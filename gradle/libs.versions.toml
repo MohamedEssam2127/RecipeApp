@@ -20,6 +20,9 @@ retrofit = "2.11.0"
 glide = "4.16.0"
 par= "2.0.10-RC"
 safeArgs= "2.7.7"
+#Add Splash Screen Version
+splashVersion = "1.0.1"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -43,6 +46,9 @@ glide = { group = "com.github.bumptech.glide", name ="glide", version.ref = "gli
 room = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+#Add Splash Screen
+androidx-splash-screen = {group = "androidx.core", name = "core-splashscreen", version.ref = "splashVersion"}
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
