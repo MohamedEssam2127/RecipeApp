@@ -63,4 +63,7 @@ dependencies {
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
+    //Add Splash Screen
+    implementation(libs.androidx.splash.screen)
+
 }

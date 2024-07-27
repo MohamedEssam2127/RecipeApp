@@ -10,4 +10,10 @@
         <item name="colorPrimary">@color/light_blue</item>
         <item name="colorOnPrimary">@color/orange</item>
     </style>
+
+    <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/recipe</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.RecipeApp</item>
+    </style>
 </resources>
