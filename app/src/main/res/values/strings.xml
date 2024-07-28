@@ -2,4 +2,13 @@
     <string name="app_name">Recipe App</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email Address</string>
+    <string name="log_in">Log in</string>
+    <string name="signup">SignUp</string>
+    <string name="first_name">First Name</string>
+    <string name="second_name">Second Name</string>
+    <string name="Sign_up">Sign up</string>
 </resources>
