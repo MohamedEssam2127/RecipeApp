@@ -3,6 +3,7 @@ package com.example.recipeapp.view
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,6 @@ class RecipeActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
    private lateinit var navController: androidx.navigation.NavController
     private lateinit var toolbar: Toolbar
-   // private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -34,7 +34,7 @@ class RecipeActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         navController = findNavController(R.id.nav_home_host)
-       supportActionBar?.title = "   HOME"
+        supportActionBar?.title = ""
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
        bottomNavigation.selectedItemId = R.id.bottom_bar_home
@@ -42,17 +42,17 @@ class RecipeActivity : AppCompatActivity() {
            when(item.itemId) {
                R.id.bottom_bar_home -> {
                    navController.navigate(R.id.action_global_homeFragment)
-                   supportActionBar?.title = "   HOME"
+                   toolbar.visibility= View.VISIBLE
                    true
                }
                R.id.bottom_bar_fav -> {
+                   toolbar.visibility= View.INVISIBLE
                    navController.navigate(R.id.action_global_favoriteFragment)
-                   supportActionBar?.title = "   FAV"
                    true
                }
                R.id.bottom_barchr_sea -> {
+                   toolbar.visibility= View.INVISIBLE
                    navController.navigate(R.id.action_global_searchFragment)
-                   supportActionBar?.title = "   SEARCH"
                    true
                }
                else -> false

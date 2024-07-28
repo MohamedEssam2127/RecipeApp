@@ -36,11 +36,14 @@
         tools:layout="@layout/fragment_recipe_detail" />
     <action
         android:id="@+id/action_global_homeFragment"
-        app:destination="@id/homeFragment" />
+        app:destination="@id/homeFragment"
+        app:launchSingleTop="true" />
     <action
         android:id="@+id/action_global_favoriteFragment"
-        app:destination="@id/favoriteFragment" />
+        app:destination="@id/favoriteFragment"
+        app:launchSingleTop="true" />
     <action
         android:id="@+id/action_global_searchFragment"
-        app:destination="@id/searchFragment" />
+        app:destination="@id/searchFragment"
+        app:launchSingleTop="true" />
 </navigation>

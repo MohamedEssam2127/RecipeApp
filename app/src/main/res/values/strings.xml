@@ -21,4 +21,6 @@
     <string name="navigation_drawer_close">close</string>
     <string name="sign_out">sign out</string>
     <string name="about">about</string>
+    <string name="search">search</string>
+    <string name="Home">Home</string>
 </resources>
