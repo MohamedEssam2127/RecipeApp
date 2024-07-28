@@ -1,4 +1,4 @@
-package com.example.recipeapp.fragmets
+package com.example.recipeapp.Aucthentication.Register
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

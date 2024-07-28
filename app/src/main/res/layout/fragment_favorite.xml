@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_blue"
     android:orientation="vertical"
-    tools:context=".fragmets.FavoriteFragment">
+    tools:context=".Recipe.Favorite.FavoriteFragment">
 
     <TextView
         android:id="@+id/favouritesListTitle"

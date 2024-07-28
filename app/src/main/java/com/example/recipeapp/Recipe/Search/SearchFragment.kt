@@ -1,4 +1,4 @@
-package com.example.recipeapp.fragmets
+package com.example.recipeapp.Recipe.Search
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

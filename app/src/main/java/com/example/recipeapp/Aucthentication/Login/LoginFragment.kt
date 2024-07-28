@@ -1,4 +1,4 @@
-package com.example.recipeapp.fragmets
+package com.example.recipeapp.Aucthentication.Login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.R
 
