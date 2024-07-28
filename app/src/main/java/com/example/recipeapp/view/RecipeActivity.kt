@@ -30,31 +30,34 @@ class RecipeActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_recipe)
         drawerLayout = findViewById(R.id.drawer_layout)
-       supportActionBar?.title = " HOME"
+
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         navController = findNavController(R.id.nav_home_host)
+       supportActionBar?.title = "   HOME"
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigation.setOnItemReselectedListener { item ->
-            when(item.itemId) {
-                R.id.bottom_bar_home -> {
+       bottomNavigation.selectedItemId = R.id.bottom_bar_home
+       bottomNavigation.setOnItemSelectedListener { item ->
+           when(item.itemId) {
+               R.id.bottom_bar_home -> {
                    navController.navigate(R.id.action_global_homeFragment)
-                    // Respond to navigation item 1 reselection
-                    supportActionBar?.title = " HOME"
-                }
-                R.id.bottom_bar_fav -> {
-                    navController.navigate(R.id.action_global_favoriteFragment)
-                    // Respond to navigation item 2 reselection
-                    supportActionBar?.title = " fav"
-                }
-                R.id.bottom_barchr_sea -> {
-                    navController.navigate(R.id.action_global_searchFragment)
-                    // Respond to navigation item 3 reselection
-                    supportActionBar?.title = " search "
-                }
-            }
-        }
+                   supportActionBar?.title = "   HOME"
+                   true
+               }
+               R.id.bottom_bar_fav -> {
+                   navController.navigate(R.id.action_global_favoriteFragment)
+                   supportActionBar?.title = "   FAV"
+                   true
+               }
+               R.id.bottom_barchr_sea -> {
+                   navController.navigate(R.id.action_global_searchFragment)
+                   supportActionBar?.title = "   SEARCH"
+                   true
+               }
+               else -> false
+           }
+       }
 
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

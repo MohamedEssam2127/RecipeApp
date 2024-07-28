@@ -2,9 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmenthome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragmenthome"
+    android:background="@color/light_blue"
     tools:context=".fragmets.HomeFragment">
 
 
@@ -17,7 +18,9 @@
             android:layout_width="326dp"
             android:layout_height="39dp"
             android:text="Welcome to Recipe App"
+            android:textColor="@color/dark_blue"
             android:textSize="25dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.439"
@@ -30,8 +33,8 @@
             android:layout_width="306dp"
             android:layout_height="195dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/food"
             android:scaleType="centerCrop"
+            android:src="@drawable/food"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,12 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="Popular recipe"
+            android:textColor="@color/dark_blue"
             android:textSize="23dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.196"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -65,7 +69,6 @@
             app:layout_constraintVertical_bias="0.051"
 
             tools:listitem="@layout/popular_rv_item" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
