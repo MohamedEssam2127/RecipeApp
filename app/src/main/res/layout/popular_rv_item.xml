@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="210dp"
+        android:layout_height="190dp"
+        app:cardCornerRadius="20dp">
+        <ImageView
+            android:id="@+id/popular_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/food"
+            android:scaleType="centerCrop"
+            android:foreground="?android:attr/selectableItemBackground"
+            />
+
+        <TextView
+            android:id="@+id/popular_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="this is the description  "
+            android:layout_gravity="bottom"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:background="@android:color/darker_gray"
+            android:alpha="0.7"
+            android:padding="8dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="20dp"/>
+
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
