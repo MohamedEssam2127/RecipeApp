@@ -1,4 +1,4 @@
-package com.example.recipeapp.view
+package com.example.recipeapp.Aucthentication
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,10 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import com.example.recipeapp.R
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class AuthActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")

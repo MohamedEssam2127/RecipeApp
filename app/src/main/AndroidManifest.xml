@@ -13,10 +13,10 @@
         android:theme="@style/Theme.RecipeApp"
         tools:targetApi="31">
         <activity
-            android:name=".view.RecipeActivity"
+            android:name=".Recipe.RecipeActivity"
             android:exported="false" />
         <activity
-            android:name=".view.AuthActivity"
+            android:name=".Aucthentication.AuthActivity"
             android:theme="@style/Theme.App.SplashScreen"
             android:exported="true">
             <intent-filter>

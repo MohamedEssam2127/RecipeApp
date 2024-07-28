@@ -8,7 +8,7 @@
     android:background="@color/light_blue"
     android:fitsSystemWindows="true"
     app:circularflow_radiusInDP="35"
-    tools:context=".view.RecipeActivity"
+    tools:context=".Recipe.RecipeActivity"
     tools:openDrawer="start">
 
     <include
