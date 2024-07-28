@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmets.RecipeDetailFragment" >
+    android:background="@color/light_blue"
+    tools:context=".fragmets.RecipeDetailFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/detailImagesRecyclerView"
@@ -16,8 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/detailRecipeTitle"
@@ -26,6 +26,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
         android:text="@string/title"
+        android:textColor="@color/dark_blue"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/category"
+        android:textColor="@color/dark_blue"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/detailRecipeTitle"
@@ -58,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:text="@string/area"
+        android:textColor="@color/dark_blue"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/detailCategoryBody"
@@ -79,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/details"
+        android:textColor="@color/dark_blue"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/detailCategory"
