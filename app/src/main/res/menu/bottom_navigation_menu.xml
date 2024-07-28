@@ -10,10 +10,10 @@
     <item
         android:id="@+id/bottom_bar_home"
         android:icon="@drawable/baseline_home_24"
-        android:title="Home" />
+        android:title="@string/Home" />
     <item
         android:id="@+id/bottom_barchr_sea"
         android:icon="@drawable/baseline_search_24"
-        android:title="search"
-        app:iconTint="@color/white"/>
+        android:title="@string/search"
+        app:iconTint="@color/white" />
 </menu>
