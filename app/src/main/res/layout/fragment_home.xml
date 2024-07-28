@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <TextView
             android:id="@+id/welcomeTextView"
             android:layout_width="326dp"
@@ -23,16 +24,16 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.439"
+            app:layout_constraintHorizontal_bias="0.188"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.089" />
+            app:layout_constraintVertical_bias="0.069" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="306dp"
             android:layout_height="195dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="12dp"
             android:scaleType="centerCrop"
             android:src="@drawable/food"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,21 +45,19 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:text="Popular recipe"
             android:textColor="@color/dark_blue"
             android:textSize="23dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.196"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textcategory"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_popular_recipe"
             android:layout_width="410dp"
-            android:layout_height="212dp"
+            android:layout_height="200dp"
             android:layout_marginTop="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,9 +65,161 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintVertical_bias="0.051"
+            app:layout_constraintVertical_bias="0.0"
 
             tools:listitem="@layout/popular_rv_item" />
+
+        <TextView
+            android:id="@+id/textcategory"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Categories"
+            android:textColor="@color/dark_blue"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/welcomeTextView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            tools:ignore="MissingConstraints" />
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="410dp"
+            android:layout_height="119dp"
+            android:layout_marginTop="8dp"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textcategory">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:id="@+id/meat"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="@drawable/r"
+                    android:src="@drawable/m" />
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/meat"
+                    android:layout_alignStart="@+id/meat"
+                    android:layout_alignEnd="@+id/meat"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="15dp"
+                    android:gravity="center"
+                    android:text="Meat"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/salad"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="@drawable/r"
+                    android:src="@drawable/sal"
+                    android:layout_marginStart="18dp"
+                    android:layout_toEndOf="@+id/meat"/>
+
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/meat"
+                    android:layout_alignStart="@+id/salad"
+                    android:layout_alignEnd="@+id/salad"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="15dp"
+
+                    android:text="Salad"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/dessert"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="@drawable/r"
+                    android:src="@drawable/dessert"
+                    android:layout_marginStart="18dp"
+                    android:layout_toEndOf="@+id/salad"/>
+
+                <TextView
+                    android:id="@+id/textdessert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dessert"
+                    android:layout_alignStart="@+id/dessert"
+                    android:layout_alignEnd="@+id/dessert"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="15dp"
+                    android:text="Dessert"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/seafood"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="@drawable/r"
+                    android:src="@drawable/seafood"
+                    android:layout_marginStart="18dp"
+                    android:layout_toEndOf="@+id/dessert"/>
+
+                <TextView
+                    android:id="@+id/textseafood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/seafood"
+                    android:layout_alignStart="@+id/seafood"
+                    android:layout_alignEnd="@+id/seafood"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="15dp"
+                    android:gravity="center"
+                    android:text="Seafood"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/breads"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="@drawable/r"
+                    android:src="@drawable/b"
+                    android:layout_marginStart="18dp"
+                    android:layout_toEndOf="@+id/seafood"/>
+
+                <TextView
+                    android:id="@+id/textbreads"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/meat"
+                    android:layout_alignStart="@+id/breads"
+                    android:layout_alignEnd="@+id/breads"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="15dp"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:text="Breads" />
+
+
+            </RelativeLayout>
+        </HorizontalScrollView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
