@@ -7,10 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".view.AuthActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <include
+        layout="@layout/auth_host"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
