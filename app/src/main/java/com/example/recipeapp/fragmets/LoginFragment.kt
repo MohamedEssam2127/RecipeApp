@@ -30,6 +30,7 @@ class LoginFragment : Fragment() {
         login_btn.setOnClickListener {
             navController.navigate(R.id.action_loginFragment_to_recipeActivity)
             requireActivity().finish()
+
         }
 
         register_btn.setOnClickListener {
