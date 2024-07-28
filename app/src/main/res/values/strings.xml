@@ -11,4 +11,10 @@
     <string name="first_name">First Name</string>
     <string name="second_name">Second Name</string>
     <string name="Sign_up">Sign up</string>
+    <string name="title">Title</string>
+    <string name="category">Category</string>
+    <string name="body">Body</string>
+    <string name="area">Area</string>
+    <string name="details">Details</string>
+    <string name="my_favourites">My Favourites</string>
 </resources>

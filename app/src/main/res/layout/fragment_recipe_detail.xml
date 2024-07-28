@@ -1,14 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_blue"
     tools:context=".fragmets.RecipeDetailFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/detailImagesRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="192dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/detailRecipeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/title"
+        android:textColor="@color/dark_blue"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailImagesRecyclerView" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/detailCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/category"
+        android:textColor="@color/dark_blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/detailRecipeTitle"
+        app:layout_constraintTop_toBottomOf="@+id/detailRecipeTitle" />
+
+    <TextView
+        android:id="@+id/detailCategoryBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/body"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/detailCategory"
+        app:layout_constraintStart_toEndOf="@+id/detailCategory" />
+
+    <TextView
+        android:id="@+id/detailArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:text="@string/area"
+        android:textColor="@color/dark_blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/detailCategoryBody"
+        app:layout_constraintStart_toEndOf="@+id/detailCategoryBody" />
+
+    <TextView
+        android:id="@+id/detailAreaBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/body"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/detailArea"
+        app:layout_constraintStart_toEndOf="@+id/detailArea" />
+
+    <TextView
+        android:id="@+id/detailDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/details"
+        android:textColor="@color/dark_blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/detailCategory"
+        app:layout_constraintTop_toBottomOf="@+id/detailCategory" />
+
+    <TextView
+        android:id="@+id/detailDetailsBody"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/detailDetails"
+        app:layout_constraintTop_toBottomOf="@+id/detailDetails"
+        tools:text="@tools:sample/cities" />
+
+    <WebView
+        android:layout_width="0dp"
+        android:layout_height="310dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailDetailsBody" />
+</androidx.constraintlayout.widget.ConstraintLayout>
