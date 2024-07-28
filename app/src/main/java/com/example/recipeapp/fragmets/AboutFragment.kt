@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.recipeapp.R
 
-class SplashFragment : Fragment() {
+class AboutFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -15,8 +15,7 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_splash, container, false)
+        return inflater.inflate(R.layout.fragment_about, container, false)
     }
-
 
 }
