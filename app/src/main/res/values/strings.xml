@@ -17,4 +17,8 @@
     <string name="area">Area</string>
     <string name="details">Details</string>
     <string name="my_favourites">My Favourites</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="sign_out">sign out</string>
+    <string name="about">about</string>
 </resources>
