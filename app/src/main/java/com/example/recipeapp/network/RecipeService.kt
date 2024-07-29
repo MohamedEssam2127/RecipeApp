@@ -25,7 +25,7 @@ interface RecipeService {
     suspend fun listAllMealCategouris(): CategoriesResponse
 
     @GET("filter.php")
-    suspend fun getMealsByCategoryResponse(
+    suspend fun getMealsByCategory(
         @Query("c") category: String
-    )
+    ):RecipeResponse
 }
