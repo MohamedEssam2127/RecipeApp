@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface RecipeService {
 
     @GET("random.php")
-    suspend fun getRandomMeal(): Meal
+    suspend fun getRandomMeal(): RecipeResponse
 
     @GET("search.php")
     suspend fun getMealsByFirstLetter(

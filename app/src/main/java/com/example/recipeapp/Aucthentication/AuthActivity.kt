@@ -2,12 +2,15 @@ package com.example.recipeapp.Aucthentication
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.recipeapp.R
+import com.example.recipeapp.network.RecipeRepository
+import kotlinx.coroutines.runBlocking
 
 
 class AuthActivity : AppCompatActivity() {
@@ -22,5 +25,12 @@ class AuthActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val repo = RecipeRepository()
+        runBlocking {
+            repo.getRandomMeal()
+            Log.d("TAG", "onCreate: ${  repo.getRandomMeal()} ")
+        }
     }
+
+
 }
