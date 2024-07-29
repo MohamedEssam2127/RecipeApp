@@ -13,12 +13,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.R
+import com.example.recipeapp.database.LocalDataBase.LocalDataBase
+import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.google.android.material.textfield.TextInputEditText
+import android.content.Context as Context
 
 class RegisterFragment : Fragment() {
 
+
     lateinit var navController :androidx.navigation.NavController
     private lateinit var viewModel: RegisterViewModel
+    //private val viewModel: RegisterViewModel
 
 
     override fun onCreateView(
@@ -31,9 +36,17 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /*
+        * val localDataBase = LocalDataBase.getDatabase(requireContext()) // Obtain your database instance
+        val userViewModelFactory = UserViewModelFactory(localDataBase)
+        viewModel = ViewModelProvider(this, userViewModelFactory).get(RegisterViewModel::class.java)*/
+
+
+
+        val userViewModelFactory= UserViewModelFactory(userRepo = UserRepoImp(localDataBase = LocalDataBaseImp(requireContext())))
 
         navController = findNavController()
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        viewModel = ViewModelProvider(this,userViewModelFactory).get(RegisterViewModel::class.java)
 
         val register_btn = view.findViewById<Button>(R.id.register_signupBtn)
         val login_btn = view.findViewById<Button>(R.id.register_loginBtn)
@@ -46,11 +59,28 @@ class RegisterFragment : Fragment() {
 
         register_btn.setOnClickListener {
             handleRegistration(firstName,lastName,email_editText, password_editText)
+
         }
 
         login_btn.setOnClickListener {
             navController.navigate(R.id.action_registerFragment_to_loginFragment)
         }
+        viewModel.userExistStatus.observe(viewLifecycleOwner, Observer { exists ->
+            if (exists) {
+                Toast.makeText(context, "User already exists", Toast.LENGTH_SHORT).show()
+            } else {
+                // Proceed with registration
+                viewModel.registerUser(
+                    firstName.text.toString().trim(),
+                    lastName.text.toString().trim(),
+                    email_editText.text.toString().trim(),
+                    password_editText.text.toString().trim()
+                )
+                navController.navigate(R.id.action_registerFragment_to_recipeActivity)
+                requireActivity().finish()
+            }
+        })
+
 
 
     }
@@ -65,6 +95,8 @@ class RegisterFragment : Fragment() {
         viewModel.validatePassword(password)
         viewModel.validateFirstName(firstName)
         viewModel.validateLastName(lastName)
+      //  viewModel.registerUser(firstName,lastName,password,email)
+
 
         val isEmailValid = viewModel.isEmailValid.value ?: false
         val isPasswordValid = viewModel.isPasswordValid.value ?: false
@@ -72,9 +104,13 @@ class RegisterFragment : Fragment() {
         val isLastNameValid = viewModel.isLastNameValid.value ?: false
 
         if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid) {
+            viewModel.checkIfUserExists(email,password)
 
-            navController.navigate(R.id.action_registerFragment_to_recipeActivity)
-            requireActivity().finish()
+
+            //viewModel.registerUser(firstName, lastName, email, password )
+            //navController.navigate(R.id.action_registerFragment_to_recipeActivity)
+
+           // requireActivity().finish()
         } else {
             when {
                 !isEmailValid -> Toast.makeText(
