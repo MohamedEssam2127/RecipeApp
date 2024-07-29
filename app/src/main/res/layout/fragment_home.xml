@@ -149,6 +149,7 @@
                     android:layout_marginEnd="15dp"
                     android:gravity="center"
                     android:text="Meat"
+                    android:textColor="@color/orange"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
@@ -174,6 +175,7 @@
                     android:gravity="center"
 
                     android:text="Salad"
+                    android:textColor="@color/orange"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
@@ -198,6 +200,7 @@
                     android:layout_marginEnd="15dp"
                     android:gravity="center"
                     android:text="Dessert"
+                    android:textColor="@color/orange"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
@@ -222,6 +225,7 @@
                     android:layout_marginEnd="15dp"
                     android:gravity="center"
                     android:text="Seafood"
+                    android:textColor="@color/orange"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
@@ -246,6 +250,7 @@
                     android:layout_marginEnd="15dp"
                     android:gravity="center"
                     android:text="Breads"
+                    android:textColor="@color/orange"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
