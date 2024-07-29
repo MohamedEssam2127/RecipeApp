@@ -24,7 +24,7 @@ interface RecipeService {
     @GET("api/json/v1/1/categories.php")
     suspend fun listAllMealCategouris(): CategoriesResponse
 
-    @GET("api/json/v1/1/filter.php?c=Seafood")
+    @GET("api/json/v1/1/filter.php")
     suspend fun getMealsByCategory(
         @Query("c") category: String
     )
