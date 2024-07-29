@@ -33,6 +33,10 @@
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="296dp"
+            android:textColorHint="@color/dark_blue"
+            app:boxStrokeColor="@color/dark_blue"
+            app:cursorColor="@color/dark_blue"
+            app:hintTextColor="@color/dark_blue"
             app:layout_constraintBottom_toTopOf="@+id/login_passwordInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"
@@ -66,6 +70,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_emailInputLayout"
             app:layout_constraintVertical_bias="0.0"
+            android:textColorHint="@color/dark_blue"
+            app:boxStrokeColor="@color/dark_blue"
+            app:cursorColor="@color/dark_blue"
+            app:hintTextColor="@color/dark_blue"
             app:startIconDrawable="@drawable/ic_lock"
             app:startIconTint="@color/dark_blue">
 

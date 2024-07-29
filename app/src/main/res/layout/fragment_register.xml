@@ -35,6 +35,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
+            android:textColorHint="@color/dark_blue"
+            app:boxStrokeColor="@color/dark_blue"
+            app:cursorColor="@color/dark_blue"
+            app:hintTextColor="@color/dark_blue"
             app:layout_constraintTop_toBottomOf="@+id/register_centerText">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -54,6 +58,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
+            android:textColorHint="@color/dark_blue"
+            app:boxStrokeColor="@color/dark_blue"
+            app:cursorColor="@color/dark_blue"
+            app:hintTextColor="@color/dark_blue"
             app:layout_constraintTop_toBottomOf="@+id/register_Fname_InputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -73,6 +81,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
+            android:textColorHint="@color/dark_blue"
+            app:boxStrokeColor="@color/dark_blue"
+            app:cursorColor="@color/dark_blue"
+            app:hintTextColor="@color/dark_blue"
             app:layout_constraintTop_toBottomOf="@+id/register_secName_InputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -89,10 +101,15 @@
             android:layout_width="330dp"
             android:layout_height="85dp"
             android:layout_marginTop="30dp"
+            android:textColorHint="@color/dark_blue"
+            app:boxStrokeColor="@color/dark_blue"
             app:counterEnabled="true"
             app:counterMaxLength="10"
+            app:counterTextColor="@color/dark_blue"
+            app:cursorColor="@color/dark_blue"
             app:endIconMode="password_toggle"
             app:endIconTint="@color/dark_blue"
+            app:hintTextColor="@color/dark_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toStartOf="parent"
