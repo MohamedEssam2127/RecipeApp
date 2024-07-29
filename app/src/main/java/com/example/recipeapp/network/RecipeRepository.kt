@@ -13,7 +13,7 @@ class RecipeRepository {
         private const val TAG = "RecipeRepository"
     }
 
-    suspend fun getRandomMeal(): Meal {
+    suspend fun getRandomMeal(): RecipeResponse {
         Log.d(TAG, "Requesting random meal")
         return api.getRandomMeal().also {
             Log.d(TAG, "Received random meal: $it")
