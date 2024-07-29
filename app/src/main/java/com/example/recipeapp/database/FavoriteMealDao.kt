@@ -11,4 +11,7 @@ interface FavoriteMealDao {
 
     @Insert
     suspend fun insertUser(FavoriteMeal: FavoriteMeal)
+    @Delete
+    suspend fun deleteFavoriteMeal (FavoriteMeal: FavoriteMeal)
+
 }

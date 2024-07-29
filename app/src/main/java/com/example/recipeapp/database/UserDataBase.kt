@@ -8,7 +8,7 @@ import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Meal
 import com.example.recipeapp.models.Users
 
-@Database(entities = [Users::class,FavoriteMeal::class], version = 1)
+@Database(entities = [Users::class,FavoriteMeal::class], version =1)
  abstract class UserDataBase : RoomDatabase() {
 
     abstract fun productDao(): UsersDao
