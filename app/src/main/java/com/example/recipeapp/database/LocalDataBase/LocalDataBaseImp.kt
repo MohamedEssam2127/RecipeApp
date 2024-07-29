@@ -37,4 +37,7 @@ class LocalDataBaseImp (context: Context) : LocalDataBase {
     suspend fun insertFavoriteMeal(favoriteMeal: FavoriteMeal) {
         favoriteMealDao.insertUser(favoriteMeal)
     }
+    suspend fun deleteUser(user: Users){
+        usersDao.deleteUser(user)
+    }
 }
