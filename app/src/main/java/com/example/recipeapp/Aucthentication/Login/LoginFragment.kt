@@ -30,7 +30,6 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
@@ -41,14 +40,12 @@ class LoginFragment : Fragment() {
         sharedPreferences=requireActivity().getSharedPreferences("user_id",0)
         navController = findNavController()
 
-
         val userId = sharedPreferences.getInt("user_id", -1)
         if (userId != -1) {
             navController.navigate(R.id.action_loginFragment_to_recipeActivity)
             requireActivity().finish()
             return
         }
-
 
         val loginViewModelFactory = ViewModelFactory(
             LoginViewModel::class.java,
@@ -73,18 +70,6 @@ class LoginFragment : Fragment() {
             navController.navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
-//        viewModel.userExistStatus.observe(viewLifecycleOwner) {
-//
-//            if(it) {
-//                viewModel.loginUser(email_editText.text.toString(), password_editText.text.toString())
-//                navController.navigate(R.id.action_loginFragment_to_recipeActivity)
-//                requireActivity().finish()
-//            }
-//            else {
-//                Toast.makeText(context, "Invalid Email or Password", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-
         viewModel.user.observe(viewLifecycleOwner) { user ->
             if (user != null) {
 
@@ -96,21 +81,15 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, "Invalid Email or Password", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
     private fun handleLogin(emailText: TextInputEditText?, passwordText: TextInputEditText?) {
+
         val email = emailText?.text.toString().trim()
         val password = passwordText?.text.toString().trim()
 
-//        viewModel.validateEmail(email)
-//        viewModel.validatePassword(password)
-
         validations.validateEmail(email)
         validations.validatePassword(password)
-
-//        val isEmailValid = viewModel.isEmailValid.value ?: false
-//        val isPasswordValid = viewModel.isPasswordValid.value ?: false
 
         val isEmailValid = validations.isEmailValid.value ?: false
         val isPasswordValid = validations.isPasswordValid.value ?: false

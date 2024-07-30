@@ -72,7 +72,7 @@ class RecipeActivity : AppCompatActivity() {
                 if (userId != -1) {
                     sharedPreferences.edit().putInt("user_id", -1).apply()
                 }
-                
+
                 finish()
                navController.navigate(R.id.action_homeFragment_to_authActivity)
 
