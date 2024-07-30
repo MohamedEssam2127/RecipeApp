@@ -1,5 +1,6 @@
 package com.example.recipeapp.Recipe
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,6 +14,8 @@ import com.example.recipeapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class RecipeActivity : AppCompatActivity() {
+
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var drawerLayout: DrawerLayout
    private lateinit var navController: androidx.navigation.NavController
     private lateinit var toolbar: Toolbar
@@ -23,6 +26,8 @@ class RecipeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_recipe)
+
+
         drawerLayout = findViewById(R.id.drawer_layout)
 
         toolbar = findViewById(R.id.toolbar)
@@ -62,6 +67,12 @@ class RecipeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_sign_out -> {
+                sharedPreferences = getSharedPreferences("user_id", 0)
+                val userId = sharedPreferences.getInt("user_id", -1)
+                if (userId != -1) {
+                    sharedPreferences.edit().putInt("user_id", -1).apply()
+                }
+
                 finish()
                navController.navigate(R.id.action_homeFragment_to_authActivity)
 
