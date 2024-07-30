@@ -15,7 +15,8 @@
         android:gravity="center"
         android:text="@string/my_favourites"
         android:textColor="@color/dark_blue"
-        android:textSize="34sp" />
+        android:textSize="34sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favouriteRecyclerView"

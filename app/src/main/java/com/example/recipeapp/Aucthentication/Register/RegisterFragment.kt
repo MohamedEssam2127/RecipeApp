@@ -1,28 +1,30 @@
 package com.example.recipeapp.Aucthentication.Register
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.recipeapp.Aucthentication.AuthRepository.UserRepoImp
+import com.example.recipeapp.Aucthentication.ViewModelFactory
+import com.example.recipeapp.Aucthentication.validations
 import com.example.recipeapp.R
-import com.example.recipeapp.database.LocalDataBase.LocalDataBase
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.google.android.material.textfield.TextInputEditText
-import android.content.Context as Context
 
 class RegisterFragment : Fragment() {
 
-
+    private lateinit var sharedPreferences: SharedPreferences
     lateinit var navController :androidx.navigation.NavController
     private lateinit var viewModel: RegisterViewModel
+
+    val validations : validations = validations()
     //private val viewModel: RegisterViewModel
 
 
@@ -42,9 +44,16 @@ class RegisterFragment : Fragment() {
         viewModel = ViewModelProvider(this, userViewModelFactory).get(RegisterViewModel::class.java)*/
 
 
+        val userViewModelFactory = ViewModelFactory(
+            RegisterViewModel::class.java,
+            constructor = { userRepo -> RegisterViewModel(userRepo) },
+            UserRepoImp(
+                localDataBase = LocalDataBaseImp(requireContext())
+            )
+        )
+        //val userViewModelFactory= UserViewModelFactory(userRepo = UserRepoImp(localDataBase = LocalDataBaseImp(requireContext())))
 
-        val userViewModelFactory= UserViewModelFactory(userRepo = UserRepoImp(localDataBase = LocalDataBaseImp(requireContext())))
-
+        sharedPreferences=requireActivity().getSharedPreferences("user",0)
         navController = findNavController()
         viewModel = ViewModelProvider(this,userViewModelFactory).get(RegisterViewModel::class.java)
 
@@ -65,6 +74,7 @@ class RegisterFragment : Fragment() {
         login_btn.setOnClickListener {
             navController.navigate(R.id.action_registerFragment_to_loginFragment)
         }
+
         viewModel.userExistStatus.observe(viewLifecycleOwner, Observer { exists ->
             if (exists) {
                 Toast.makeText(context, "User already exists", Toast.LENGTH_SHORT).show()
@@ -81,6 +91,16 @@ class RegisterFragment : Fragment() {
             }
         })
 
+        viewModel.user.observe(viewLifecycleOwner,Observer { user ->
+            if (user != null) {
+                // Save the user ID in SharedPreferences
+                sharedPreferences.edit().putInt("user_id", user.userId).apply()
+
+                navController.navigate(R.id.action_registerFragment_to_recipeActivity)
+                requireActivity().finish()
+            }
+        })
+
 
 
     }
@@ -91,21 +111,32 @@ class RegisterFragment : Fragment() {
         val firstName = firstName.text.toString().trim()
         val lastName = lastName.text.toString().trim()
 
-        viewModel.validateEmail(email)
-        viewModel.validatePassword(password)
-        viewModel.validateFirstName(firstName)
-        viewModel.validateLastName(lastName)
+//        viewModel.validateEmail(email)
+//        viewModel.validatePassword(password)
+//        viewModel.validateFirstName(firstName)
+//        viewModel.validateLastName(lastName)
+
+        validations.validateEmail(email)
+        validations.validatePassword(password)
+        validations.validateFirstName(firstName)
+        validations.validateLastName(lastName)
+
       //  viewModel.registerUser(firstName,lastName,password,email)
 
 
-        val isEmailValid = viewModel.isEmailValid.value ?: false
-        val isPasswordValid = viewModel.isPasswordValid.value ?: false
-        val isFirstNameValid = viewModel.isFirstNameValid.value ?: false
-        val isLastNameValid = viewModel.isLastNameValid.value ?: false
+//        val isEmailValid = viewModel.isEmailValid.value ?: false
+//        val isPasswordValid = viewModel.isPasswordValid.value ?: false
+//        val isFirstNameValid = viewModel.isFirstNameValid.value ?: false
+//        val isLastNameValid = viewModel.isLastNameValid.value ?: false
+
+
+        val isEmailValid = validations.isEmailValid.value ?: false
+        val isPasswordValid = validations.isPasswordValid.value ?: false
+        val isFirstNameValid = validations.isFirstNameValid.value ?: false
+        val isLastNameValid = validations.isLastNameValid.value ?: false
 
         if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid) {
-            viewModel.checkIfUserExists(email,password)
-
+            viewModel.checkIfUserExists(email)
 
             //viewModel.registerUser(firstName, lastName, email, password )
             //navController.navigate(R.id.action_registerFragment_to_recipeActivity)
