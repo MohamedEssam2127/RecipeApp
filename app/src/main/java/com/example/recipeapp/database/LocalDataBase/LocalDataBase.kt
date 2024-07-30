@@ -1,5 +1,7 @@
 package com.example.recipeapp.database.LocalDataBase
 
+import com.example.recipeapp.database.UserWithFavorite
+import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Users
 
 interface LocalDataBase {
@@ -13,4 +15,10 @@ interface LocalDataBase {
     suspend fun isUserExist(email: String, password: String ): Boolean
 
     suspend fun  isEmailExist(email: String): Boolean
+
+    // Fav
+    suspend fun insertFavoriteMeal(meal: FavoriteMeal)
+
+    suspend fun getUserWithFavorite(userId:Int): List<UserWithFavorite>
+
 }
