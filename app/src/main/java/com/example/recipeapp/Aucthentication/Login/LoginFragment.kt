@@ -41,6 +41,15 @@ class LoginFragment : Fragment() {
         sharedPreferences=requireActivity().getSharedPreferences("user_id",0)
         navController = findNavController()
 
+
+        val userId = sharedPreferences.getInt("user_id", -1)
+        if (userId != -1) {
+            navController.navigate(R.id.action_loginFragment_to_recipeActivity)
+            requireActivity().finish()
+            return
+        }
+
+
         val loginViewModelFactory = ViewModelFactory(
             LoginViewModel::class.java,
             constructor = { userRepo -> LoginViewModel(userRepo) },

@@ -96,8 +96,8 @@ class RegisterFragment : Fragment() {
                 // Save the user ID in SharedPreferences
                 sharedPreferences.edit().putInt("user_id", user.userId).apply()
 
-                navController.navigate(R.id.action_registerFragment_to_recipeActivity)
-                requireActivity().finish()
+//                navController.navigate(R.id.action_registerFragment_to_recipeActivity)
+//                requireActivity().finish()
             }
         })
 
