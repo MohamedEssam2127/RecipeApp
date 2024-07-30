@@ -19,6 +19,9 @@
             app:destination="@id/authActivity"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -39,7 +42,11 @@
         android:id="@+id/recipeDetailFragment"
         android:name="com.example.recipeapp.Recipe.RecipeDetail.RecipeDetailFragment"
         android:label="fragment_recipe_detail"
-        tools:layout="@layout/fragment_recipe_detail" />
+        tools:layout="@layout/fragment_recipe_detail" >
+        <argument
+            android:name="recipeSent"
+            app:argType="com.example.recipeapp.models.Meal" />
+    </fragment>
     <action
         android:id="@+id/action_global_homeFragment"
         app:destination="@id/homeFragment"
