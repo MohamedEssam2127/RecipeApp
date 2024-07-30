@@ -100,6 +100,7 @@
         tools:text="@tools:sample/cities" />
 
     <WebView
+        android:id="@+id/youtubeVideoView"
         android:layout_width="0dp"
         android:layout_height="310dp"
         android:layout_marginStart="16dp"
