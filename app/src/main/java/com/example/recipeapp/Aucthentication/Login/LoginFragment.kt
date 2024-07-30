@@ -104,13 +104,13 @@ class LoginFragment : Fragment() {
                 !isEmailValid -> {
                     val emailhelper = view?.findViewById<TextInputLayout>(R.id.login_emailInputLayout)
                     if (emailhelper != null)
-                        emailhelper.helperText = "Email Address not found"
+                        emailhelper.helperText = "*Email Address not found"
                 }
 
                 !isPasswordValid -> {
                     val passwordhelper = view?.findViewById<TextInputLayout>(R.id.login_passwordInputLayout)
                     if (passwordhelper != null)
-                        passwordhelper.helperText = "Wrong Password"
+                        passwordhelper.helperText = "*Wrong Password"
                 }
             }
         }

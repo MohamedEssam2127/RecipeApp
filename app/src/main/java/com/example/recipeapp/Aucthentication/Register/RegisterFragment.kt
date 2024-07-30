@@ -140,27 +140,28 @@ class RegisterFragment : Fragment() {
             viewModel.checkIfUserExists(email)
         } else {
             when {
-                !isEmailValid -> Toast.makeText(
-                    context,
-                    "Invalid Email Address",
-                    Toast.LENGTH_SHORT
-                ).show()
+                !isEmailValid -> {
+                    val emailhelper = view?.findViewById<TextInputLayout>(R.id.register_email_InputLayout)
+                    if (emailhelper != null)
+                        emailhelper.helperText = "*Email Address not found"
+                }
 
-                !isPasswordValid -> Toast.makeText(
-                    context,
-                    "Enter Strong Password",
-                    Toast.LENGTH_SHORT
-                ).show()
-                !isFirstNameValid -> Toast.makeText(
-                    context,
-                    "First Name is Required",
-                    Toast.LENGTH_SHORT
-                ).show()
-                !isLastNameValid -> Toast.makeText(
-                    context,
-                    "Second Name is Required",
-                    Toast.LENGTH_SHORT
-                ).show()
+                !isPasswordValid -> {
+                    val passwordhelper = view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
+                    if (passwordhelper != null)
+                        passwordhelper.helperText = "*Wrong Password"
+                }
+
+                !isFirstNameValid -> {
+                    val firstNameHelper = view?.findViewById<TextInputLayout>(R.id.register_Fname_InputLayout)
+                    if (firstNameHelper != null)
+                        firstNameHelper.helperText = "*First Name is Required"
+                }
+                !isLastNameValid -> {
+                    val lastNameHelper = view?.findViewById<TextInputLayout>(R.id.register_secName_InputLayout)
+                    if (lastNameHelper != null)
+                        lastNameHelper.helperText = "*Last Name is Required"
+                }
             }
 
         }
