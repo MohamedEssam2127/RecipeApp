@@ -45,7 +45,6 @@ class RegisterFragment : Fragment() {
         )
 
         sharedPreferences=requireActivity().getSharedPreferences("user",0)
-        val userId = sharedPreferences.getInt("user_id", -1)
         navController = findNavController()
 
         viewModel = ViewModelProvider(this,userViewModelFactory).get(RegisterViewModel::class.java)
