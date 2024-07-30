@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_blue"
+    android:background="#FBE6E6"
     android:orientation="vertical"
     tools:context=".Recipe.Home.AboutFragment">
 
@@ -13,30 +13,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_end="373dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="375dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_percent="0.9541985" />
 
     <ImageView
         android:id="@+id/logoImage"
-        android:layout_width="111dp"
-        android:layout_height="156dp"
-        android:layout_marginStart="149dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="124dp"
-        android:src="@drawable/recipe"
+        android:layout_width="130dp"
+        android:layout_height="152dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/app_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,8 +38,10 @@
         android:id="@+id/aboutApp"
         android:layout_width="306dp"
         android:layout_height="98dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         android:text="Our Recipe app allows you to discover, save, and organize a variety of recipes effortlessly. Enhance your cooking experience with easy-to-follow instructions and personalized recipe collections."
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -56,134 +51,150 @@
         android:id="@+id/aboutAppTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:text="About The App"
-        android:textSize="20sp"
+        android:textColor="@color/orange"
+        android:textSize="26sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.565"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="@+id/logoImage"
+        app:layout_constraintHorizontal_bias="0.351"
+        app:layout_constraintStart_toStartOf="@+id/logoImage"
         app:layout_constraintTop_toBottomOf="@+id/logoImage" />
 
     <TextView
         android:id="@+id/AboutUsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="About Us"
+        android:textColor="@color/orange"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/aboutApp"
-        tools:textSize="18sp" />
+        tools:textSize="22sp" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/youssefAboutID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Youssef Mostafa Abdelaty"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/aboutApp"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/aboutApp"
         app:layout_constraintTop_toBottomOf="@+id/AboutUsTitle" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/youssefEmailID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="youssef2.mostafa.1@gmail.com"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/youssefAboutID"
+        app:layout_constraintHorizontal_bias="0.411"
+        app:layout_constraintStart_toStartOf="@+id/youssefAboutID"
+        app:layout_constraintTop_toBottomOf="@+id/youssefAboutID" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/mohammedEmailID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="MohammedEssamMail@gmil.com"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        android:text="msam01619@gmail.com"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/mohammedAboutID"
+        app:layout_constraintHorizontal_bias="0.62"
+        app:layout_constraintStart_toStartOf="@+id/mohammedAboutID"
+        app:layout_constraintTop_toBottomOf="@+id/mohammedAboutID" />
 
     <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Mohammed Essam"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-    <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/OmarAboutID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        android:text="Omar Adel Badawy"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/aboutApp"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="@+id/aboutApp"
+        app:layout_constraintTop_toBottomOf="@+id/mohammedEmailID" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/mohammedAboutID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        android:layout_marginTop="16dp"
+        android:text="Mohammed Essam El-Din"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/aboutApp"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/aboutApp"
+        app:layout_constraintTop_toBottomOf="@+id/youssefEmailID" />
+
+    <TextView
+        android:id="@+id/omarEmailID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="omarwahsh555@gmail.com"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/OmarAboutID"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="@+id/OmarAboutID"
+        app:layout_constraintTop_toBottomOf="@+id/OmarAboutID" />
+
+    <TextView
+        android:id="@+id/ShahdAboutID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Shahd Osama Hamed"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/aboutApp"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="@+id/aboutApp"
+        app:layout_constraintTop_toBottomOf="@+id/omarEmailID" />
+
+    <TextView
+        android:id="@+id/shahdEmailID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="shahdosama734@gmail.com"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/ShahdAboutID"
+        app:layout_constraintHorizontal_bias="0.566"
+        app:layout_constraintStart_toStartOf="@+id/ShahdAboutID"
+        app:layout_constraintTop_toBottomOf="@+id/ShahdAboutID" />
+
+    <TextView
+        android:id="@+id/AsmaaAboutID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Asmaa Saleh Farghaly"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/aboutApp"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="@+id/aboutApp"
+        app:layout_constraintTop_toBottomOf="@+id/shahdEmailID" />
+
+    <TextView
+        android:id="@+id/AsmaaEmailID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="asmaa111saleh111@gmail.com"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/AsmaaAboutID"
+        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintStart_toStartOf="@+id/AsmaaAboutID"
+        app:layout_constraintTop_toBottomOf="@+id/AsmaaAboutID" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
