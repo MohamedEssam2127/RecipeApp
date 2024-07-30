@@ -1,13 +1,11 @@
-package com.example.recipeapp.Aucthentication.Login
+package com.example.recipeapp.Aucthentication.Login.LoginViewModel
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipeapp.Aucthentication.AuthRepository.UserRepo
 import com.example.recipeapp.models.Users
-import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
 
 

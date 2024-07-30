@@ -12,8 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.Aucthentication.AuthRepository.UserRepoImp
-import com.example.recipeapp.Aucthentication.ViewModelFactory
-import com.example.recipeapp.Aucthentication.validations
+import com.example.recipeapp.Aucthentication.Register.RegisterViewModel.RegisterViewModel
+import com.example.recipeapp.Aucthentication.AuthViewModelFactory.ViewModelFactory
+import com.example.recipeapp.Aucthentication.ViewValidations.validations
 import com.example.recipeapp.R
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.google.android.material.textfield.TextInputEditText
@@ -45,7 +46,6 @@ class RegisterFragment : Fragment() {
         )
 
         sharedPreferences=requireActivity().getSharedPreferences("user",0)
-        val userId = sharedPreferences.getInt("user_id", -1)
         navController = findNavController()
 
         viewModel = ViewModelProvider(this,userViewModelFactory).get(RegisterViewModel::class.java)
