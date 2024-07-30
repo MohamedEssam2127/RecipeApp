@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -30,6 +31,11 @@ class HomeFragment : Fragment() {
             val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_popular_recipe)
             recyclerView?.adapter = adapter
             recyclerView?.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+
+            adapter.onItemClick = {
+                val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(it)
+                findNavController().navigate(action)
+            }
         }
 
         viewModel.getRandomMeal()
