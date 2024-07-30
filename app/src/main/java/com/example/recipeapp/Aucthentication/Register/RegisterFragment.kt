@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.Aucthentication.AuthRepository.UserRepoImp
+import com.example.recipeapp.Aucthentication.ViewModelFactory
 import com.example.recipeapp.Aucthentication.validations
 import com.example.recipeapp.R
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp

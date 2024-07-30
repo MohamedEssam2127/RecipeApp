@@ -2,7 +2,6 @@ package com.example.recipeapp.Aucthentication.Login
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.renderscript.ScriptGroup.Binding
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.Aucthentication.AuthRepository.UserRepoImp
-import com.example.recipeapp.Aucthentication.Register.ViewModelFactory
+import com.example.recipeapp.Aucthentication.ViewModelFactory
 import com.example.recipeapp.Aucthentication.validations
 
 import com.example.recipeapp.R

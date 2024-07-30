@@ -1,4 +1,4 @@
-package com.example.recipeapp.Aucthentication.Register
+package com.example.recipeapp.Aucthentication
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
