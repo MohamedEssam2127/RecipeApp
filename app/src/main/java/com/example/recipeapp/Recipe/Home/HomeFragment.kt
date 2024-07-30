@@ -50,6 +50,10 @@ class HomeFragment : Fragment() {
                         .error(R.drawable.baseline_assignment_late_24)
                 ).into(image)
             }
+            image?.setOnClickListener {
+                val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(recipeResponce.meals[0])
+                findNavController().navigate(action)
+            }
         }
 
         // Inflate the layout for this fragment
