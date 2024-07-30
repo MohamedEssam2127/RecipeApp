@@ -17,7 +17,7 @@ class RecipeActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var drawerLayout: DrawerLayout
-   private lateinit var navController: androidx.navigation.NavController
+    private lateinit var navController: androidx.navigation.NavController
     private lateinit var toolbar: Toolbar
     companion object {
         var splachFlag = false
@@ -36,27 +36,27 @@ class RecipeActivity : AppCompatActivity() {
         supportActionBar?.title = ""
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-       bottomNavigation.selectedItemId = R.id.bottom_bar_home
-       bottomNavigation.setOnItemSelectedListener { item ->
-           when(item.itemId) {
-               R.id.bottom_bar_home -> {
-                   navController.navigate(R.id.action_global_homeFragment)
-                   toolbar.visibility= View.VISIBLE
-                   true
-               }
-               R.id.bottom_bar_fav -> {
-                   toolbar.visibility= View.INVISIBLE
-                   navController.navigate(R.id.action_global_favoriteFragment)
-                   true
-               }
-               R.id.bottom_barchr_sea -> {
-                   toolbar.visibility= View.INVISIBLE
-                   navController.navigate(R.id.action_global_searchFragment)
-                   true
-               }
-               else -> false
-           }
-       }
+        bottomNavigation.selectedItemId = R.id.bottom_bar_home
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.bottom_bar_home -> {
+                    navController.navigate(R.id.action_global_homeFragment)
+                    toolbar.visibility= View.VISIBLE
+                    true
+                }
+                R.id.bottom_bar_fav -> {
+                    toolbar.visibility= View.INVISIBLE
+                    navController.navigate(R.id.action_global_favoriteFragment)
+                    true
+                }
+                R.id.bottom_barchr_sea -> {
+                    toolbar.visibility= View.INVISIBLE
+                    navController.navigate(R.id.action_global_searchFragment)
+                    true
+                }
+                else -> false
+            }
+        }
 
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -74,7 +74,7 @@ class RecipeActivity : AppCompatActivity() {
                 }
 
                 finish()
-               navController.navigate(R.id.action_homeFragment_to_authActivity)
+                navController.navigate(R.id.action_homeFragment_to_authActivity)
 
                 return true
             }
