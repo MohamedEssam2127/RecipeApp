@@ -48,12 +48,6 @@ class RegisterFragment : Fragment() {
         val userId = sharedPreferences.getInt("user_id", -1)
         navController = findNavController()
 
-        if (userId != -1) {
-            navController.navigate(R.id.action_registerFragment_to_recipeActivity)
-            requireActivity().finish()
-            return
-        }
-
         viewModel = ViewModelProvider(this,userViewModelFactory).get(RegisterViewModel::class.java)
 
         val register_btn = view.findViewById<Button>(R.id.register_signupBtn)
@@ -82,8 +76,7 @@ class RegisterFragment : Fragment() {
                     email_editText.text.toString().trim(),
                     password_editText.text.toString().trim()
                 )
-                navController.navigate(R.id.action_registerFragment_to_recipeActivity)
-                requireActivity().finish()
+                navController.navigate(R.id.action_registerFragment_to_loginFragment)
             }
         })
 
