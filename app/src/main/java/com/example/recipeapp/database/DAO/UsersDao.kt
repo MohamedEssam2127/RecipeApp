@@ -1,4 +1,4 @@
-package com.example.recipeapp.database
+package com.example.recipeapp.database.DAO
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -7,6 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import com.example.recipeapp.database.UserWithFavorite
 import com.example.recipeapp.models.Users
 @Dao
 interface UsersDao {

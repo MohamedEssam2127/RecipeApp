@@ -1,4 +1,4 @@
-package com.example.recipeapp.Aucthentication
+package com.example.recipeapp.Aucthentication.ViewValidations
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

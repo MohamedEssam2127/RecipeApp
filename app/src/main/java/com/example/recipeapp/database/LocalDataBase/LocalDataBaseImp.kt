@@ -1,9 +1,9 @@
 package com.example.recipeapp.database.LocalDataBase
 
 import android.content.Context
-import com.example.recipeapp.database.FavoriteMealDao
+import com.example.recipeapp.database.DAO.FavoriteMealDao
 import com.example.recipeapp.database.UserDataBase
-import com.example.recipeapp.database.UsersDao
+import com.example.recipeapp.database.DAO.UsersDao
 import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Users
 

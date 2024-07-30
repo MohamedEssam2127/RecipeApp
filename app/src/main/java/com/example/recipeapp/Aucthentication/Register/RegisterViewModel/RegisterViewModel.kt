@@ -1,4 +1,4 @@
-package com.example.recipeapp.Aucthentication.Register
+package com.example.recipeapp.Aucthentication.Register.RegisterViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

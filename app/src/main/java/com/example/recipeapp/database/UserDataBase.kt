@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.recipeapp.database.DAO.FavoriteMealDao
+import com.example.recipeapp.database.DAO.UsersDao
 import com.example.recipeapp.models.FavoriteMeal
-import com.example.recipeapp.models.Meal
 import com.example.recipeapp.models.Users
 
 @Database(entities = [Users::class,FavoriteMeal::class], version =2)

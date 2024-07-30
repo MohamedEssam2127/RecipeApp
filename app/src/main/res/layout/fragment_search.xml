@@ -28,9 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="16dp"
-            android:queryHint="Enter Recipe"
+            android:background="#FBE6E6"
             android:iconifiedByDefault="false"
-            />
+            android:queryHint="Enter Recipe" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recipeRecyclerView"
