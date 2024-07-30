@@ -21,4 +21,5 @@ interface LocalDataBase {
 
     suspend fun getUserWithFavorite(userId:Int): List<UserWithFavorite>
 
+    suspend fun deleteFavoriteMeal (FavoriteMeal: FavoriteMeal)
 }

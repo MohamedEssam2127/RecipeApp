@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
@@ -51,7 +50,8 @@ class FavoriteFragment : Fragment() {
                 Log.d("FavoriteFragment", "Favorite meals: ${fav}")
 
             }else{
-                val adapter = FavoriteAdapter(favoriteMeals[0].favoriteMeals)
+                val list = fav[0].favoriteMeals as MutableList<FavoriteMeal>
+                val adapter = FavoriteAdapter(list,viewModel, viewLifecycleOwner)
                 recyclerView.adapter = adapter
             }
 

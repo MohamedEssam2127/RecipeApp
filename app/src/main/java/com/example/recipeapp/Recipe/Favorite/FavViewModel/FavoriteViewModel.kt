@@ -15,11 +15,13 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
 
     private val _FavoriteMeal = MutableLiveData<List<UserWithFavorite>>()
     val FavoriteMeal: LiveData<List<UserWithFavorite>> get() = _FavoriteMeal
+
+    private val _FavoritelistAdapter = MutableLiveData<List<FavoriteMeal>>()
+    val FavoritelistAdapter: LiveData<List<FavoriteMeal>> get() = _FavoritelistAdapter
+
     fun insertFavoriteMeal (meal: FavoriteMeal){
         viewModelScope.launch {
-            Log.d("FavoriteViewModel", "Inserting favorite meal: $meal")
            repo.insertFavoriteMeal(meal)
-            Log.d("FavoriteViewModel", " done ")
         }
     }
 
@@ -27,6 +29,17 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
         viewModelScope.launch {
             val favoriteMeals = repo.getUserWithFavorite(userId)
             _FavoriteMeal.value = favoriteMeals
+
+           _FavoritelistAdapter.value = favoriteMeals[0].favoriteMeals
+            Log.d("FavoriteViewModel", "Favorite meals size: ${FavoritelistAdapter.value}")
         }
+    }
+
+    fun deleteFromFavList (favoriteMeal: FavoriteMeal){
+        viewModelScope.launch {
+
+            repo.deleteFavoriteMeal(favoriteMeal)
+        }
+
     }
 }

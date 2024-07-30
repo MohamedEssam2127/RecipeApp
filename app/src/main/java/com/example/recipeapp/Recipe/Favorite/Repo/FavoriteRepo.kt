@@ -8,4 +8,6 @@ interface FavoriteRepo {
     suspend fun insertFavoriteMeal(meal: FavoriteMeal)
 
     suspend fun getUserWithFavorite(userId:Int): List<UserWithFavorite>
+
+    suspend fun deleteFavoriteMeal (favoriteMeal: FavoriteMeal)
 }
