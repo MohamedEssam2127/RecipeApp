@@ -17,4 +17,9 @@
         <item name="postSplashScreenTheme">@style/Base.Theme.RecipeApp</item>
     </style>
 
+    <style name="RoundedCorners">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50dp</item>
+    </style>
+
 </resources>
