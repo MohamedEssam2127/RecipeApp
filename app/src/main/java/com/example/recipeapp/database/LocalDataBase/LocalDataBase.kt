@@ -11,4 +11,6 @@ interface LocalDataBase {
     suspend fun getUserByEmailAndPassword(email: String, password: String): Users
 
     suspend fun isUserExist(email: String, password: String ): Boolean
+
+    suspend fun  isEmailExist(email: String): Boolean
 }
