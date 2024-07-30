@@ -16,6 +16,9 @@ class RecipeActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
    private lateinit var navController: androidx.navigation.NavController
     private lateinit var toolbar: Toolbar
+    companion object {
+        var splachFlag = false
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -60,9 +63,12 @@ class RecipeActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.menu_sign_out -> {
                 finish()
+               navController.navigate(R.id.action_homeFragment_to_authActivity)
+
                 return true
             }
             R.id.menu_about -> {
+                toolbar.visibility= View.INVISIBLE
                 navController.navigate(R.id.action_homeFragment_to_aboutFragment)
                 return true
             }
