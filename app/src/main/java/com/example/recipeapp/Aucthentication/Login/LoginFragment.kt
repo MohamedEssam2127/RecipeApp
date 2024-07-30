@@ -18,6 +18,7 @@ import com.example.recipeapp.Aucthentication.ViewValidations.validations
 import com.example.recipeapp.R
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 
 class LoginFragment : Fragment() {
@@ -100,19 +101,18 @@ class LoginFragment : Fragment() {
         }
         else{
             when {
-                !isEmailValid -> Toast.makeText(
-                    context,
-                    "Invalid Email Address",
-                    Toast.LENGTH_SHORT
-                ).show()
+                !isEmailValid -> {
+                    val emailhelper = view?.findViewById<TextInputLayout>(R.id.login_emailInputLayout)
+                    if (emailhelper != null)
+                        emailhelper.helperText = "*Email Address not found"
+                }
 
-                !isPasswordValid -> Toast.makeText(
-                    context,
-                    "Wrong Password",
-                    Toast.LENGTH_SHORT
-                ).show()
+                !isPasswordValid -> {
+                    val passwordhelper = view?.findViewById<TextInputLayout>(R.id.login_passwordInputLayout)
+                    if (passwordhelper != null)
+                        passwordhelper.helperText = "*Wrong Password"
+                }
             }
         }
     }
-
 }
