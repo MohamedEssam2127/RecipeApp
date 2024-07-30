@@ -10,7 +10,7 @@ import com.example.recipeapp.models.Users
 class LocalDataBaseImp (context: Context) : LocalDataBase {
 
 
-    private lateinit var usersDao: UsersDao
+    private  var usersDao: UsersDao
     private lateinit var favoriteMealDao: FavoriteMealDao
 
     init {
