@@ -102,7 +102,7 @@ class LoginFragment : Fragment() {
             when {
                 !isEmailValid -> Toast.makeText(
                     context,
-                    "Invalid Email Address",
+                    "Email Address not found",
                     Toast.LENGTH_SHORT
                 ).show()
 

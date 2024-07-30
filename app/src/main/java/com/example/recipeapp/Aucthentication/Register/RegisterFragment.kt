@@ -18,6 +18,7 @@ import com.example.recipeapp.Aucthentication.ViewValidations.validations
 import com.example.recipeapp.R
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class RegisterFragment : Fragment() {
 
@@ -56,6 +57,7 @@ class RegisterFragment : Fragment() {
         val lastName = view.findViewById<TextInputEditText>(R.id.register_SecName_TextInput)
         val email_editText = view.findViewById<TextInputEditText>(R.id.register_email_TextInput)
         val password_editText = view.findViewById<TextInputEditText>(R.id.register_password_TextInput)
+
 
         register_btn.setOnClickListener {
             handleRegistration(firstName,lastName,email_editText, password_editText)
@@ -100,10 +102,39 @@ class RegisterFragment : Fragment() {
         validations.validateFirstName(firstName)
         validations.validateLastName(lastName)
 
+
+        if (passwordEdittext != null) {
+            if (passwordEdittext.length() < 8) {
+                // make helper text visible
+                val helper= view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
+                if (helper != null) {
+                    helper.helperText = "*Password must be at least 8 characters"
+                }
+            }
+
+            else if (passwordEdittext.length() > 16) {
+                // make helper text visible
+                val helper= view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
+                if (helper != null) {
+                    helper.helperText = "*Password must be at most 16 characters"
+                }
+            }
+
+            else{
+                // make helper text invisible
+                val helper= view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
+                if (helper != null) {
+                    helper.helperText = ""
+                }
+            }
+        }
+
+
         val isEmailValid = validations.isEmailValid.value ?: false
         val isPasswordValid = validations.isPasswordValid.value ?: false
         val isFirstNameValid = validations.isFirstNameValid.value ?: false
         val isLastNameValid = validations.isLastNameValid.value ?: false
+
 
         if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid) {
             viewModel.checkIfUserExists(email)

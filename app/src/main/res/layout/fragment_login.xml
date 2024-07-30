@@ -81,7 +81,7 @@
                     android:textColorHint="@color/dark_blue"
                     app:boxStrokeColor="@color/dark_blue"
                     app:counterEnabled="true"
-                    app:counterMaxLength="10"
+                    app:counterMaxLength="16"
                     app:counterTextColor="@color/dark_blue"
                     app:cursorColor="@color/dark_blue"
                     app:endIconMode="password_toggle"
