@@ -107,7 +107,7 @@ class LoginFragment : Fragment() {
 
                 !isPasswordValid -> Toast.makeText(
                     context,
-                    "Enter Strong Password",
+                    "Wrong Password",
                     Toast.LENGTH_SHORT
                 ).show()
             }
