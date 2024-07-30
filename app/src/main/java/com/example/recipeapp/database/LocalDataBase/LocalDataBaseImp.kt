@@ -40,4 +40,8 @@ class LocalDataBaseImp (context: Context) : LocalDataBase {
     suspend fun deleteUser(user: Users){
         usersDao.deleteUser(user)
     }
+
+    override suspend fun isEmailExist(email: String): Boolean {
+        return usersDao.isEmailExist(email)
+    }
 }

@@ -118,7 +118,7 @@
             android:layout_marginTop="8dp"
             android:text="Categories"
             android:textColor="@color/dark_blue"
-            android:textSize="20dp"
+            android:textSize="22dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -164,7 +164,9 @@
                     android:layout_marginEnd="15dp"
                     android:gravity="center"
                     android:text="Meat"
-                    android:textSize="16dp" />
+                    android:textColor="@color/orange"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/salad"
@@ -183,12 +185,14 @@
                     android:layout_alignStart="@+id/salad"
                     android:layout_alignEnd="@+id/salad"
                     android:layout_marginStart="10dp"
-                    android:gravity="center"
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="15dp"
+                    android:gravity="center"
 
                     android:text="Salad"
-                    android:textSize="16dp" />
+                    android:textColor="@color/orange"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/dessert"
@@ -207,11 +211,13 @@
                     android:layout_alignStart="@+id/dessert"
                     android:layout_alignEnd="@+id/dessert"
                     android:layout_marginStart="10dp"
-                    android:gravity="center"
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="15dp"
+                    android:gravity="center"
                     android:text="Dessert"
-                    android:textSize="16dp" />
+                    android:textColor="@color/orange"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/seafood"
@@ -234,7 +240,9 @@
                     android:layout_marginEnd="15dp"
                     android:gravity="center"
                     android:text="Seafood"
-                    android:textSize="16dp" />
+                    android:textColor="@color/orange"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/breads"
@@ -256,8 +264,10 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="15dp"
                     android:gravity="center"
+                    android:text="Breads"
+                    android:textColor="@color/orange"
                     android:textSize="16dp"
-                    android:text="Breads" />
+                    android:textStyle="bold" />
 
 
             </RelativeLayout>
