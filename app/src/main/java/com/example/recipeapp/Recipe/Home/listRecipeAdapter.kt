@@ -82,14 +82,12 @@ class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: Favo
         holder.iconFav.setOnClickListener {
             val favoriteMeal = FavoriteMeal(
                 idMeal = recipes.meals[position].idMeal.toInt(),
-                strCategory=  recipes.meals[0].strCategory,
-                strMeal= recipes.meals[0].strMeal,
-                strMealThumb = recipes.meals[0].strMealThumb,
-                strTags = recipes.meals[0].strTags,
-                strYoutube= recipes.meals[0].strYoutube,
-                userId= userId
-
-            )
+                strCategory=  recipes.meals[position].strCategory,
+                strMeal= recipes.meals[position].strMeal,
+                strMealThumb = recipes.meals[position].strMealThumb,
+                strTags = recipes.meals[position].strTags,
+                strYoutube= recipes.meals[position].strYoutube,
+                userId= userId)
             if (!isFavorite) {
                 viewModel.insertFavoriteMeal(favoriteMeal)
                 holder.iconFav.setImageResource(R.drawable.baseline_favorite_24)
