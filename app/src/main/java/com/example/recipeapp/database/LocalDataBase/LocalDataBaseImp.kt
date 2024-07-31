@@ -1,9 +1,10 @@
 package com.example.recipeapp.database.LocalDataBase
 
 import android.content.Context
-import com.example.recipeapp.database.FavoriteMealDao
+import com.example.recipeapp.database.DAO.FavoriteMealDao
 import com.example.recipeapp.database.UserDataBase
-import com.example.recipeapp.database.UsersDao
+import com.example.recipeapp.database.DAO.UsersDao
+import com.example.recipeapp.database.UserWithFavorite
 import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Users
 
@@ -11,7 +12,7 @@ class LocalDataBaseImp (context: Context) : LocalDataBase {
 
 
     private  var usersDao: UsersDao
-    private lateinit var favoriteMealDao: FavoriteMealDao
+    private  var favoriteMealDao: FavoriteMealDao
 
     init {
         val db = UserDataBase.getInstance(context)
@@ -34,14 +35,29 @@ class LocalDataBaseImp (context: Context) : LocalDataBase {
     override suspend fun isUserExist(email: String, password: String): Boolean {
         return usersDao.isUserExist(email , password)
     }
-    suspend fun insertFavoriteMeal(favoriteMeal: FavoriteMeal) {
-        favoriteMealDao.insertUser(favoriteMeal)
-    }
+
     suspend fun deleteUser(user: Users){
         usersDao.deleteUser(user)
     }
 
     override suspend fun isEmailExist(email: String): Boolean {
         return usersDao.isEmailExist(email)
+    }
+/////////////////////////////////////////////////////////////////////
+                             // FAV //
+    override suspend fun insertFavoriteMeal(meal: FavoriteMeal) {
+    favoriteMealDao.insertFavoriteMeal(meal)
+    }
+
+    override suspend fun getUserWithFavorite(userId: Int): List<UserWithFavorite> {
+     return favoriteMealDao.getUsersWithPlaylists(userId)
+    }
+
+    override suspend fun deleteFavoriteMeal(favoriteMeal: FavoriteMeal) {
+        favoriteMealDao.deleteFavoriteMeal(favoriteMeal)
+    }
+
+    override suspend fun getFavoriteMealsByUserIdAndIdMeal(userId: Int, idMeal: Int): FavoriteMeal {
+      return  favoriteMealDao.getFavoriteMealsByUserIdAndIdMeal(userId, idMeal)
     }
 }

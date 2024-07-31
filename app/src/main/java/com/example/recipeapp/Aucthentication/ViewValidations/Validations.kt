@@ -1,4 +1,4 @@
-package com.example.recipeapp.Aucthentication
+package com.example.recipeapp.Aucthentication.ViewValidations
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -24,7 +24,7 @@ class validations {
     }
 
     fun validatePassword(password: String) {
-        val passwordPattern = "(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}"
+        val passwordPattern = "(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,16}"
         _isPasswordValid.value = password.matches(passwordPattern.toRegex())
     }
 

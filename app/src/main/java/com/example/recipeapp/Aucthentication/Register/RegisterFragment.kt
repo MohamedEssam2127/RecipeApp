@@ -12,11 +12,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.Aucthentication.AuthRepository.UserRepoImp
-import com.example.recipeapp.Aucthentication.ViewModelFactory
-import com.example.recipeapp.Aucthentication.validations
+import com.example.recipeapp.Aucthentication.Register.RegisterViewModel.RegisterViewModel
+import com.example.recipeapp.Aucthentication.AuthViewModelFactory.ViewModelFactory
+import com.example.recipeapp.Aucthentication.ViewValidations.validations
 import com.example.recipeapp.R
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class RegisterFragment : Fragment() {
 
@@ -55,6 +57,7 @@ class RegisterFragment : Fragment() {
         val lastName = view.findViewById<TextInputEditText>(R.id.register_SecName_TextInput)
         val email_editText = view.findViewById<TextInputEditText>(R.id.register_email_TextInput)
         val password_editText = view.findViewById<TextInputEditText>(R.id.register_password_TextInput)
+
 
         register_btn.setOnClickListener {
             handleRegistration(firstName,lastName,email_editText, password_editText)
@@ -99,36 +102,66 @@ class RegisterFragment : Fragment() {
         validations.validateFirstName(firstName)
         validations.validateLastName(lastName)
 
+
+        if (passwordEdittext != null) {
+            if (passwordEdittext.length() < 8) {
+                // make helper text visible
+                val helper= view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
+                if (helper != null) {
+                    helper.helperText = "*Password must be at least 8 characters"
+                }
+            }
+
+            else if (passwordEdittext.length() > 16) {
+                // make helper text visible
+                val helper= view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
+                if (helper != null) {
+                    helper.helperText = "*Password must be at most 16 characters"
+                }
+            }
+
+            else{
+                // make helper text invisible
+                val helper= view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
+                if (helper != null) {
+                    helper.helperText = ""
+                }
+            }
+        }
+
+
         val isEmailValid = validations.isEmailValid.value ?: false
         val isPasswordValid = validations.isPasswordValid.value ?: false
         val isFirstNameValid = validations.isFirstNameValid.value ?: false
         val isLastNameValid = validations.isLastNameValid.value ?: false
 
+
         if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid) {
             viewModel.checkIfUserExists(email)
         } else {
             when {
-                !isEmailValid -> Toast.makeText(
-                    context,
-                    "Invalid Email Address",
-                    Toast.LENGTH_SHORT
-                ).show()
+                !isEmailValid -> {
+                    val emailhelper = view?.findViewById<TextInputLayout>(R.id.register_email_InputLayout)
+                    if (emailhelper != null)
+                        emailhelper.helperText = "*Email Address not found"
+                }
 
-                !isPasswordValid -> Toast.makeText(
-                    context,
-                    "Enter Strong Password",
-                    Toast.LENGTH_SHORT
-                ).show()
-                !isFirstNameValid -> Toast.makeText(
-                    context,
-                    "First Name is Required",
-                    Toast.LENGTH_SHORT
-                ).show()
-                !isLastNameValid -> Toast.makeText(
-                    context,
-                    "Second Name is Required",
-                    Toast.LENGTH_SHORT
-                ).show()
+                !isPasswordValid -> {
+                    val passwordhelper = view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
+                    if (passwordhelper != null)
+                        passwordhelper.helperText = "*Wrong Password"
+                }
+
+                !isFirstNameValid -> {
+                    val firstNameHelper = view?.findViewById<TextInputLayout>(R.id.register_Fname_InputLayout)
+                    if (firstNameHelper != null)
+                        firstNameHelper.helperText = "*First Name is Required"
+                }
+                !isLastNameValid -> {
+                    val lastNameHelper = view?.findViewById<TextInputLayout>(R.id.register_secName_InputLayout)
+                    if (lastNameHelper != null)
+                        lastNameHelper.helperText = "*Last Name is Required"
+                }
             }
 
         }

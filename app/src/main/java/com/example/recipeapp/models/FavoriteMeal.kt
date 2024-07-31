@@ -17,10 +17,10 @@ import androidx.room.PrimaryKey
 data class FavoriteMeal(
     @PrimaryKey(autoGenerate = true)
     val idMeal: Int=0,
-    val strCategory: String,
-    val strMeal: String,
-    val strMealThumb: String,
-    val strTags: String,
-    val strYoutube: String,
+    val strCategory: String?,
+    val strMeal: String?,
+    val strMealThumb: String?,
+    val strTags: String?,
+    val strYoutube: String?,
     val userId: Int
 )

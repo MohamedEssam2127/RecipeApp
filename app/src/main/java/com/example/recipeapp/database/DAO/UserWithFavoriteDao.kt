@@ -1,4 +1,4 @@
-package com.example.recipeapp.database
+package com.example.recipeapp.database.DAO
 
 import androidx.room.Dao
 
