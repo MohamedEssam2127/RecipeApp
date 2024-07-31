@@ -17,4 +17,10 @@ data class Meal(
     val strYoutube: String,
     val strArea: String,
     val strInstructions: String
-): Parcelable
+): Parcelable{
+    override fun hashCode(): Int {
+        // Handle null description
+        val descriptionHashCode = strInstructions?.hashCode() ?: 0
+        return 31 * strMeal.hashCode() + descriptionHashCode
+    }
+}

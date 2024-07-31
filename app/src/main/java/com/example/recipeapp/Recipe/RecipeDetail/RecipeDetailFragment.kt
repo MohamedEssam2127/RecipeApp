@@ -1,19 +1,20 @@
 package com.example.recipeapp.Recipe.RecipeDetail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
 import com.example.recipeapp.models.Meal
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 
 class RecipeDetailFragment : Fragment() {
@@ -53,11 +54,16 @@ class RecipeDetailFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
 
-//        val webView = view.findViewById<WebView>(R.id.youtubeVideoView)
-//        webView.loadUrl(recipe.strYoutube)
+        val youTubePlayerView: YouTubePlayerView = view.findViewById(R.id.youtubeVideoView)
+        viewLifecycleOwner.lifecycle.addObserver(youTubePlayerView)
 
-
-
+        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                val videoId = recipe.strYoutube.substringAfter("v=")
+                youTubePlayer.cueVideo(videoId, 0f)
+                youTubePlayer.mute()
+            }
+        })
 
     }
 
