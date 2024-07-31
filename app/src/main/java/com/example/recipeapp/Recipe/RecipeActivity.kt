@@ -76,15 +76,24 @@ class RecipeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_sign_out -> {
-
-
                 showLogoutDialog()
-
                 return true
             }
             R.id.menu_about -> {
                 toolbar.visibility= View.INVISIBLE
-                navController.navigate(R.id.action_homeFragment_to_aboutFragment)
+//                navController.navigate(R.id.action_homeFragment_to_aboutFragment)
+//                return true
+
+                val currentDestination = navController.currentDestination?.id
+                when (currentDestination) {
+                    R.id.recipeDetailFragment -> {
+
+                        navController.navigate(R.id.action_recipeDetailFragment_to_aboutFragment)
+                    }
+                    R.id.homeFragment -> {
+                        navController.navigate(R.id.action_homeFragment_to_aboutFragment)
+                    }
+                }
                 return true
             }
         }

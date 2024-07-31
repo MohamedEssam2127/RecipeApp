@@ -46,6 +46,9 @@
         <argument
             android:name="recipeSent"
             app:argType="com.example.recipeapp.models.Meal" />
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_homeFragment"
