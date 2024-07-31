@@ -49,12 +49,12 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
     }
 
 
-    fun isMealFavorite(id:String){
-        viewModelScope.launch (Dispatchers.IO) {
-            val isMealFavorite = repo.isMealFavorite(id)
-            withContext(Dispatchers.Main){
-                _isFav.value = isMealFavorite
-            }
-        }
+
+
+   suspend fun isMealFavorite(id:String,uId:Int) : Boolean{
+
+            return repo.isMealFavorite(id,uId)
+
+
     }
 }

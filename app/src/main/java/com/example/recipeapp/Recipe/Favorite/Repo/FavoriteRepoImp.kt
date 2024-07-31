@@ -22,8 +22,8 @@ class FavoriteRepoImp (private val localDataBase: LocalDataBase): FavoriteRepo {
         return localDataBase.getFavoriteMealsByUserIdAndIdMeal(userId, idMeal)
     }
 
-    override suspend fun isMealFavorite(id: Int): Boolean {
-        return localDataBase.isMealFavorite(id)
+    override  suspend fun isMealFavorite(id:String,uId:Int):Boolean {
+        return localDataBase.isMealFavorite(id,uId)
     }
 
 

@@ -16,12 +16,18 @@ import com.example.recipeapp.Recipe.Home.HomeFragment.Companion.userId
 import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Meal
 import com.example.recipeapp.models.RecipeResponse
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.joinAll
 
 class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: FavoriteViewModel) :
     RecyclerView.Adapter<listRecipeAdapter.RecipesViewHolder>() {
     var onItemClick: ((Meal) -> Unit)? = null
 
+
+    lateinit var a: Deferred<Unit>
     class RecipesViewHolder(private val row: View) : RecyclerView.ViewHolder(row) {
         private var img: ImageView? = null
         private var title: TextView? = null
@@ -42,6 +48,10 @@ class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: Favo
         val layout =
             LayoutInflater.from(parent.context).inflate(R.layout.list_recipe_item, parent, false)
         return RecipesViewHolder(layout)
+
+
+
+
     }
 
     override fun getItemCount(): Int {
@@ -50,18 +60,12 @@ class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: Favo
 
     override fun onBindViewHolder(holder: RecipesViewHolder, position: Int) {
 
-        viewModel.isMealFavorite(recipes.meals[position].strMeal)
-        var isFav = false
-        viewModel.isFav.observe(holder.itemView.context as LifecycleOwner) { isFavLive ->
-            Log.d("TAG", " is fav before  ${isFav}")
-            isFav = isFavLive
-            Log.d("TAG", " is fav after  ${isFav}")
-
-            if (isFavLive) {
+        var isFavourite:Boolean = false
+        holder.iconFav.setImageResource(R.drawable.avorite)
+        a = CoroutineScope(Dispatchers.Main).async {
+            isFavourite =  viewModel.isMealFavorite(recipes.meals[position].strMeal,userId)
+            if (isFavourite) {
                 holder.iconFav.setImageResource(R.drawable.baseline_favorite_24)
-            } else {
-
-                holder.iconFav.setImageResource(R.drawable.avorite)
             }
         }
 
@@ -77,18 +81,45 @@ class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: Favo
             onItemClick?.invoke(recipes.meals[position])
         }
         holder.iconFav.setOnClickListener {
+            val favoriteMeal = FavoriteMeal(
+                idMeal = recipes.meals[position].idMeal.toInt(),
+                strCategory=  recipes.meals[0].strCategory,
+                strMeal= recipes.meals[0].strMeal,
+                strMealThumb = recipes.meals[0].strMealThumb,
+                strTags = recipes.meals[0].strTags,
+                strYoutube= recipes.meals[0].strYoutube,
+                userId= userId
 
-           val favoriteMeal = FavoriteMeal(
-               idMeal = recipes.meals[position].idMeal.toInt(),
-               strCategory=  recipes.meals[0].strCategory,
-               strMeal= recipes.meals[0].strMeal,
-               strMealThumb = recipes.meals[0].strMealThumb,
-               strTags = recipes.meals[0].strTags,
-               strYoutube= recipes.meals[0].strYoutube,
-               userId= userId
             )
-            viewModel.insertFavoriteMeal(favoriteMeal)
+            if (!isFavourite) {
+                viewModel.insertFavoriteMeal(favoriteMeal)
+                holder.iconFav.setImageResource(R.drawable.baseline_favorite_24)
+                Log.d("TAG", " is added to fav")
+                isFavourite = true
+            }else{
+                viewModel.deleteFromFavList(favoriteMeal)
+                holder.iconFav.setImageResource(R.drawable.avorite)
+                Log.d("TAG", " is already fav")
+                isFavourite = false
+            }
+
         }
 
     }
+//    fun checkIsFavorite (holder: RecipesViewHolder, position: Int){
+//        viewModel.isMealFavorite(recipes.meals[position].strMeal)
+//        var isFav = false
+//        viewModel.isFav.observe(holder.itemView.context as LifecycleOwner) { isFavLive ->
+//            Log.d("TAG", " is fav before  ${isFav}")
+//            isFav = isFavLive
+//            Log.d("TAG", " is fav after  ${isFav}")
+//
+//            if (isFavLive) {
+//                holder.iconFav.setImageResource(R.drawable.baseline_favorite_24)
+//            } else {
+//
+//                holder.iconFav.setImageResource(R.drawable.avorite)
+//            }
+//        }
+//    }
 }

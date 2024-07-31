@@ -26,5 +26,5 @@ interface LocalDataBase {
 
     suspend fun getFavoriteMealsByUserIdAndIdMeal(userId: Int, idMeal: Int): FavoriteMeal
 
-    suspend fun isMealFavorite(id:String):Boolean
+    suspend fun isMealFavorite(id:String,uId:Int):Boolean
 }
