@@ -18,6 +18,7 @@ class FavoriteAdapter(
     private val viewLifecycleOwner: LifecycleOwner
 
 ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
+    var onItemClick: ((FavoriteMeal) -> Unit)? = null
 
     init {
         viewModel.FavoritelistAdapter.observe(viewLifecycleOwner) {
@@ -40,6 +41,9 @@ class FavoriteAdapter(
             values.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, values.size)
+        }
+        holder.itemView.setOnClickListener{
+            onItemClick?.invoke(meal)
         }
     }
 
