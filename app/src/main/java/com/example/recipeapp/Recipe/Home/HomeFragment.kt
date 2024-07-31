@@ -71,7 +71,9 @@ class HomeFragment : Fragment() {
                     recipeResponce.meals[0].strMealThumb,
                     recipeResponce.meals[0].strTags,
                     recipeResponce.meals[0].strYoutube,
-                    userId
+                    userId,
+                    recipeResponce.meals[0].strArea,
+                    recipeResponce.meals[0].strInstructions
                 )
 
 

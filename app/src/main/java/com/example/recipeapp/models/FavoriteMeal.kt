@@ -22,5 +22,7 @@ data class FavoriteMeal(
     val strMealThumb: String?,
     val strTags: String?,
     val strYoutube: String?,
-    val userId: Int
+    val userId: Int,
+    val strArea: String,
+    val strInstructions: String
 )
