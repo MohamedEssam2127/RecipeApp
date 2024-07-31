@@ -68,5 +68,6 @@ dependencies {
 
     //Android Youtube player
     implementation(libs.youtube.video.player)
+    implementation(libs.read.more.expand)
 
 }
