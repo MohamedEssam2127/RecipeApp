@@ -22,7 +22,6 @@ class HomeViewModel: ViewModel() {
         viewModelScope.launch {
             var char = ('a'..'z').random().toString()  // randomize char every time
             if (repo.getMealsByFirstLetter(char).meals == null){    // hit another char if no meals found with char
-                Log.d("asdf", "getRecipesByLetter: null $char")
                 getRecipesByLetter()
             }
             _recipes.postValue(repo.getMealsByFirstLetter(char))
