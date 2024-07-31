@@ -28,16 +28,21 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var favViewModel: FavoriteViewModel
     private lateinit var favoriteMeal: FavoriteMeal
-     private lateinit var sharedPreferences: SharedPreferences
+    companion object{
+        private lateinit var sharedPreferences: SharedPreferences
+        var userId :Int =-1
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        gettingViewModelReady()
         sharedPreferences=requireActivity().getSharedPreferences("user_id",0)
-        val userId = sharedPreferences.getInt("user_id", -1)
+         userId = sharedPreferences.getInt("user_id", -1)
         viewModel.getRecipesByLetter()
         viewModel.recipes.observe(viewLifecycleOwner) { recipeResponce ->
-            val adapter = listRecipeAdapter(recipeResponce)
+            val adapter = listRecipeAdapter(recipeResponce,favViewModel)
             val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_popular_recipe)
             recyclerView?.adapter = adapter
             recyclerView?.layoutManager =
@@ -83,7 +88,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        gettingViewModelReady()
         val FavImg = view.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
         FavImg.setOnClickListener {
             if(favoriteMeal != null)

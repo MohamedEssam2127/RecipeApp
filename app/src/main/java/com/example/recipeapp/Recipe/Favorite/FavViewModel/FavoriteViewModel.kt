@@ -9,7 +9,9 @@ import com.example.recipeapp.Recipe.Favorite.Repo.FavoriteRepo
 import com.example.recipeapp.database.UserWithFavorite
 import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Users
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
 
@@ -18,6 +20,9 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
 
     private val _FavoritelistAdapter = MutableLiveData<List<FavoriteMeal>>()
     val FavoritelistAdapter: LiveData<List<FavoriteMeal>> get() = _FavoritelistAdapter
+
+    private val _getByUserAndMeal = MutableLiveData<FavoriteMeal>()
+    val getByUserAndMeal: LiveData<FavoriteMeal> get() = _getByUserAndMeal
 
     fun insertFavoriteMeal (meal: FavoriteMeal){
         viewModelScope.launch {
@@ -41,5 +46,21 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
             repo.deleteFavoriteMeal(favoriteMeal)
         }
 
+    }
+
+    fun getFavMealByUserIdAndMealId(userId: Int, mealId: Int){
+        viewModelScope.launch {
+           val favoriteMeal = repo.getFavoriteMealsByUserIdAndIdMeal(userId,mealId)
+            _getByUserAndMeal.value = favoriteMeal
+
+        }
+    }
+
+    suspend fun getFavMealByUserIdAndMealIdSync(userId: Int, mealId: Int) {
+        return withContext(Dispatchers.IO) {
+            // Perform the query on the background thread and return the result
+            // Assume getFavMealByUserIdAndMealId() is a suspend function that returns the FavoriteMeal
+            getFavMealByUserIdAndMealId(userId, mealId)
+        }
     }
 }

@@ -16,6 +16,7 @@ class FavoriteAdapter(
     private var values: MutableList<FavoriteMeal>,
     private val viewModel: FavoriteViewModel,
     private val viewLifecycleOwner: LifecycleOwner
+
 ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
     init {

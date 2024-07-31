@@ -18,5 +18,9 @@ class FavoriteRepoImp (private val localDataBase: LocalDataBase): FavoriteRepo {
         localDataBase.deleteFavoriteMeal(favoriteMeal)
     }
 
+    override suspend fun getFavoriteMealsByUserIdAndIdMeal(userId: Int, idMeal: Int): FavoriteMeal {
+        return localDataBase.getFavoriteMealsByUserIdAndIdMeal(userId, idMeal)
+    }
+
 
 }
