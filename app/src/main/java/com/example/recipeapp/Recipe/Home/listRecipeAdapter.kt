@@ -21,13 +21,13 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
 
 class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: FavoriteViewModel) :
     RecyclerView.Adapter<listRecipeAdapter.RecipesViewHolder>() {
     var onItemClick: ((Meal) -> Unit)? = null
 
 
-    lateinit var a: Deferred<Unit>
     class RecipesViewHolder(private val row: View) : RecyclerView.ViewHolder(row) {
         private var img: ImageView? = null
         private var title: TextView? = null
@@ -59,12 +59,11 @@ class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: Favo
     }
 
     override fun onBindViewHolder(holder: RecipesViewHolder, position: Int) {
-
-        var isFavourite:Boolean = false
-        holder.iconFav.setImageResource(R.drawable.avorite)
-        a = CoroutineScope(Dispatchers.Main).async {
-            isFavourite =  viewModel.isMealFavorite(recipes.meals[position].strMeal,userId)
-            if (isFavourite) {
+        var isFavorite:Boolean =false
+        CoroutineScope(Dispatchers.Main).launch {
+            holder.iconFav.setImageResource(R.drawable.avorite)
+             isFavorite = viewModel.isMealFavorite(recipes.meals[position].strMeal, userId)
+            if (isFavorite) {
                 holder.iconFav.setImageResource(R.drawable.baseline_favorite_24)
             }
         }
@@ -91,16 +90,16 @@ class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: Favo
                 userId= userId
 
             )
-            if (!isFavourite) {
+            if (!isFavorite) {
                 viewModel.insertFavoriteMeal(favoriteMeal)
                 holder.iconFav.setImageResource(R.drawable.baseline_favorite_24)
                 Log.d("TAG", " is added to fav")
-                isFavourite = true
+                isFavorite = true
             }else{
                 viewModel.deleteFromFavList(favoriteMeal)
                 holder.iconFav.setImageResource(R.drawable.avorite)
                 Log.d("TAG", " is already fav")
-                isFavourite = false
+                isFavorite = false
             }
 
         }
