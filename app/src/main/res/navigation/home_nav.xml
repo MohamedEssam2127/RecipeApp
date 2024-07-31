@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_recipeDetailFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_authActivity"
+            app:destination="@id/authActivity" />
     </fragment>
     <action
         android:id="@+id/action_global_homeFragment"

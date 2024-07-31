@@ -121,8 +121,17 @@ class RecipeActivity : AppCompatActivity() {
             if (userId != -1) {
                 sharedPreferences.edit().putInt("user_id", -1).apply()
             }
+            val currentDestinationid = navController.currentDestination?.id
+                when (currentDestinationid) {
+                    R.id.recipeDetailFragment -> {
+
+                        navController.navigate(R.id.action_recipeDetailFragment_to_authActivity)
+                    }
+                    R.id.homeFragment -> {
+                        navController.navigate(R.id.action_homeFragment_to_authActivity)
+                    }
+                }
             finish()
-            navController.navigate(R.id.action_homeFragment_to_authActivity)
 
         }
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
