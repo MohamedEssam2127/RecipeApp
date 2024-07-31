@@ -51,8 +51,8 @@
             android:id="@+id/favBtn"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:backgroundTint="#00FFFFFF"
-            android:src="@drawable/baseline_favorite_24"
+            android:backgroundTint="#8F332D2D"
+            android:src="@drawable/avorite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

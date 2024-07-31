@@ -1,10 +1,12 @@
 package com.example.recipeapp.Recipe.Home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -47,6 +49,23 @@ class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: Favo
     }
 
     override fun onBindViewHolder(holder: RecipesViewHolder, position: Int) {
+
+        viewModel.isMealFavorite(recipes.meals[position].strMeal)
+        var isFav = false
+        viewModel.isFav.observe(holder.itemView.context as LifecycleOwner) { isFavLive ->
+            Log.d("TAG", " is fav before  ${isFav}")
+            isFav = isFavLive
+            Log.d("TAG", " is fav after  ${isFav}")
+
+            if (isFavLive) {
+                holder.iconFav.setImageResource(R.drawable.baseline_favorite_24)
+            } else {
+
+                holder.iconFav.setImageResource(R.drawable.avorite)
+            }
+        }
+
+
         holder.getTitle().text = recipes.meals[position].strMeal
 
         Glide.with(holder.itemView.context).load(recipes.meals[position].strMealThumb).apply(
@@ -60,6 +79,7 @@ class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: Favo
         holder.iconFav.setOnClickListener {
 
            val favoriteMeal = FavoriteMeal(
+               idMeal = recipes.meals[position].idMeal.toInt(),
                strCategory=  recipes.meals[0].strCategory,
                strMeal= recipes.meals[0].strMeal,
                strMealThumb = recipes.meals[0].strMealThumb,

@@ -23,6 +23,6 @@ interface FavoriteMealDao {
     @Query("SELECT * FROM FavoriteMeal WHERE userId = :userId and idMeal = :idMeal")
     suspend fun getFavoriteMealsByUserIdAndIdMeal(userId: Int, idMeal: Int): FavoriteMeal
 
-    @Query ("SELECT EXISTS(SELECT * FROM FavoriteMeal WHERE idMeal = :id)")
-    suspend fun isMealFavorite(id:Int):Boolean
+    @Query ("SELECT EXISTS(SELECT * FROM FavoriteMeal WHERE strMeal = :id)")
+    suspend fun isMealFavorite(id:String):Boolean
 }

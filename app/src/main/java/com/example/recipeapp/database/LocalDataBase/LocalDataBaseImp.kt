@@ -61,7 +61,7 @@ class LocalDataBaseImp (context: Context) : LocalDataBase {
       return  favoriteMealDao.getFavoriteMealsByUserIdAndIdMeal(userId, idMeal)
     }
 
-    override suspend fun isMealFavorite(id: Int): Boolean {
+    override  suspend fun isMealFavorite(id:String):Boolean{
         return favoriteMealDao.isMealFavorite(id)
     }
 }

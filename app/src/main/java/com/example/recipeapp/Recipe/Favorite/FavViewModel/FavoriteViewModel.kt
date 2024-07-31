@@ -21,8 +21,8 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
     private val _FavoritelistAdapter = MutableLiveData<List<FavoriteMeal>>()
     val FavoritelistAdapter: LiveData<List<FavoriteMeal>> get() = _FavoritelistAdapter
 
-    private val _getByUserAndMeal = MutableLiveData<FavoriteMeal>()
-    val getByUserAndMeal: LiveData<FavoriteMeal> get() = _getByUserAndMeal
+    private val _isFav= MutableLiveData<Boolean>()
+    val isFav: LiveData<Boolean> get() = _isFav
 
     fun insertFavoriteMeal (meal: FavoriteMeal){
         viewModelScope.launch {
@@ -48,19 +48,13 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
 
     }
 
-    fun getFavMealByUserIdAndMealId(userId: Int, mealId: Int){
-        viewModelScope.launch {
-           val favoriteMeal = repo.getFavoriteMealsByUserIdAndIdMeal(userId,mealId)
-            _getByUserAndMeal.value = favoriteMeal
 
-        }
-    }
-
-    suspend fun getFavMealByUserIdAndMealIdSync(userId: Int, mealId: Int) {
-        return withContext(Dispatchers.IO) {
-            // Perform the query on the background thread and return the result
-            // Assume getFavMealByUserIdAndMealId() is a suspend function that returns the FavoriteMeal
-            getFavMealByUserIdAndMealId(userId, mealId)
+    fun isMealFavorite(id:String){
+        viewModelScope.launch (Dispatchers.IO) {
+            val isMealFavorite = repo.isMealFavorite(id)
+            withContext(Dispatchers.Main){
+                _isFav.value = isMealFavorite
+            }
         }
     }
 }
