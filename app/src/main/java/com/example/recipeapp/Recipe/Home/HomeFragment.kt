@@ -63,42 +63,45 @@ class HomeFragment : Fragment() {
         viewModel.getRandomMeal()
 
         viewModel.randomMeal.observe(viewLifecycleOwner) { recipeResponce ->
-            favoriteMeal = FavoriteMeal(
-                recipeResponce.meals[0].idMeal.toInt(),
-                recipeResponce.meals[0].strCategory,
-                recipeResponce.meals[0].strMeal,
-                recipeResponce.meals[0].strMealThumb,
-                recipeResponce.meals[0].strTags,
-                recipeResponce.meals[0].strYoutube,
-                userId
-            )
+            if(recipeResponce.meals.isNotEmpty()){
+                favoriteMeal = FavoriteMeal(
+                    recipeResponce.meals[0].idMeal.toInt(),
+                    recipeResponce.meals[0].strCategory,
+                    recipeResponce.meals[0].strMeal,
+                    recipeResponce.meals[0].strMealThumb,
+                    recipeResponce.meals[0].strTags,
+                    recipeResponce.meals[0].strYoutube,
+                    userId
+                )
 
 
-            val FavImg = view?.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
+                val FavImg = view?.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
 
-            CoroutineScope(Dispatchers.Main).launch {
-                FavImg?.setImageResource(R.drawable.avorite)
-                isFavorite = favViewModel.isMealFavorite(recipeResponce.meals[0].strMeal, userId)
-                if (isFavorite) {
-                    FavImg?.setImageResource(R.drawable.baseline_favorite_24)
+                CoroutineScope(Dispatchers.Main).launch {
+                    FavImg?.setImageResource(R.drawable.avorite)
+                    isFavorite = favViewModel.isMealFavorite(recipeResponce.meals[0].strMeal, userId)
+                    if (isFavorite) {
+                        FavImg?.setImageResource(R.drawable.baseline_favorite_24)
+                    }
+                }
+
+                val image = view?.findViewById<ImageView>(R.id.random_image)
+                val title = view?.findViewById<TextView>(R.id.titletext)
+                title?.text = recipeResponce.meals[0].strMeal
+                strMealRandom = recipeResponce.meals[0].strMeal
+                if (image != null) {
+                    Glide.with(this).load(recipeResponce.meals[0].strMealThumb).apply(
+                        RequestOptions().placeholder(R.drawable.baseline_access_time_24)
+                            .error(R.drawable.baseline_assignment_late_24)
+                    ).into(image)
+                }
+                image?.setOnClickListener {
+                    val action =
+                        HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(recipeResponce.meals[0])
+                    findNavController().navigate(action)
                 }
             }
 
-            val image = view?.findViewById<ImageView>(R.id.random_image)
-            val title = view?.findViewById<TextView>(R.id.titletext)
-            title?.text = recipeResponce.meals[0].strMeal
-            strMealRandom = recipeResponce.meals[0].strMeal
-            if (image != null) {
-                Glide.with(this).load(recipeResponce.meals[0].strMealThumb).apply(
-                    RequestOptions().placeholder(R.drawable.baseline_access_time_24)
-                        .error(R.drawable.baseline_assignment_late_24)
-                ).into(image)
-            }
-            image?.setOnClickListener {
-                val action =
-                    HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(recipeResponce.meals[0])
-                findNavController().navigate(action)
-            }
         }
 
         // Inflate the layout for this fragment

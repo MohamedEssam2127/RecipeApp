@@ -34,9 +34,11 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
         viewModelScope.launch {
             val favoriteMeals = repo.getUserWithFavorite(userId)
             _FavoriteMeal.value = favoriteMeals
+            if (favoriteMeals.isNotEmpty()){
+                _FavoritelistAdapter.value = favoriteMeals[0].favoriteMeals
+                Log.d("FavoriteViewModel", "Favorite meals size: ${FavoritelistAdapter.value}")
+            }
 
-           _FavoritelistAdapter.value = favoriteMeals[0].favoriteMeals
-            Log.d("FavoriteViewModel", "Favorite meals size: ${FavoritelistAdapter.value}")
         }
     }
 
