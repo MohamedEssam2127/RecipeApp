@@ -9,19 +9,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.recipeapp.R
+import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModel
+import com.example.recipeapp.Recipe.Home.HomeFragment.Companion.userId
+import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Meal
 import com.example.recipeapp.models.RecipeResponse
 import kotlinx.coroutines.joinAll
 
-class listRecipeAdapter(private val recipes: RecipeResponse) :
+class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: FavoriteViewModel) :
     RecyclerView.Adapter<listRecipeAdapter.RecipesViewHolder>() {
-
     var onItemClick: ((Meal) -> Unit)? = null
 
     class RecipesViewHolder(private val row: View) : RecyclerView.ViewHolder(row) {
         private var img: ImageView? = null
         private var title: TextView? = null
 
+        val iconFav: ImageView = row.findViewById(R.id.favBtn)
         fun getImg(): ImageView {
             return img ?: row.findViewById(R.id.RecipeListImg)
         }
@@ -54,5 +57,18 @@ class listRecipeAdapter(private val recipes: RecipeResponse) :
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(recipes.meals[position])
         }
+        holder.iconFav.setOnClickListener {
+
+           val favoriteMeal = FavoriteMeal(
+               strCategory=  recipes.meals[0].strCategory,
+               strMeal= recipes.meals[0].strMeal,
+               strMealThumb = recipes.meals[0].strMealThumb,
+               strTags = recipes.meals[0].strTags,
+               strYoutube= recipes.meals[0].strYoutube,
+               userId= userId
+            )
+            viewModel.insertFavoriteMeal(favoriteMeal)
+        }
+
     }
 }
