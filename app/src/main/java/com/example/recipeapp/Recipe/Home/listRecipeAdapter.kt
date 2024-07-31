@@ -87,9 +87,7 @@ class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: Favo
                 strMealThumb = recipes.meals[position].strMealThumb,
                 strTags = recipes.meals[position].strTags,
                 strYoutube= recipes.meals[position].strYoutube,
-                userId= userId
-
-            )
+                userId= userId)
             if (!isFavorite) {
                 viewModel.insertFavoriteMeal(favoriteMeal)
                 holder.iconFav.setImageResource(R.drawable.baseline_favorite_24)
