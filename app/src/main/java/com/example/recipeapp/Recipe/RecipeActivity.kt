@@ -96,7 +96,7 @@ class RecipeActivity : AppCompatActivity() {
         val dialogView = layoutInflater.inflate(R.layout.dialog, null)
         val cancelBtn: Button = dialogView.findViewById(R.id.btn_dialog_cancel)
         val signoutBtn: Button= dialogView.findViewById(R.id.btn_dialog_signout)
-        //dialogView.windowId?.s
+
 
         val dialog = AlertDialog.Builder(this)
             .setView(dialogView)
@@ -120,7 +120,28 @@ class RecipeActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
+    override fun onBackPressed() {
 
+        val dialogExit = layoutInflater.inflate(R.layout.dialog_exit, null)
+        val cancelBtn: Button = dialogExit.findViewById(R.id.btn_dialog_cancel2)
+        val exitBtn: Button= dialogExit.findViewById(R.id.btn_dialog_exit)
 
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogExit)
+            .create()
 
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        exitBtn.setOnClickListener {
+            dialog.dismiss()
+            //finishAndRemoveTask()
+            super.onBackPressed()
+        }
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+    }
 }
