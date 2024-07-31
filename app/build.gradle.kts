@@ -66,4 +66,8 @@ dependencies {
     //Add Splash Screen
     implementation(libs.androidx.splash.screen)
 
+    //Android Youtube player
+    implementation(libs.youtube.video.player)
+    implementation(libs.read.more.expand)
+
 }
