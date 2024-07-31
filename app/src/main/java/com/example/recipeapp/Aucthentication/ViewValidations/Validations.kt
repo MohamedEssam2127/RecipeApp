@@ -24,7 +24,7 @@ class validations {
     }
 
     fun validatePassword(password: String) {
-        val passwordPattern = "(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}"
+        val passwordPattern = "(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,16}"
         _isPasswordValid.value = password.matches(passwordPattern.toRegex())
     }
 
