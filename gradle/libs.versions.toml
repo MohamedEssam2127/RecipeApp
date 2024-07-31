@@ -22,6 +22,9 @@ par= "2.0.10-RC"
 safeArgs= "2.7.7"
 #Add Splash Screen Version
 splashVersion = "1.0.1"
+#Youtube Player Version
+androidYoutubePlayerVersion = "12.1.0"
+readMore = "2.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +51,12 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 #Add Splash Screen
 androidx-splash-screen = {group = "androidx.core", name = "core-splashscreen", version.ref = "splashVersion"}
+
+#Android Youtube player
+youtube-video-player = {group = "com.pierfrancescosoffritti.androidyoutubeplayer", name = "core", version.ref = "androidYoutubePlayerVersion"}
+
+#Read more functionalty
+read-more-expand = {group = "com.borjabravo", name = "readmoretextview", version.ref = "readMore"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
