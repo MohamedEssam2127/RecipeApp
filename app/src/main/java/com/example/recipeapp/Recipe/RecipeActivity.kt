@@ -10,11 +10,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import com.example.recipeapp.Aucthentication.AuthActivity
 import com.example.recipeapp.R
@@ -67,6 +70,7 @@ class RecipeActivity : AppCompatActivity() {
             }
         }
 
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.about_menu, menu)
@@ -100,7 +104,7 @@ class RecipeActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
     private fun showLogoutDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog, null)
         val cancelBtn: Button = dialogView.findViewById(R.id.btn_dialog_cancel)
@@ -137,16 +141,16 @@ class RecipeActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
+    @SuppressLint("MissingSuperCall")
 
-    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
-    override fun onBackPressed() {
 
-        val dialogExit = layoutInflater.inflate(R.layout.dialog_exit, null)
-        val cancelBtn: Button = dialogExit.findViewById(R.id.btn_dialog_cancel2)
-        val exitBtn: Button= dialogExit.findViewById(R.id.btn_dialog_exit)
+    fun showExitDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_exit, null)
+        val cancelBtn: Button = dialogView.findViewById(R.id.btn_dialog_cancel2)
+        val exitBtn: Button = dialogView.findViewById(R.id.btn_dialog_exit)
 
         val dialog = AlertDialog.Builder(this)
-            .setView(dialogExit)
+            .setView(dialogView)
             .create()
 
         cancelBtn.setOnClickListener {
@@ -155,11 +159,17 @@ class RecipeActivity : AppCompatActivity() {
 
         exitBtn.setOnClickListener {
             dialog.dismiss()
-            //finishAndRemoveTask()
-            super.onBackPressed()
+            finishAndRemoveTask()
         }
 
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
+
+
+
+
+
+
+
 }
