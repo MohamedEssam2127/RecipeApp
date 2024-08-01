@@ -70,15 +70,15 @@ class HomeFragment : Fragment() {
         viewModel.randomMeal.observe(viewLifecycleOwner) { recipeResponce ->
             if(recipeResponce.meals.isNotEmpty()){
                 favoriteMeal = FavoriteMeal(
-                    recipeResponce.meals[0].idMeal.toInt(),
-                    recipeResponce.meals[0].strCategory,
-                    recipeResponce.meals[0].strMeal,
-                    recipeResponce.meals[0].strMealThumb,
-                    recipeResponce.meals[0].strTags,
-                    recipeResponce.meals[0].strYoutube,
-                    userId,
-                    recipeResponce.meals[0].strArea,
-                    recipeResponce.meals[0].strInstructions
+                    idMeal =recipeResponce.meals[0].idMeal.toInt(),
+                    strCategory =recipeResponce.meals[0].strCategory,
+                    strMeal=  recipeResponce.meals[0].strMeal,
+                    strMealThumb= recipeResponce.meals[0].strMealThumb,
+                    strTags =recipeResponce.meals[0].strTags,
+                    strYoutube =recipeResponce.meals[0].strYoutube,
+                    userId= userId,
+                    strArea =recipeResponce.meals[0].strArea,
+                    strInstructions =recipeResponce.meals[0].strInstructions
                 )
 
 

@@ -9,7 +9,7 @@ import com.example.recipeapp.database.DAO.UsersDao
 import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Users
 
-@Database(entities = [Users::class,FavoriteMeal::class], version =2)
+@Database(entities = [Users::class,FavoriteMeal::class], version =1)
  abstract class UserDataBase : RoomDatabase() {
 
     abstract fun productDao(): UsersDao
