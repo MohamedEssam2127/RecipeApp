@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -21,6 +22,7 @@ import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModel
 import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModelFactory
 import com.example.recipeapp.Recipe.Favorite.Repo.FavoriteRepoImp
 import com.example.recipeapp.Recipe.Home.HomeViewModel.HomeViewModel
+import com.example.recipeapp.Recipe.RecipeActivity
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.example.recipeapp.models.FavoriteMeal
 import kotlinx.coroutines.CoroutineScope
@@ -105,6 +107,11 @@ class HomeFragment : Fragment() {
             }
 
         }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                (requireActivity() as RecipeActivity).showExitDialog()
+            }
+        })
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -140,5 +147,6 @@ class HomeFragment : Fragment() {
         favViewModel =
             ViewModelProvider(this, productViewModelFactory).get(FavoriteViewModel::class.java)
     }
+
 
 }
