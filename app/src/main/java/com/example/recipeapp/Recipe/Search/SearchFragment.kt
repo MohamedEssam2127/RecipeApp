@@ -81,9 +81,8 @@ class SearchFragment : Fragment() {
     }
 
     private fun navigateToDetail(meal: Meal) {
-        val bundle = Bundle().apply {
-            putParcelable("meal", meal)
-        }
-        findNavController().navigate(R.id.action_searchFragment_to_recipeDetailFragment, bundle)
+        Log.d("SearchFragment", "Navigating to details with meal: $meal")
+        val action = SearchFragmentDirections.actionSearchFragmentToRecipeDetailFragment(meal)
+        findNavController().navigate(action)
     }
 }
