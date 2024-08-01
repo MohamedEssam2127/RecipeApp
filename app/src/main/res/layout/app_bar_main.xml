@@ -26,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Display1"
             app:titleTextColor="@color/dark_blue" />
 
         <include

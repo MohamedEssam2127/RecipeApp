@@ -27,6 +27,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class RecipeDetailFragment : Fragment() {
@@ -71,12 +72,16 @@ class RecipeDetailFragment : Fragment() {
         val favIcon = view.findViewById<ImageView>(R.id.Details_favBtn)
         gettingViewModelReady()
 
-        CoroutineScope(Dispatchers.Main).launch {
-            favIcon?.setImageResource(R.drawable.avorite)
+        CoroutineScope(Dispatchers.IO).launch {
+
             isFavorite = favViewModel.isMealFavorite(recipe.strMeal, userId)
-            if (isFavorite) {
-                favIcon?.setImageResource(R.drawable.baseline_favorite_24)
+            withContext(Dispatchers.Main) {
+                favIcon?.setImageResource(R.drawable.avorite)
+                if (isFavorite) {
+                    favIcon?.setImageResource(R.drawable.baseline_favorite_24)
+                }
             }
+
         }
         val favoriteMeal = FavoriteMeal(
             idMeal= recipe.idMeal.toInt(),

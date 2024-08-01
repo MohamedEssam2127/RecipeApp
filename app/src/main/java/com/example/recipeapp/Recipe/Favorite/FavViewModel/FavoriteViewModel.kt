@@ -26,7 +26,10 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
 
     fun insertFavoriteMeal (meal: FavoriteMeal){
         viewModelScope.launch {
-           repo.insertFavoriteMeal(meal)
+            if( isMealFavorite(meal?.strMeal?:"",meal.userId)  == false){
+                repo.insertFavoriteMeal(meal)
+            }
+
         }
     }
 

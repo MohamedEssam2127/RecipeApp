@@ -30,6 +30,7 @@ import com.example.recipeapp.network.RecipeRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
@@ -84,12 +85,16 @@ class HomeFragment : Fragment() {
 
                 val FavImg = view?.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
 
-                CoroutineScope(Dispatchers.Main).launch {
-                    FavImg?.setImageResource(R.drawable.avorite)
+                CoroutineScope(Dispatchers.IO).launch {
+
                     isFavorite = favViewModel.isMealFavorite(recipeResponce.meals[0].strMeal, userId)
-                    if (isFavorite) {
-                        FavImg?.setImageResource(R.drawable.baseline_favorite_24)
+                    withContext(Dispatchers.Main) {
+                        FavImg?.setImageResource(R.drawable.avorite)
+                        if (isFavorite) {
+                            FavImg?.setImageResource(R.drawable.baseline_favorite_24)
+                        }
                     }
+
                 }
 
                 val image = view?.findViewById<ImageView>(R.id.random_image)
