@@ -6,10 +6,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="600dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:cardCornerRadius="30dp"
+        app:cardElevation="4dp"
+        android:layout_margin="16dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.cardview.widget.CardView>
+
 </LinearLayout>
