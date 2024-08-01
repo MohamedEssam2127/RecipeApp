@@ -5,13 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.recipeapp.Recipe.Favorite.Repo.FavoriteRepo
 import com.example.recipeapp.models.RecipeResponse
 import com.example.recipeapp.network.RecipeRepository
 import kotlinx.coroutines.launch
 
-class HomeViewModel: ViewModel() {
+class HomeViewModel(private val repo: RecipeRepository): ViewModel() {
 
-    private val repo = RecipeRepository()
+ //   private val repo = RecipeRepository()
 
     private val _recipes = MutableLiveData<RecipeResponse>()
     val recipes = _recipes

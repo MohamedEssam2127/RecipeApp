@@ -21,17 +21,19 @@ import com.example.recipeapp.R
 import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModel
 import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModelFactory
 import com.example.recipeapp.Recipe.Favorite.Repo.FavoriteRepoImp
+import com.example.recipeapp.Recipe.Home.HomeViewModel.FactoryViewModelHome
 import com.example.recipeapp.Recipe.Home.HomeViewModel.HomeViewModel
 import com.example.recipeapp.Recipe.RecipeActivity
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.example.recipeapp.models.FavoriteMeal
+import com.example.recipeapp.network.RecipeRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
-    private val viewModel: HomeViewModel by viewModels()
+    private  lateinit var  viewModel: HomeViewModel
     private lateinit var favViewModel: FavoriteViewModel
     private lateinit var favoriteMeal: FavoriteMeal
     private var strMealRandom: String = ""
@@ -45,7 +47,8 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        gettingViewModelReady()
+        gettingFavoriteViewModelReady()
+        gettingHomeViewModelReady()
         sharedPreferences=requireActivity().getSharedPreferences("user_id",0)
          userId = sharedPreferences.getInt("user_id", -1)
         viewModel.getRecipesByLetter()
@@ -138,7 +141,16 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun gettingViewModelReady() {
+
+    private fun gettingHomeViewModelReady() {
+        val HomeViewModelFactory = FactoryViewModelHome(
+                RecipeRepository()
+                )
+                viewModel =
+                ViewModelProvider(this, HomeViewModelFactory).get(HomeViewModel::class.java)
+    }
+
+    private fun gettingFavoriteViewModelReady() {
         val productViewModelFactory = FavoriteViewModelFactory(
             FavoriteRepoImp(
                 LocalDataBaseImp(requireContext())
@@ -147,6 +159,8 @@ class HomeFragment : Fragment() {
         favViewModel =
             ViewModelProvider(this, productViewModelFactory).get(FavoriteViewModel::class.java)
     }
+
+
 
 
 }
