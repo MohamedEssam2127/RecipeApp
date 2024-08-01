@@ -1,5 +1,6 @@
 package com.example.recipeapp.Recipe.Home.HomeViewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,6 +21,9 @@ class HomeViewModel: ViewModel() {
     fun getRecipesByLetter(){
         viewModelScope.launch {
             var char = ('a'..'z').random().toString()  // randomize char every time
+            if (repo.getMealsByFirstLetter(char).meals == null){    // hit another char if no meals found with char
+                getRecipesByLetter()
+            }
             _recipes.postValue(repo.getMealsByFirstLetter(char))
         }
     }

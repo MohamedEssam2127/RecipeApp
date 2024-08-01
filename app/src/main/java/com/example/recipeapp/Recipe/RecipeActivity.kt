@@ -10,11 +10,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import com.example.recipeapp.Aucthentication.AuthActivity
 import com.example.recipeapp.R
@@ -67,6 +70,7 @@ class RecipeActivity : AppCompatActivity() {
             }
         }
 
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.about_menu, menu)
@@ -76,27 +80,36 @@ class RecipeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_sign_out -> {
-
-
                 showLogoutDialog()
-
                 return true
             }
             R.id.menu_about -> {
                 toolbar.visibility= View.INVISIBLE
-                navController.navigate(R.id.action_homeFragment_to_aboutFragment)
+//                navController.navigate(R.id.action_homeFragment_to_aboutFragment)
+//                return true
+
+                val currentDestination = navController.currentDestination?.id
+                when (currentDestination) {
+                    R.id.recipeDetailFragment -> {
+
+                        navController.navigate(R.id.action_recipeDetailFragment_to_aboutFragment)
+                    }
+                    R.id.homeFragment -> {
+                        navController.navigate(R.id.action_homeFragment_to_aboutFragment)
+                    }
+                }
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
     private fun showLogoutDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog, null)
         val cancelBtn: Button = dialogView.findViewById(R.id.btn_dialog_cancel)
         val signoutBtn: Button= dialogView.findViewById(R.id.btn_dialog_signout)
-        //dialogView.windowId?.s
+
 
         val dialog = AlertDialog.Builder(this)
             .setView(dialogView)
@@ -112,13 +125,49 @@ class RecipeActivity : AppCompatActivity() {
             if (userId != -1) {
                 sharedPreferences.edit().putInt("user_id", -1).apply()
             }
+            val currentDestinationid = navController.currentDestination?.id
+                when (currentDestinationid) {
+                    R.id.recipeDetailFragment -> {
+
+                        navController.navigate(R.id.action_recipeDetailFragment_to_authActivity)
+                    }
+                    R.id.homeFragment -> {
+                        navController.navigate(R.id.action_homeFragment_to_authActivity)
+                    }
+                }
             finish()
-            navController.navigate(R.id.action_homeFragment_to_authActivity)
 
         }
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
+    @SuppressLint("MissingSuperCall")
+
+
+    fun showExitDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_exit, null)
+        val cancelBtn: Button = dialogView.findViewById(R.id.btn_dialog_cancel2)
+        val exitBtn: Button = dialogView.findViewById(R.id.btn_dialog_exit)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .create()
+
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        exitBtn.setOnClickListener {
+            dialog.dismiss()
+            finishAndRemoveTask()
+        }
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+    }
+
+
+
 
 
 

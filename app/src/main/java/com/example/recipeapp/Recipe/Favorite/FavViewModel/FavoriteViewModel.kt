@@ -21,8 +21,8 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
     private val _FavoritelistAdapter = MutableLiveData<List<FavoriteMeal>>()
     val FavoritelistAdapter: LiveData<List<FavoriteMeal>> get() = _FavoritelistAdapter
 
-    private val _getByUserAndMeal = MutableLiveData<FavoriteMeal>()
-    val getByUserAndMeal: LiveData<FavoriteMeal> get() = _getByUserAndMeal
+    private val _isFav= MutableLiveData<Boolean>()
+    val isFav: LiveData<Boolean> get() = _isFav
 
     fun insertFavoriteMeal (meal: FavoriteMeal){
         viewModelScope.launch {
@@ -34,9 +34,11 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
         viewModelScope.launch {
             val favoriteMeals = repo.getUserWithFavorite(userId)
             _FavoriteMeal.value = favoriteMeals
+            if (favoriteMeals.isNotEmpty()){
+                _FavoritelistAdapter.value = favoriteMeals[0].favoriteMeals
+                Log.d("FavoriteViewModel", "Favorite meals size: ${FavoritelistAdapter.value}")
+            }
 
-           _FavoritelistAdapter.value = favoriteMeals[0].favoriteMeals
-            Log.d("FavoriteViewModel", "Favorite meals size: ${FavoritelistAdapter.value}")
         }
     }
 
@@ -48,19 +50,13 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
 
     }
 
-    fun getFavMealByUserIdAndMealId(userId: Int, mealId: Int){
-        viewModelScope.launch {
-           val favoriteMeal = repo.getFavoriteMealsByUserIdAndIdMeal(userId,mealId)
-            _getByUserAndMeal.value = favoriteMeal
 
-        }
-    }
 
-    suspend fun getFavMealByUserIdAndMealIdSync(userId: Int, mealId: Int) {
-        return withContext(Dispatchers.IO) {
-            // Perform the query on the background thread and return the result
-            // Assume getFavMealByUserIdAndMealId() is a suspend function that returns the FavoriteMeal
-            getFavMealByUserIdAndMealId(userId, mealId)
-        }
+
+   suspend fun isMealFavorite(id:String,uId:Int) : Boolean{
+
+            return repo.isMealFavorite(id,uId)
+
+
     }
 }

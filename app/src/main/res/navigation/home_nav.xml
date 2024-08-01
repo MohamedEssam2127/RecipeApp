@@ -27,7 +27,11 @@
         android:id="@+id/favoriteFragment"
         android:name="com.example.recipeapp.Recipe.Favorite.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.recipeapp.Recipe.Home.AboutFragment"
@@ -50,6 +54,12 @@
         <argument
             android:name="recipeSent"
             app:argType="com.example.recipeapp.models.Meal" />
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_authActivity"
+            app:destination="@id/authActivity" />
     </fragment>
     <action
         android:id="@+id/action_global_homeFragment"

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
@@ -16,6 +17,7 @@ import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModelFacto
 import com.example.recipeapp.Recipe.Favorite.Repo.FavoriteRepoImp
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.example.recipeapp.models.FavoriteMeal
+import com.example.recipeapp.models.Meal
 
 class FavoriteFragment : Fragment() {
     lateinit var viewModel: FavoriteViewModel
@@ -53,6 +55,11 @@ class FavoriteFragment : Fragment() {
                 val list = fav[0].favoriteMeals as MutableList<FavoriteMeal>
                 val adapter = FavoriteAdapter(list,viewModel, viewLifecycleOwner)
                 recyclerView.adapter = adapter
+                adapter.onItemClick = {
+                    val meal = Meal(it.idMeal.toString(),it.strCategory.toString(),it.strMeal.toString(),it.strMealThumb.toString(),it.strTags.toString(),it.strYoutube.toString(),it.strArea.toString(),it.strInstructions)
+                    val action = FavoriteFragmentDirections.actionFavoriteFragmentToRecipeDetailFragment(meal)
+                    findNavController().navigate(action)
+                }
             }
 
 

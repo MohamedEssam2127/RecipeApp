@@ -18,10 +18,10 @@ class FavoriteAdapter(
     private val viewLifecycleOwner: LifecycleOwner
 
 ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
+    var onItemClick: ((FavoriteMeal) -> Unit)? = null
 
     init {
         viewModel.FavoritelistAdapter.observe(viewLifecycleOwner) {
-            // Refresh the entire list when data changes
             notifyDataSetChanged()
         }
     }
@@ -37,13 +37,13 @@ class FavoriteAdapter(
         Glide.with(holder.itemView.context).load(meal.strMealThumb).into(holder.image)
 
         holder.iconFav.setOnClickListener {
-            // Remove item from data source
             viewModel.deleteFromFavList(meal)
             values.removeAt(position)
-            // Notify the adapter about the item removal
             notifyItemRemoved(position)
-            // Notify the adapter about the item range change
             notifyItemRangeChanged(position, values.size)
+        }
+        holder.itemView.setOnClickListener{
+            onItemClick?.invoke(meal)
         }
     }
 
