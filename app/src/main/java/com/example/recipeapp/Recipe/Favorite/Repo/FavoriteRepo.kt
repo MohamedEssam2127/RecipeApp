@@ -14,4 +14,6 @@ interface FavoriteRepo {
     suspend fun getFavoriteMealsByUserIdAndIdMeal(userId: Int, idMeal: Int): FavoriteMeal
 
     suspend fun isMealFavorite(id:String,uId:Int):Boolean
+
+    suspend fun getFavMeal (strMeal:String,uId:Int):FavoriteMeal
 }
