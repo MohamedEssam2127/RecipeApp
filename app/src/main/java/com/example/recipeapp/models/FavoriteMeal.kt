@@ -16,7 +16,7 @@ import androidx.room.PrimaryKey
 
 data class FavoriteMeal(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    var id: Int = 0,
     val idMeal: Int ,
     val strCategory: String?,
     val strMeal: String?,
