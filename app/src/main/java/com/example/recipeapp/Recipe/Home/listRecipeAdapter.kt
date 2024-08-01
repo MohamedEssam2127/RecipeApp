@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -17,10 +16,7 @@ import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Meal
 import com.example.recipeapp.models.RecipeResponse
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 
 class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: FavoriteViewModel) :
@@ -32,7 +28,7 @@ class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: Favo
         private var img: ImageView? = null
         private var title: TextView? = null
 
-        val iconFav: ImageView = row.findViewById(R.id.favBtn)
+        val iconFav: ImageView = row.findViewById(R.id.Details_favBtn)
         fun getImg(): ImageView {
             return img ?: row.findViewById(R.id.RecipeListImg)
         }
