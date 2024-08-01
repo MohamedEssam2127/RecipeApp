@@ -48,7 +48,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/favBtn"
+            android:id="@+id/Details_favBtn"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:backgroundTint="#8F332D2D"

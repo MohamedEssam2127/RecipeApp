@@ -24,12 +24,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/favBtn"
+            android:id="@+id/Details_favBtn"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:tint="#70B8F0"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="96dp"
             android:backgroundTint="#00FFFFFF"
-            android:layout_marginEnd="24dp"
             android:src="@drawable/avorite"
             app:layout_constraintBottom_toTopOf="@+id/detailAreaBody"
             app:layout_constraintEnd_toEndOf="parent" />

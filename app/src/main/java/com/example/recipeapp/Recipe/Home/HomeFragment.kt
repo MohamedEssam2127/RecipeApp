@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
     private lateinit var favViewModel: FavoriteViewModel
     private lateinit var favoriteMeal: FavoriteMeal
     private var strMealRandom: String = ""
-    var isFavorite  =false
+    private  var isFavorite  =false
     companion object{
         private lateinit var sharedPreferences: SharedPreferences
         var userId :Int =-1
