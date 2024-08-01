@@ -21,8 +21,8 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
     private val _FavoritelistAdapter = MutableLiveData<List<FavoriteMeal>>()
     val FavoritelistAdapter: LiveData<List<FavoriteMeal>> get() = _FavoritelistAdapter
 
-    private val _isFav= MutableLiveData<Boolean>()
-    val isFav: LiveData<Boolean> get() = _isFav
+//    private val _isFav= MutableLiveData<Boolean>()
+//    val isFav: LiveData<Boolean> get() = _isFav
 
     fun insertFavoriteMeal (meal: FavoriteMeal){
         viewModelScope.launch {
@@ -59,4 +59,16 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
 
 
     }
+
+//     fun isFavorite(id:String,uId:Int) : LiveData<Boolean> {
+//
+//         viewModelScope.launch (Dispatchers.Main){
+//           val isfav =  repo.isMealFavorite(id,uId)
+//             _isFav.value = isfav
+//         }
+//         return isFav
+//
+//
+//    }
+
 }
