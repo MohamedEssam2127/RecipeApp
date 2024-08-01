@@ -79,15 +79,15 @@ class RecipeDetailFragment : Fragment() {
             }
         }
         val favoriteMeal = FavoriteMeal(
-            recipe.idMeal.toInt(),
-            recipe.strCategory,
-            recipe.strMeal,
-            recipe.strMealThumb,
-            recipe.strTags,
-            recipe.strYoutube,
-            userId,
-            recipe.strArea,
-            recipe.strInstructions
+            idMeal= recipe.idMeal.toInt(),
+            strCategory =recipe.strCategory,
+            strMeal = recipe.strMeal,
+            strMealThumb = recipe.strMealThumb,
+            strTags= recipe.strTags,
+            strYoutube = recipe.strYoutube,
+            userId =userId,
+            strArea =recipe.strArea,
+            strInstructions= recipe.strInstructions
         )
         favIcon.setOnClickListener {
             if(favoriteMeal != null){
