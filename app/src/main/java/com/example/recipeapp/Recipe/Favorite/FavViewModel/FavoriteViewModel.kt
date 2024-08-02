@@ -26,7 +26,10 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
 
     fun insertFavoriteMeal (meal: FavoriteMeal){
         viewModelScope.launch {
-           repo.insertFavoriteMeal(meal)
+            if( isMealFavorite(meal?.strMeal?:"",meal.userId)  == false){
+                repo.insertFavoriteMeal(meal)
+            }
+
         }
     }
 
@@ -44,14 +47,17 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
 
     fun deleteFromFavList (favoriteMeal: FavoriteMeal){
         viewModelScope.launch {
-
+           val favItem = getFavoriteMealsByUserIdAndIdMeal(favoriteMeal?.strMeal?:"",favoriteMeal.userId)
+            favoriteMeal.id = favItem.id
             repo.deleteFavoriteMeal(favoriteMeal)
         }
 
     }
 
 
-
+   private suspend fun getFavoriteMealsByUserIdAndIdMeal(strMeal: String, userId: Int): FavoriteMeal {
+        return repo.getFavMeal(strMeal,userId)
+    }
 
    suspend fun isMealFavorite(id:String,uId:Int) : Boolean{
 

@@ -21,6 +21,7 @@ import com.example.recipeapp.network.RecipeRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: FavoriteViewModel) :
     RecyclerView.Adapter<listRecipeAdapter.RecipesViewHolder>() {
@@ -59,12 +60,16 @@ class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: Favo
 
     override fun onBindViewHolder(holder: RecipesViewHolder, position: Int) {
         var isFavorite:Boolean =false
-        CoroutineScope(Dispatchers.Main).launch {
-            holder.iconFav.setImageResource(R.drawable.avorite)
+        CoroutineScope(Dispatchers.IO).launch {
+
              isFavorite = viewModel.isMealFavorite(recipes.meals[position].strMeal, userId)
-            if (isFavorite) {
-                holder.iconFav.setImageResource(R.drawable.baseline_favorite_24)
+            withContext(Dispatchers.Main) {
+                holder.iconFav.setImageResource(R.drawable.avorite)
+                if (isFavorite) {
+                    holder.iconFav.setImageResource(R.drawable.baseline_favorite_24)
+                }
             }
+
         }
 
 

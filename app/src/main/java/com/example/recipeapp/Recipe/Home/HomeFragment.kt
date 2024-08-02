@@ -32,6 +32,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
@@ -84,39 +85,35 @@ class HomeFragment : Fragment() {
             }
         }
 
-
-
-
-
-
-
-
         viewModel.getRandomMeal()
 
         viewModel.randomMeal.observe(viewLifecycleOwner) { recipeResponce ->
             if(recipeResponce.meals.isNotEmpty()){
                 favoriteMeal = FavoriteMeal(
-                    recipeResponce.meals[0].idMeal.toInt(),
-                    recipeResponce.meals[0].strCategory,
-                    recipeResponce.meals[0].strMeal,
-                    recipeResponce.meals[0].strMealThumb,
-                    recipeResponce.meals[0].strTags,
-                    recipeResponce.meals[0].strYoutube,
-                    userId,
-                    recipeResponce.meals[0].strArea,
-                    recipeResponce.meals[0].strInstructions
+                    idMeal =recipeResponce.meals[0].idMeal.toInt(),
+                    strCategory =recipeResponce.meals[0].strCategory,
+                    strMeal=  recipeResponce.meals[0].strMeal,
+                    strMealThumb= recipeResponce.meals[0].strMealThumb,
+                    strTags =recipeResponce.meals[0].strTags,
+                    strYoutube =recipeResponce.meals[0].strYoutube,
+                    userId= userId,
+                    strArea =recipeResponce.meals[0].strArea,
+                    strInstructions =recipeResponce.meals[0].strInstructions
                 )
 
 
                 val FavImg = view?.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
 
-                CoroutineScope(Dispatchers.Main).launch {
-                    FavImg?.setImageResource(R.drawable.avorite)
-                    isFavorite =
-                        favViewModel.isMealFavorite(recipeResponce.meals[0].strMeal, userId)
-                    if (isFavorite) {
-                        FavImg?.setImageResource(R.drawable.baseline_favorite_24)
+                CoroutineScope(Dispatchers.IO).launch {
+
+                    isFavorite = favViewModel.isMealFavorite(recipeResponce.meals[0].strMeal, userId)
+                    withContext(Dispatchers.Main) {
+                        FavImg?.setImageResource(R.drawable.avorite)
+                        if (isFavorite) {
+                            FavImg?.setImageResource(R.drawable.baseline_favorite_24)
+                        }
                     }
+
                 }
 
                 val image = view?.findViewById<ImageView>(R.id.random_image)
@@ -141,13 +138,11 @@ class HomeFragment : Fragment() {
             }
 
         }
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    (requireActivity() as RecipeActivity).showExitDialog()
-                }
-            })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                (requireActivity() as RecipeActivity).showExitDialog()
+            }
+        })
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -158,14 +153,14 @@ class HomeFragment : Fragment() {
         val FavImg = view.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
         FavImg.setOnClickListener {
 
-            if (favoriteMeal != null) {
+            if(favoriteMeal != null){
                 if (!isFavorite) {
-                    favViewModel.insertFavoriteMeal(favoriteMeal)
+                   favViewModel.insertFavoriteMeal(favoriteMeal)
                     FavImg.setImageResource(R.drawable.baseline_favorite_24)
                     Log.d("SAD", " is added random to fav")
                     isFavorite = true
-                } else {
-                    favViewModel.deleteFromFavList(favoriteMeal)
+                }else{
+                   favViewModel.deleteFromFavList(favoriteMeal)
                     FavImg.setImageResource(R.drawable.avorite)
                     Log.d("SAD", " is already   random  fav")
                     isFavorite = false
@@ -177,10 +172,10 @@ class HomeFragment : Fragment() {
 
     private fun gettingHomeViewModelReady() {
         val HomeViewModelFactory = FactoryViewModelHome(
-            RecipeRepository()
-        )
-        viewModel =
-            ViewModelProvider(this, HomeViewModelFactory).get(HomeViewModel::class.java)
+                RecipeRepository()
+                )
+                viewModel =
+                ViewModelProvider(this, HomeViewModelFactory).get(HomeViewModel::class.java)
     }
 
     private fun gettingFavoriteViewModelReady() {
@@ -192,6 +187,8 @@ class HomeFragment : Fragment() {
         favViewModel =
             ViewModelProvider(this, productViewModelFactory).get(FavoriteViewModel::class.java)
     }
+
+
 
 
 }

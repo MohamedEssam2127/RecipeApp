@@ -14,7 +14,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/detailImagesRecyclerView"
             android:layout_width="0dp"
-            android:layout_height="192dp"
+            android:layout_height="360dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="1dp"
             android:layout_marginEnd="32dp"
@@ -27,19 +27,18 @@
             android:id="@+id/Details_favBtn"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="96dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="30dp"
             android:backgroundTint="#00FFFFFF"
             android:src="@drawable/avorite"
-            app:layout_constraintBottom_toTopOf="@+id/detailAreaBody"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/detailImagesRecyclerView"
+            app:layout_constraintEnd_toEndOf="@+id/detailImagesRecyclerView" />
 
         <TextView
             android:id="@+id/detailRecipeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="30dp"
             android:text="@string/title"
             android:textColor="@color/dark_blue"
             android:textSize="40sp"
@@ -53,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/category"
-            android:textColor="@color/dark_blue"
+            android:textColor="@color/orange"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/detailRecipeTitle"
@@ -75,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="72dp"
             android:text="@string/area"
-            android:textColor="@color/dark_blue"
+            android:textColor="@color/orange"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/detailCategoryBody"
@@ -111,14 +110,15 @@
             android:layout_marginEnd="16dp"
             android:text="This is Expandable text"
             android:textSize="16sp"
+            app:trimExpandedText="@string/read_less"
+            app:trimCollapsedText="@string/read_more"
+            app:trimMode="trimModeLength"
+            app:trimLength="30"
             app:colorClickableText="#039BE5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/detailDetails"
             app:layout_constraintTop_toBottomOf="@+id/detailDetails"
-            app:trimCollapsedText="@string/read_more"
-            app:trimExpandedText="@string/read_less"
-            app:trimLength="30"
-            app:trimMode="trimModeLength" />
+            />
 
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
             android:id="@+id/youtubeVideoView"

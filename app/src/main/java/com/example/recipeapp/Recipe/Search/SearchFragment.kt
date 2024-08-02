@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -21,6 +21,7 @@ class SearchFragment : Fragment() {
     private val searchViewModel: SearchViewModel by viewModels()
     private lateinit var searchView: SearchView
     private lateinit var recipeRecyclerView: RecyclerView
+    private lateinit var notFoundImageView: ImageView
     private lateinit var adapter: RecipeAdapter
 
     companion object {
@@ -38,6 +39,7 @@ class SearchFragment : Fragment() {
         // Initialize views
         searchView = view.findViewById(R.id.search_view)
         recipeRecyclerView = view.findViewById(R.id.recipeRecyclerView)
+        notFoundImageView = view.findViewById(R.id.not_found_image)
 
         // Set up RecyclerView
         recipeRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -48,7 +50,6 @@ class SearchFragment : Fragment() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // Do nothing on submit, as we are handling live search
-                // May be used later, in details of recipe
                 return true
             }
 
@@ -71,12 +72,20 @@ class SearchFragment : Fragment() {
         // Observe LiveData from ViewModel
         searchViewModel.meals.observe(viewLifecycleOwner, Observer { meals ->
             Log.d(TAG, "Updating UI with meals: $meals")
-            adapter.updateData(meals)
+            if (meals.isEmpty()) {
+                notFoundImageView.visibility = View.VISIBLE
+                recipeRecyclerView.visibility = View.GONE
+            } else {
+                notFoundImageView.visibility = View.GONE
+                recipeRecyclerView.visibility = View.VISIBLE
+                adapter.updateData(meals)
+            }
         })
 
         searchViewModel.errorMessage.observe(viewLifecycleOwner, Observer { error ->
             Log.d(TAG, "Error message received: $error")
-            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+            notFoundImageView.visibility = View.VISIBLE
+            recipeRecyclerView.visibility = View.GONE
         })
     }
 
