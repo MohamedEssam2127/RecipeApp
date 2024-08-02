@@ -47,4 +47,8 @@ class RecipeRepository {
             Log.d(TAG, "Received meals by category: $it")
         }
     }
+
+    suspend fun getMealById(id: String): Meal{
+        return (api.getMealById(id).meals[0])
+    }
 }
