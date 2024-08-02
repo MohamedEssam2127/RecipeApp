@@ -72,7 +72,7 @@
             android:id="@+id/detailArea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
+            android:layout_marginStart="64dp"
             android:text="@string/area"
             android:textColor="@color/orange"
             android:textSize="20sp"
