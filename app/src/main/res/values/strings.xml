@@ -25,4 +25,5 @@
     <string name="Home">Home</string>
     <string name="cancel">cancel</string>
     <string name="remove">remove</string>
+    <string name="clear_category">Clear Category</string>
 </resources>

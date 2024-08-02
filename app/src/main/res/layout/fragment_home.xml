@@ -163,6 +163,18 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
+        <Button
+            android:id="@+id/clearCategoryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_category"
+            android:textSize="15sp"
+            android:textColor="@color/blueButton"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textcategory"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
