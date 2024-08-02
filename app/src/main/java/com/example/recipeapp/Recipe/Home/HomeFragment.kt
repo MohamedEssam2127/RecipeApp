@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -56,34 +57,10 @@ class HomeFragment : Fragment() {
         sharedPreferences = requireActivity().getSharedPreferences("user_id", 0)
         userId = sharedPreferences.getInt("user_id", -1)
 
-        viewModel.getRecipesByLetter()
-        viewModel.recipes.observe(viewLifecycleOwner) { recipeResponce ->
-            val adapter = listRecipeAdapter(requireActivity(),recipeResponce,favViewModel)
-            val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_popular_recipe)
-            recyclerView?.adapter = adapter
-            recyclerView?.layoutManager =
-                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
 
-            adapter.onItemClick = {     // get the item was clicked on
-                lifecycleScope.launch { // get the complete meal object from the Api
-                    val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(viewModel.getMealById(it.idMeal))
-                    findNavController().navigate(action)
-                }
-            }
-        }
+        initializeRecipesList()     //prepare the Recipes RV
+        initializeCategories()      //prepare the Categories and it's actions
 
-        viewModel.getAllMealCategories()
-        viewModel.categories.observe(viewLifecycleOwner) {
-            val adapter = CategoryListAdapetr(viewModel.categories.value!!)
-            val recyclerView = view?.findViewById<RecyclerView>(R.id.categoriesRV)
-            recyclerView?.adapter = adapter
-            recyclerView?.layoutManager =
-                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-
-            adapter.onItemClick = {
-                viewModel.getRecipeByCategory(it.strCategory)
-            }
-        }
 
         viewModel.getRandomMeal()
 
@@ -190,7 +167,44 @@ class HomeFragment : Fragment() {
             ViewModelProvider(this, productViewModelFactory).get(FavoriteViewModel::class.java)
     }
 
+    private fun initializeRecipesList(){
+        viewModel.getRecipesByLetter()      // get a the Recipes for a random alphabet char
+        viewModel.recipes.observe(viewLifecycleOwner) { recipeResponce ->
+            val adapter = listRecipeAdapter(requireActivity(),recipeResponce,favViewModel)
+            val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_popular_recipe)
+            recyclerView?.adapter = adapter
+            recyclerView?.layoutManager =
+                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
 
+            adapter.onItemClick = {     // get the item was clicked on
+                lifecycleScope.launch { // get the complete meal object from the Api
+                    val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(viewModel.getMealById(it.idMeal))
+                    findNavController().navigate(action)
+                }
+            }
+        }
+    }
+
+    private fun initializeCategories(){
+        viewModel.getAllMealCategories()
+        viewModel.categories.observe(viewLifecycleOwner) {
+            val adapter = CategoryListAdapetr(viewModel.categories.value!!)
+            val recyclerView = view?.findViewById<RecyclerView>(R.id.categoriesRV)
+            recyclerView?.adapter = adapter
+            recyclerView?.layoutManager =
+                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+
+            adapter.onItemClick = {
+                viewModel.getRecipeByCategory(it.strCategory)
+            }
+
+            val clearBtn = view?.findViewById<Button>(R.id.clearCategoryBtn)
+            clearBtn?.setOnClickListener {
+                viewModel.getRecipesByLetter()  // Restart the Recipes unselected categories
+                adapter.clearSelectedCategory(resources)
+            }
+        }
+    }
 
 
 }
