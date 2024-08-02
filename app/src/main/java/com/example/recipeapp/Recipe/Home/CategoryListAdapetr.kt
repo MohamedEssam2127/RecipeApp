@@ -1,11 +1,16 @@
 package com.example.recipeapp.Recipe.Home
 
+import android.content.res.ColorStateList
+import android.content.res.Resources
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -16,6 +21,9 @@ import com.example.recipeapp.models.Category
 class CategoryListAdapetr(private val categories: CategoriesResponse): RecyclerView.Adapter<CategoryListAdapetr.CategoryListViewHolder>() {
 
     var onItemClick: ((Category) -> Unit)? = null
+    companion object{
+        var prevSelected: View? = null
+    }
 
     class CategoryListViewHolder(private val view: View): RecyclerView.ViewHolder(view){
         private var categoryImage : ImageView? = null
@@ -46,9 +54,19 @@ class CategoryListAdapetr(private val categories: CategoriesResponse): RecyclerV
                 .error(R.drawable.baseline_assignment_late_24)
         ).into(holder.getCategoryImage())
 
+
         holder.itemView.setOnClickListener {    // get the item clicked on
+            if(prevSelected != null)    //check if the category is selected before
+                prevSelected?.setBackgroundColor(holder.itemView.resources.getColor(R.color.light_blue))    //reset the color of the previous selected category
+            it.setBackgroundColor(holder.itemView.resources.getColor(R.color.gray))     // set the color of the selected category
+            prevSelected = it
             onItemClick?.invoke(categories.categories[position])
         }
 
+    }
+
+    fun clearSelectedCategory(res:Resources) {
+        prevSelected?.setBackgroundColor(res.getColor(R.color.light_blue))
+        prevSelected = null
     }
 }

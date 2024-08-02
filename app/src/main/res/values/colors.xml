@@ -5,5 +5,8 @@
     <color name="dark_blue">#161a1d</color>
     <color name="light_blue">#f5f3f4</color>
     <color name="orange">#a4161a</color>
-<!--    a4161a         f5f3f4                   161a1d-->
+    <color name="blueButton">#198CE9</color>
+    <color name="green">#1DB424</color>
+    <color name="gray">#E45C5C5C</color>
+    <!--    a4161a         f5f3f4                   161a1d-->
 </resources>
