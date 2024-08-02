@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,19 +30,21 @@ import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.network.RecipeRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
-    private  lateinit var  viewModel: HomeViewModel
+    private lateinit var viewModel: HomeViewModel
     private lateinit var favViewModel: FavoriteViewModel
     private lateinit var favoriteMeal: FavoriteMeal
     private var strMealRandom: String = ""
-    private  var isFavorite  =false
-    companion object{
+    private var isFavorite = false
+
+    companion object {
         private lateinit var sharedPreferences: SharedPreferences
-        var userId :Int =-1
+        var userId: Int = -1
     }
 
     override fun onCreateView(
@@ -50,8 +53,9 @@ class HomeFragment : Fragment() {
     ): View? {
         gettingFavoriteViewModelReady()
         gettingHomeViewModelReady()
-        sharedPreferences=requireActivity().getSharedPreferences("user_id",0)
-         userId = sharedPreferences.getInt("user_id", -1)
+        sharedPreferences = requireActivity().getSharedPreferences("user_id", 0)
+        userId = sharedPreferences.getInt("user_id", -1)
+
         viewModel.getRecipesByLetter()
         viewModel.recipes.observe(viewLifecycleOwner) { recipeResponce ->
             val adapter = listRecipeAdapter(requireActivity(),recipeResponce,favViewModel)
@@ -60,9 +64,24 @@ class HomeFragment : Fragment() {
             recyclerView?.layoutManager =
                 LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
 
+            adapter.onItemClick = {     // get the item was clicked on
+                lifecycleScope.launch { // get the complete meal object from the Api
+                    val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(viewModel.getMealById(it.idMeal))
+                    findNavController().navigate(action)
+                }
+            }
+        }
+
+        viewModel.getAllMealCategories()
+        viewModel.categories.observe(viewLifecycleOwner) {
+            val adapter = CategoryListAdapetr(viewModel.categories.value!!)
+            val recyclerView = view?.findViewById<RecyclerView>(R.id.categoriesRV)
+            recyclerView?.adapter = adapter
+            recyclerView?.layoutManager =
+                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+
             adapter.onItemClick = {
-                val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(it)
-                findNavController().navigate(action)
+                viewModel.getRecipeByCategory(it.strCategory)
             }
         }
 
@@ -108,9 +127,13 @@ class HomeFragment : Fragment() {
                     ).into(image)
                 }
                 image?.setOnClickListener {
-                    val action =
-                        HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(recipeResponce.meals[0])
-                    findNavController().navigate(action)
+                    lifecycleScope.launch {
+                        val action =
+                            HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(
+                                viewModel.getMealById(recipeResponce.meals[0].idMeal)
+                            )
+                        findNavController().navigate(action)
+                    }
                 }
             }
 

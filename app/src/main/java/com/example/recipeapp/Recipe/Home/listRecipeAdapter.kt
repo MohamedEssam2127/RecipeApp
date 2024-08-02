@@ -7,16 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.recipeapp.R
 import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModel
 import com.example.recipeapp.Recipe.Home.HomeFragment.Companion.userId
+import com.example.recipeapp.Recipe.Home.HomeViewModel.HomeViewModel
 import com.example.recipeapp.Recipe.RecipeActivity
 import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Meal
 import com.example.recipeapp.models.RecipeResponse
+import com.example.recipeapp.network.RecipeRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,7 +28,7 @@ import kotlinx.coroutines.withContext
 class listRecipeAdapter(private val context: Context,private val recipes: RecipeResponse ,val viewModel: FavoriteViewModel) :
     RecyclerView.Adapter<listRecipeAdapter.RecipesViewHolder>() {
     var onItemClick: ((Meal) -> Unit)? = null
-
+    val homeViewModel = HomeViewModel(RecipeRepository())
 
     class RecipesViewHolder(private val row: View) : RecyclerView.ViewHolder(row) {
         private var img: ImageView? = null
@@ -82,32 +85,37 @@ class listRecipeAdapter(private val context: Context,private val recipes: Recipe
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(recipes.meals[position])
         }
-        holder.iconFav.setOnClickListener {
-            val favoriteMeal = FavoriteMeal(
-                idMeal = recipes.meals[position].idMeal.toInt(),
-                strCategory=  recipes.meals[position].strCategory,
-                strMeal= recipes.meals[position].strMeal,
-                strMealThumb = recipes.meals[position].strMealThumb,
-                strTags = recipes.meals[position].strTags,
-                strYoutube= recipes.meals[position].strYoutube,
-                userId= userId,
-                strArea = recipes.meals[position].strArea,
-                strInstructions = recipes.meals[position].strInstructions)
-            if (!isFavorite) {
-                viewModel.insertFavoriteMeal(favoriteMeal)
-                holder.iconFav.setImageResource(R.drawable.baseline_favorite_24)
-                Log.d("TAG", " is added to fav")
-                isFavorite = true
-            }else{
-                (context as RecipeActivity).showRemoveFavDialog(favoriteMeal) {
-                    viewModel.deleteFromFavList(favoriteMeal)
-                    holder.iconFav.setImageResource(R.drawable.avorite)
-                    Log.d("TAG", " is already fav")
-                    isFavorite = false
+
+            holder.iconFav.setOnClickListener {
+                viewModel.viewModelScope.launch {
+                    //hit the Api to get the complete Recipe object
+                    val clickedMeal = homeViewModel.getMealById(recipes.meals[position].idMeal)
+                    val favoriteMeal = FavoriteMeal(
+                        idMeal = clickedMeal.idMeal.toInt(),
+                        strCategory = clickedMeal.strCategory,
+                        strMeal = clickedMeal.strMeal,
+                        strMealThumb =clickedMeal.strMealThumb,
+                        strTags = clickedMeal.strTags,
+                        strYoutube = clickedMeal.strYoutube,
+                        userId = userId,
+                        strArea = clickedMeal.strArea,
+                        strInstructions = clickedMeal.strInstructions
+                    )
+                    if (!isFavorite) {
+                        viewModel.insertFavoriteMeal(favoriteMeal)
+                        holder.iconFav.setImageResource(R.drawable.baseline_favorite_24)
+                        Log.d("TAG", " is added to fav")
+                        isFavorite = true
+                    } else {
+                        viewModel.deleteFromFavList(favoriteMeal)
+                        holder.iconFav.setImageResource(R.drawable.avorite)
+                        Log.d("TAG", " is already fav")
+                        isFavorite = false
+                    }
                 }
             }
 
-        }
+
 
     }
 //    fun checkIsFavorite (holder: RecipesViewHolder, position: Int){
