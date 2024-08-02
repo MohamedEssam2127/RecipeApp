@@ -17,6 +17,7 @@ import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModel
 import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModelFactory
 import com.example.recipeapp.Recipe.Favorite.Repo.FavoriteRepoImp
 import com.example.recipeapp.Recipe.Home.HomeFragment.Companion.userId
+import com.example.recipeapp.Recipe.RecipeActivity
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Meal
@@ -41,13 +42,12 @@ class RecipeDetailFragment : Fragment() {
     private var areaView: TextView? = null
     private var detailsView: TextView? = null
     private lateinit var favViewModel: FavoriteViewModel
-   private val favIcon = view?.findViewById<ImageView>(R.id.Details_favBtn)
-    private  var isFavorite  =false
+    private val favIcon = view?.findViewById<ImageView>(R.id.Details_favBtn)
+    private var isFavorite = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
 
 
         // Inflate the layout for this fragment
@@ -84,53 +84,57 @@ class RecipeDetailFragment : Fragment() {
 
         }
         val favoriteMeal = FavoriteMeal(
-            idMeal= recipe.idMeal.toInt(),
-            strCategory =recipe.strCategory,
+            idMeal = recipe.idMeal.toInt(),
+            strCategory = recipe.strCategory,
             strMeal = recipe.strMeal,
             strMealThumb = recipe.strMealThumb,
-            strTags= recipe.strTags,
+            strTags = recipe.strTags,
             strYoutube = recipe.strYoutube,
-            userId =userId,
-            strArea =recipe.strArea,
-            strInstructions= recipe.strInstructions
+            userId = userId,
+            strArea = recipe.strArea,
+            strInstructions = recipe.strInstructions
         )
         favIcon.setOnClickListener {
-            if(favoriteMeal != null){
+            if (favoriteMeal != null) {
                 if (!isFavorite) {
                     favViewModel.insertFavoriteMeal(favoriteMeal)
                     favIcon.setImageResource(R.drawable.baseline_favorite_24)
                     isFavorite = true
-                }else{
-                    favViewModel.deleteFromFavList(favoriteMeal)
-                    favIcon.setImageResource(R.drawable.avorite)
-                    isFavorite = false
+                } else {
+                    (requireActivity() as RecipeActivity).showRemoveFavDialog(favoriteMeal) {
+                        favViewModel.deleteFromFavList(favoriteMeal)
+                        favIcon.setImageResource(R.drawable.avorite)
+                        isFavorite = false
+                    }
+                }
                 }
             }
+            recyclerView.adapter = adapter
+            recyclerView.layoutManager =
+                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+
+            val youTubePlayerView: YouTubePlayerView = view.findViewById(R.id.youtubeVideoView)
+            viewLifecycleOwner.lifecycle.addObserver(youTubePlayerView)
+
+            youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                override fun onReady(youTubePlayer: YouTubePlayer) {
+                    val videoId = recipe.strYoutube.substringAfter("v=")
+                    youTubePlayer.cueVideo(videoId, 0f)
+                    youTubePlayer.mute()
+                }
+            })
+
         }
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
 
-        val youTubePlayerView: YouTubePlayerView = view.findViewById(R.id.youtubeVideoView)
-        viewLifecycleOwner.lifecycle.addObserver(youTubePlayerView)
-
-        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = recipe.strYoutube.substringAfter("v=")
-                youTubePlayer.cueVideo(videoId, 0f)
-                youTubePlayer.mute()
-            }
-        })
-
-    }
-
-    private fun gettingViewModelReady() {
-        val productViewModelFactory = FavoriteViewModelFactory(
-            FavoriteRepoImp(
-                LocalDataBaseImp(requireContext())
+        private fun gettingViewModelReady() {
+            val productViewModelFactory = FavoriteViewModelFactory(
+                FavoriteRepoImp(
+                    LocalDataBaseImp(requireContext())
+                )
             )
-        )
-        favViewModel =
-            ViewModelProvider(this, productViewModelFactory).get(FavoriteViewModel::class.java)
-    }
+            favViewModel =
+                ViewModelProvider(this, productViewModelFactory).get(FavoriteViewModel::class.java)
+        }
+
 
 }
