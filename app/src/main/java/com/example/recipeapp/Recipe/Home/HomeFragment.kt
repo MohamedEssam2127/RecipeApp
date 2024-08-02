@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,18 +30,20 @@ import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.network.RecipeRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
-    private  lateinit var  viewModel: HomeViewModel
+    private lateinit var viewModel: HomeViewModel
     private lateinit var favViewModel: FavoriteViewModel
     private lateinit var favoriteMeal: FavoriteMeal
     private var strMealRandom: String = ""
-    private  var isFavorite  =false
-    companion object{
+    private var isFavorite = false
+
+    companion object {
         private lateinit var sharedPreferences: SharedPreferences
-        var userId :Int =-1
+        var userId: Int = -1
     }
 
     override fun onCreateView(
@@ -49,21 +52,44 @@ class HomeFragment : Fragment() {
     ): View? {
         gettingFavoriteViewModelReady()
         gettingHomeViewModelReady()
-        sharedPreferences=requireActivity().getSharedPreferences("user_id",0)
-         userId = sharedPreferences.getInt("user_id", -1)
+        sharedPreferences = requireActivity().getSharedPreferences("user_id", 0)
+        userId = sharedPreferences.getInt("user_id", -1)
+
         viewModel.getRecipesByLetter()
         viewModel.recipes.observe(viewLifecycleOwner) { recipeResponce ->
-            val adapter = listRecipeAdapter(recipeResponce,favViewModel)
+            val adapter = listRecipeAdapter(recipeResponce, favViewModel)
             val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_popular_recipe)
             recyclerView?.adapter = adapter
             recyclerView?.layoutManager =
                 LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
 
-            adapter.onItemClick = {
-                val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(it)
-                findNavController().navigate(action)
+            adapter.onItemClick = {     // get the item was clicked on
+                lifecycleScope.launch { // get the complete meal object from the Api
+                    val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(viewModel.getMealById(it.idMeal))
+                    findNavController().navigate(action)
+                }
             }
         }
+
+        viewModel.getAllMealCategories()
+        viewModel.categories.observe(viewLifecycleOwner) {
+            val adapter = CategoryListAdapetr(viewModel.categories.value!!)
+            val recyclerView = view?.findViewById<RecyclerView>(R.id.categoriesRV)
+            recyclerView?.adapter = adapter
+            recyclerView?.layoutManager =
+                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+
+            adapter.onItemClick = {
+                viewModel.getRecipeByCategory(it.strCategory)
+            }
+        }
+
+
+
+
+
+
+
 
         viewModel.getRandomMeal()
 
@@ -86,7 +112,8 @@ class HomeFragment : Fragment() {
 
                 CoroutineScope(Dispatchers.Main).launch {
                     FavImg?.setImageResource(R.drawable.avorite)
-                    isFavorite = favViewModel.isMealFavorite(recipeResponce.meals[0].strMeal, userId)
+                    isFavorite =
+                        favViewModel.isMealFavorite(recipeResponce.meals[0].strMeal, userId)
                     if (isFavorite) {
                         FavImg?.setImageResource(R.drawable.baseline_favorite_24)
                     }
@@ -103,18 +130,24 @@ class HomeFragment : Fragment() {
                     ).into(image)
                 }
                 image?.setOnClickListener {
-                    val action =
-                        HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(recipeResponce.meals[0])
-                    findNavController().navigate(action)
+                    lifecycleScope.launch {
+                        val action =
+                            HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(
+                                viewModel.getMealById(recipeResponce.meals[0].idMeal)
+                            )
+                        findNavController().navigate(action)
+                    }
                 }
             }
 
         }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                (requireActivity() as RecipeActivity).showExitDialog()
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    (requireActivity() as RecipeActivity).showExitDialog()
+                }
+            })
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -125,14 +158,14 @@ class HomeFragment : Fragment() {
         val FavImg = view.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
         FavImg.setOnClickListener {
 
-            if(favoriteMeal != null){
+            if (favoriteMeal != null) {
                 if (!isFavorite) {
-                   favViewModel.insertFavoriteMeal(favoriteMeal)
+                    favViewModel.insertFavoriteMeal(favoriteMeal)
                     FavImg.setImageResource(R.drawable.baseline_favorite_24)
                     Log.d("SAD", " is added random to fav")
                     isFavorite = true
-                }else{
-                   favViewModel.deleteFromFavList(favoriteMeal)
+                } else {
+                    favViewModel.deleteFromFavList(favoriteMeal)
                     FavImg.setImageResource(R.drawable.avorite)
                     Log.d("SAD", " is already   random  fav")
                     isFavorite = false
@@ -144,10 +177,10 @@ class HomeFragment : Fragment() {
 
     private fun gettingHomeViewModelReady() {
         val HomeViewModelFactory = FactoryViewModelHome(
-                RecipeRepository()
-                )
-                viewModel =
-                ViewModelProvider(this, HomeViewModelFactory).get(HomeViewModel::class.java)
+            RecipeRepository()
+        )
+        viewModel =
+            ViewModelProvider(this, HomeViewModelFactory).get(HomeViewModel::class.java)
     }
 
     private fun gettingFavoriteViewModelReady() {
@@ -159,8 +192,6 @@ class HomeFragment : Fragment() {
         favViewModel =
             ViewModelProvider(this, productViewModelFactory).get(FavoriteViewModel::class.java)
     }
-
-
 
 
 }
