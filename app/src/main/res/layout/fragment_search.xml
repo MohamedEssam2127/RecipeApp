@@ -39,4 +39,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/not_found_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/not_found"
+        android:visibility="gone" />
+
 </FrameLayout>
