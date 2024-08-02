@@ -108,17 +108,17 @@
             android:id="@+id/detailDetailsBody"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:text="This is Expandable text"
             android:textSize="16sp"
-            app:trimExpandedText="@string/read_less"
-            app:trimCollapsedText="@string/read_more"
-            app:trimMode="trimModeLength"
-            app:trimLength="30"
             app:colorClickableText="#039BE5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/detailDetails"
             app:layout_constraintTop_toBottomOf="@+id/detailDetails"
-            />
+            app:trimCollapsedText="@string/read_more"
+            app:trimExpandedText="@string/read_less"
+            app:trimLength="30"
+            app:trimMode="trimModeLength" />
 
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
             android:id="@+id/youtubeVideoView"
