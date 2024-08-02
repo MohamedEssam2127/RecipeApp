@@ -1,5 +1,6 @@
 package com.example.recipeapp.Recipe.Home
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.example.recipeapp.R
 import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModel
 import com.example.recipeapp.Recipe.Home.HomeFragment.Companion.userId
 import com.example.recipeapp.Recipe.Home.HomeViewModel.HomeViewModel
+import com.example.recipeapp.Recipe.RecipeActivity
 import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Meal
 import com.example.recipeapp.models.RecipeResponse
@@ -23,7 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class listRecipeAdapter(private val recipes: RecipeResponse ,val viewModel: FavoriteViewModel) :
+class listRecipeAdapter(private val context: Context,private val recipes: RecipeResponse ,val viewModel: FavoriteViewModel) :
     RecyclerView.Adapter<listRecipeAdapter.RecipesViewHolder>() {
     var onItemClick: ((Meal) -> Unit)? = null
     val homeViewModel = HomeViewModel(RecipeRepository())

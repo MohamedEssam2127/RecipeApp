@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import com.example.recipeapp.Aucthentication.AuthActivity
 import com.example.recipeapp.R
+import com.example.recipeapp.models.FavoriteMeal
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class RecipeActivity : AppCompatActivity() {
@@ -160,6 +161,27 @@ class RecipeActivity : AppCompatActivity() {
         exitBtn.setOnClickListener {
             dialog.dismiss()
             finishAndRemoveTask()
+        }
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+    }
+    fun showRemoveFavDialog(favoriteMeal: FavoriteMeal, onRemove: () -> Unit) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_fav, null)
+        val cancelBtn: Button = dialogView.findViewById(R.id.btn_dialog_cancel3)
+        val removeBtn: Button = dialogView.findViewById(R.id.btn_dialog_remove)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .create()
+
+        cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        removeBtn.setOnClickListener {
+            onRemove()
+            dialog.dismiss()
         }
 
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
