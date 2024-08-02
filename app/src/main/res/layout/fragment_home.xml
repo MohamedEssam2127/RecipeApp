@@ -120,7 +120,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textcategory"
-            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+            app:layout_constraintTop_toBottomOf="@+id/categoriesRV" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_popular_recipe"
@@ -152,152 +152,16 @@
             app:layout_constraintTop_toBottomOf="@+id/cardView"
             tools:ignore="MissingConstraints" />
 
-        <HorizontalScrollView
-            android:id="@+id/horizontalScrollView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categoriesRV"
             android:layout_width="410dp"
             android:layout_height="119dp"
             android:layout_marginTop="8dp"
-            android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textcategory">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:paddingRight="20dp"
-                android:paddingLeft="20dp"
-                android:orientation="vertical">
-
-
-                <ImageView
-                    android:id="@+id/meat"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:background="@drawable/r"
-                    android:src="@drawable/m" />
-
-                <TextView
-                    android:id="@+id/text1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/meat"
-                    android:layout_alignStart="@+id/meat"
-                    android:layout_alignEnd="@+id/meat"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="15dp"
-                    android:gravity="center"
-                    android:text="Meat"
-                    android:textColor="@color/orange"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/salad"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:background="@drawable/r"
-                    android:src="@drawable/sal"
-                    android:layout_marginStart="18dp"
-                    android:layout_toEndOf="@+id/meat"/>
-
-                <TextView
-                    android:id="@+id/text2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/meat"
-                    android:layout_alignStart="@+id/salad"
-                    android:layout_alignEnd="@+id/salad"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="15dp"
-                    android:gravity="center"
-
-                    android:text="Salad"
-                    android:textColor="@color/orange"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/dessert"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:background="@drawable/r"
-                    android:src="@drawable/dessert"
-                    android:layout_marginStart="18dp"
-                    android:layout_toEndOf="@+id/salad"/>
-
-                <TextView
-                    android:id="@+id/textdessert"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/dessert"
-                    android:layout_alignStart="@+id/dessert"
-                    android:layout_alignEnd="@+id/dessert"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="15dp"
-                    android:gravity="center"
-                    android:text="Dessert"
-                    android:textColor="@color/orange"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/seafood"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:background="@drawable/r"
-                    android:src="@drawable/seafood"
-                    android:layout_marginStart="18dp"
-                    android:layout_toEndOf="@+id/dessert"/>
-
-                <TextView
-                    android:id="@+id/textseafood"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/seafood"
-                    android:layout_alignStart="@+id/seafood"
-                    android:layout_alignEnd="@+id/seafood"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="15dp"
-                    android:gravity="center"
-                    android:text="Seafood"
-                    android:textColor="@color/orange"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/breads"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:background="@drawable/r"
-                    android:src="@drawable/b"
-                    android:layout_marginStart="18dp"
-                    android:layout_toEndOf="@+id/seafood"/>
-
-                <TextView
-                    android:id="@+id/textbreads"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/meat"
-                    android:layout_alignStart="@+id/breads"
-                    android:layout_alignEnd="@+id/breads"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="15dp"
-                    android:gravity="center"
-                    android:text="Breads"
-                    android:textColor="@color/orange"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-
-            </RelativeLayout>
-        </HorizontalScrollView>
+        </androidx.recyclerview.widget.RecyclerView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
