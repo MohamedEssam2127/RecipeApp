@@ -1,5 +1,6 @@
 package com.example.recipeapp.Recipe.Home
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,7 +26,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class listRecipeAdapter(private val context: Context,private val recipes: RecipeResponse ,val viewModel: FavoriteViewModel) :
+class listRecipeAdapter(private val activity: RecipeActivity,private val recipes: RecipeResponse ,val viewModel: FavoriteViewModel) :
     RecyclerView.Adapter<listRecipeAdapter.RecipesViewHolder>() {
     var onItemClick: ((Meal) -> Unit)? = null
     val homeViewModel = HomeViewModel(RecipeRepository())
@@ -107,10 +108,12 @@ class listRecipeAdapter(private val context: Context,private val recipes: Recipe
                         Log.d("TAG", " is added to fav")
                         isFavorite = true
                     } else {
-                        viewModel.deleteFromFavList(favoriteMeal)
-                        holder.iconFav.setImageResource(R.drawable.avorite)
-                        Log.d("TAG", " is already fav")
-                        isFavorite = false
+                        activity.showRemoveFavDialog(favoriteMeal) {
+                            viewModel.deleteFromFavList(favoriteMeal)
+                            holder.iconFav.setImageResource(R.drawable.avorite)
+                            Log.d("TAG", " is already fav")
+                            isFavorite = false
+                        }
                     }
                 }
             }

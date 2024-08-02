@@ -170,7 +170,7 @@ class HomeFragment : Fragment() {
     private fun initializeRecipesList(){
         viewModel.getRecipesByLetter()      // get a the Recipes for a random alphabet char
         viewModel.recipes.observe(viewLifecycleOwner) { recipeResponce ->
-            val adapter = listRecipeAdapter(requireActivity(),recipeResponce,favViewModel)
+            val adapter = listRecipeAdapter(requireActivity() as RecipeActivity,recipeResponce,favViewModel)
             val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_popular_recipe)
             recyclerView?.adapter = adapter
             recyclerView?.layoutManager =
