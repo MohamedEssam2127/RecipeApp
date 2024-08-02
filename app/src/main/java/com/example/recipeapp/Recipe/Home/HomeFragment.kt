@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
          userId = sharedPreferences.getInt("user_id", -1)
         viewModel.getRecipesByLetter()
         viewModel.recipes.observe(viewLifecycleOwner) { recipeResponce ->
-            val adapter = listRecipeAdapter(recipeResponce,favViewModel)
+            val adapter = listRecipeAdapter(requireActivity(),recipeResponce,favViewModel)
             val recyclerView = view?.findViewById<RecyclerView>(R.id.rv_popular_recipe)
             recyclerView?.adapter = adapter
             recyclerView?.layoutManager =
@@ -137,10 +137,12 @@ class HomeFragment : Fragment() {
                     Log.d("SAD", " is added random to fav")
                     isFavorite = true
                 }else{
-                   favViewModel.deleteFromFavList(favoriteMeal)
-                    FavImg.setImageResource(R.drawable.avorite)
-                    Log.d("SAD", " is already   random  fav")
-                    isFavorite = false
+                    (requireActivity() as RecipeActivity).showRemoveFavDialog(favoriteMeal) {
+                        favViewModel.deleteFromFavList(favoriteMeal)
+                        FavImg.setImageResource(R.drawable.avorite)
+                        Log.d("SAD", " is already   random  fav")
+                        isFavorite = false
+                    }
                 }
             }
         }

@@ -5,17 +5,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipeapp.R
 import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModel
+import com.example.recipeapp.Recipe.RecipeActivity
 import com.example.recipeapp.models.FavoriteMeal
 
 class FavoriteAdapter(
     private var values: MutableList<FavoriteMeal>,
     private val viewModel: FavoriteViewModel,
-    private val viewLifecycleOwner: LifecycleOwner
+    private val viewLifecycleOwner: LifecycleOwner,
+    private val activity: RecipeActivity
 
 ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
     var onItemClick: ((FavoriteMeal) -> Unit)? = null
@@ -37,10 +40,12 @@ class FavoriteAdapter(
         Glide.with(holder.itemView.context).load(meal.strMealThumb).into(holder.image)
 
         holder.iconFav.setOnClickListener {
-            viewModel.deleteFromFavList(meal)
-            values.removeAt(position)
-            notifyItemRemoved(position)
-            notifyItemRangeChanged(position, values.size)
+            activity.showRemoveFavDialog(meal) {
+                viewModel.deleteFromFavList(meal)
+                values.removeAt(position)
+                notifyItemRemoved(position)
+                notifyItemRangeChanged(position, values.size)
+            }
         }
         holder.itemView.setOnClickListener{
             onItemClick?.invoke(meal)
