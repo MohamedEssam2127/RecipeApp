@@ -1,6 +1,5 @@
 package com.example.recipeapp.database.LocalDataBase
 
-import androidx.room.Query
 import com.example.recipeapp.database.UserWithFavorite
 import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Users
@@ -24,9 +23,8 @@ interface LocalDataBase {
 
     suspend fun deleteFavoriteMeal (FavoriteMeal: FavoriteMeal)
 
-    suspend fun getFavoriteMealsByUserIdAndIdMeal(userId: Int, idMeal: Int): FavoriteMeal
 
     suspend fun isMealFavorite(id:String,uId:Int):Boolean
 
-    suspend fun getFavMeal (strMeal:String,uId:Int):FavoriteMeal
+    suspend fun getFavoriteMealsByUserIdAndIdMeal (idMeal:Int, uId:Int):FavoriteMeal
 }

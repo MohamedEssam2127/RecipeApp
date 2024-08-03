@@ -8,10 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.recipeapp.Recipe.Favorite.Repo.FavoriteRepo
 import com.example.recipeapp.database.UserWithFavorite
 import com.example.recipeapp.models.FavoriteMeal
-import com.example.recipeapp.models.Users
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
 
@@ -47,7 +44,7 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
 
     fun deleteFromFavList (favoriteMeal: FavoriteMeal){
         viewModelScope.launch {
-           val favItem = getFavoriteMealsByUserIdAndIdMeal(favoriteMeal?.strMeal?:"",favoriteMeal.userId)
+           val favItem = getFavoriteMealsByUserIdAndIdMeal(favoriteMeal?.idMeal?.toInt() ?:-1,favoriteMeal.userId)
             favoriteMeal.id = favItem.id
             repo.deleteFavoriteMeal(favoriteMeal)
         }
@@ -55,8 +52,8 @@ class FavoriteViewModel (private val repo: FavoriteRepo) : ViewModel() {
     }
 
 
-   private suspend fun getFavoriteMealsByUserIdAndIdMeal(strMeal: String, userId: Int): FavoriteMeal {
-        return repo.getFavMeal(strMeal,userId)
+   private suspend fun getFavoriteMealsByUserIdAndIdMeal(idMeal: Int, userId: Int): FavoriteMeal {
+        return repo.getFavoriteMealsByUserIdAndIdMeal(idMeal,userId)
     }
 
    suspend fun isMealFavorite(id:String,uId:Int) : Boolean{
