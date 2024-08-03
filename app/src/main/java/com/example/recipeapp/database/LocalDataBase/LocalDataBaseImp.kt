@@ -50,7 +50,7 @@ class LocalDataBaseImp (context: Context) : LocalDataBase {
     }
 
     override suspend fun getUserWithFavorite(userId: Int): List<UserWithFavorite> {
-     return favoriteMealDao.getUsersWithPlaylists(userId)
+     return favoriteMealDao.getUserWithFavorite(userId)
     }
 
     override suspend fun deleteFavoriteMeal(favoriteMeal: FavoriteMeal) {

@@ -23,11 +23,6 @@ class FavoriteAdapter(
 ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
     var onItemClick: ((FavoriteMeal) -> Unit)? = null
 
-    init {
-        viewModel.FavoritelistAdapter.observe(viewLifecycleOwner) {
-            notifyDataSetChanged()
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layout = LayoutInflater.from(parent.context).inflate(R.layout.favourite_row_view, parent, false)
