@@ -91,6 +91,7 @@
                     android:alpha="0.9"
                     android:background="#9FF5F3F4"
                     android:foregroundGravity="center_horizontal"
+                    android:gravity="center"
                     android:padding="8dp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"

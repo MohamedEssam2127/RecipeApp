@@ -22,16 +22,18 @@
             android:id="@+id/popular_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="this is the title  "
             android:layout_gravity="bottom"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:background="@android:color/darker_gray"
             android:alpha="0.6"
+            android:background="@android:color/darker_gray"
+            android:gravity="center"
             android:padding="8dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:paddingBottom="20dp"/>
+            android:paddingBottom="20dp"
+            android:text="this is the title  "
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
     </androidx.cardview.widget.CardView>
