@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -36,7 +37,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
-
+    private lateinit var toolbar: Toolbar
     private lateinit var viewModel: HomeViewModel
     private lateinit var favViewModel: FavoriteViewModel
     private lateinit var favoriteMeal: FavoriteMeal
@@ -126,6 +127,8 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        toolbar = activity?.findViewById(R.id.toolbar) ?: return
+        toolbar.visibility = View.VISIBLE
         super.onViewCreated(view, savedInstanceState)
         val FavImg = view.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
         FavImg.setOnClickListener {
