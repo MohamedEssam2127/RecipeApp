@@ -26,12 +26,10 @@
         android:id="@+id/logoImage"
         android:layout_width="130dp"
         android:layout_height="152dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:src="@drawable/app_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -43,7 +41,6 @@
         android:text="Our Recipe app allows you to discover, save, and organize a variety of recipes effortlessly. Enhance your cooking experience with easy-to-follow instructions and personalized recipe collections."
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/aboutAppTitle" />
 
@@ -58,7 +55,6 @@
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoImage"
-        app:layout_constraintHorizontal_bias="0.351"
         app:layout_constraintStart_toStartOf="@+id/logoImage"
         app:layout_constraintTop_toBottomOf="@+id/logoImage" />
 
@@ -72,7 +68,6 @@
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/aboutApp"
         tools:textSize="22sp" />
@@ -97,7 +92,6 @@
         android:text="youssef2.mostafa.1@gmail.com"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/youssefAboutID"
-        app:layout_constraintHorizontal_bias="0.411"
         app:layout_constraintStart_toStartOf="@+id/youssefAboutID"
         app:layout_constraintTop_toBottomOf="@+id/youssefAboutID" />
 
@@ -108,7 +102,6 @@
         android:text="msam01619@gmail.com"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/mohammedAboutID"
-        app:layout_constraintHorizontal_bias="0.62"
         app:layout_constraintStart_toStartOf="@+id/mohammedAboutID"
         app:layout_constraintTop_toBottomOf="@+id/mohammedAboutID" />
 
@@ -121,7 +114,6 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/aboutApp"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="@+id/aboutApp"
         app:layout_constraintTop_toBottomOf="@+id/mohammedEmailID" />
 
@@ -134,7 +126,6 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/aboutApp"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="@+id/aboutApp"
         app:layout_constraintTop_toBottomOf="@+id/youssefEmailID" />
 
@@ -145,7 +136,6 @@
         android:text="omarwahsh555@gmail.com"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/OmarAboutID"
-        app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="@+id/OmarAboutID"
         app:layout_constraintTop_toBottomOf="@+id/OmarAboutID" />
 
@@ -169,7 +159,6 @@
         android:text="shahdosama734@gmail.com"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/ShahdAboutID"
-        app:layout_constraintHorizontal_bias="0.566"
         app:layout_constraintStart_toStartOf="@+id/ShahdAboutID"
         app:layout_constraintTop_toBottomOf="@+id/ShahdAboutID" />
 
@@ -182,7 +171,6 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/aboutApp"
-        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="@+id/aboutApp"
         app:layout_constraintTop_toBottomOf="@+id/shahdEmailID" />
 
@@ -193,7 +181,6 @@
         android:text="asmaa111saleh111@gmail.com"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/AsmaaAboutID"
-        app:layout_constraintHorizontal_bias="0.44"
         app:layout_constraintStart_toStartOf="@+id/AsmaaAboutID"
         app:layout_constraintTop_toBottomOf="@+id/AsmaaAboutID" />
 
