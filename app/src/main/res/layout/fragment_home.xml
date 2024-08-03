@@ -153,7 +153,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categoriesRV"
-            android:layout_width="363dp"
+            android:layout_width="400dp"
             android:layout_height="117dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
