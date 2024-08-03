@@ -1,14 +1,14 @@
-package com.example.recipeapp.Aucthentication.Register.RegisterViewModel
+package com.example.recipeapp.Aucthentication.Register.ViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.recipeapp.Aucthentication.AuthRepository.UserRepo
+import com.example.recipeapp.Aucthentication.Register.Repository.RegisterRepo
 import com.example.recipeapp.models.Users
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(private val userRepo: UserRepo) : ViewModel() {
+class RegisterViewModel(private val registerRepo: RegisterRepo) : ViewModel() {
 
     private val _user = MutableLiveData<Users?>()
     val user: LiveData<Users?> get() = _user
@@ -27,7 +27,7 @@ class RegisterViewModel(private val userRepo: UserRepo) : ViewModel() {
                     userEmail = email,
                     userPassword = password
                 )
-                userRepo.insertUser(user)
+                registerRepo.insertUser(user)
                 _user.postValue(user)
 
             }catch (e: Exception) {
@@ -40,7 +40,7 @@ class RegisterViewModel(private val userRepo: UserRepo) : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val exists = userRepo.isEmailExist(email)
+                val exists = registerRepo.isEmailExist(email)
                 _userExistStatus.postValue(exists)
 
             } catch (e: Exception) {

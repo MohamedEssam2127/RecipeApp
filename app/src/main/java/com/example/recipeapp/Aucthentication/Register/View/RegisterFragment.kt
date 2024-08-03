@@ -1,4 +1,4 @@
-package com.example.recipeapp.Aucthentication.Register
+package com.example.recipeapp.Aucthentication.Register.View
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -11,9 +11,9 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.recipeapp.Aucthentication.AuthRepository.UserRepoImp
-import com.example.recipeapp.Aucthentication.Register.RegisterViewModel.RegisterViewModel
+import com.example.recipeapp.Aucthentication.Register.ViewModel.RegisterViewModel
 import com.example.recipeapp.Aucthentication.AuthViewModelFactory.ViewModelFactory
+import com.example.recipeapp.Aucthentication.Register.Repository.RegisterRepoImp
 import com.example.recipeapp.Aucthentication.ViewValidations.validations
 import com.example.recipeapp.R
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
@@ -38,10 +38,11 @@ class RegisterFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
+
         val userViewModelFactory = ViewModelFactory(
             RegisterViewModel::class.java,
-            constructor = { userRepo -> RegisterViewModel(userRepo) },
-            UserRepoImp(
+            constructorRegister = { registerRepo -> RegisterViewModel(registerRepo) },
+            registerRepo = RegisterRepoImp(
                 localDataBase = LocalDataBaseImp(requireContext())
             )
         )

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.recipeapp.Aucthentication.Login.LoginFragment"
+        android:name="com.example.recipeapp.Aucthentication.Login.View.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.recipeapp.Aucthentication.Register.RegisterFragment"
+        android:name="com.example.recipeapp.Aucthentication.Register.View.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action

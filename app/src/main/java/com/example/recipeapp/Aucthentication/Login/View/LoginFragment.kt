@@ -1,4 +1,4 @@
-package com.example.recipeapp.Aucthentication.Login
+package com.example.recipeapp.Aucthentication.Login.View
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -10,11 +10,10 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.recipeapp.Aucthentication.AuthRepository.UserRepoImp
-import com.example.recipeapp.Aucthentication.Login.LoginViewModel.LoginViewModel
+import com.example.recipeapp.Aucthentication.Login.ViewModel.LoginViewModel
 import com.example.recipeapp.Aucthentication.AuthViewModelFactory.ViewModelFactory
+import com.example.recipeapp.Aucthentication.Login.Repository.LoginRepoImp
 import com.example.recipeapp.Aucthentication.ViewValidations.validations
-
 import com.example.recipeapp.R
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.google.android.material.textfield.TextInputEditText
@@ -51,8 +50,8 @@ class LoginFragment : Fragment() {
 
         val loginViewModelFactory = ViewModelFactory(
             LoginViewModel::class.java,
-            constructor = { userRepo -> LoginViewModel(userRepo) },
-            UserRepoImp(
+            constructorLogin = { loginRepo -> LoginViewModel(loginRepo) },
+            LoginRepoImp(
                 localDataBase = LocalDataBaseImp(requireContext())
             )
         )
