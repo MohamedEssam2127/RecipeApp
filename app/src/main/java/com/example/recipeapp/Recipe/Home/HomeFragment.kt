@@ -1,6 +1,9 @@
 package com.example.recipeapp.Recipe.Home
 
+import NetworkLiveData
+import android.content.Context
 import android.content.SharedPreferences
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,8 +13,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -44,6 +49,7 @@ class HomeFragment : Fragment() {
     private lateinit var favoriteMeal: FavoriteMeal
     private var strMealRandom: String = ""
     private var isFavorite = false
+    private lateinit var networkLiveData: NetworkLiveData
 
     companion object {
         private lateinit var sharedPreferences: SharedPreferences
@@ -54,69 +60,80 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        gettingFavoriteViewModelReady()
-        gettingHomeViewModelReady()
-        sharedPreferences = requireActivity().getSharedPreferences("user_id", 0)
-        userId = sharedPreferences.getInt("user_id", -1)
+
+        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        networkLiveData = NetworkLiveData(connectivityManager)
+
+        networkLiveData.observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
 
 
-        initializeRecipesList()     //prepare the Recipes RV
-        initializeCategories()      //prepare the Categories and it's actions
+                gettingFavoriteViewModelReady()
+                gettingHomeViewModelReady()
+                sharedPreferences = requireActivity().getSharedPreferences("user_id", 0)
+                userId = sharedPreferences.getInt("user_id", -1)
+                initializeRecipesList()     //prepare the Recipes RV
+                initializeCategories()      //prepare the Categories and it's actions
+                viewModel.getRandomMeal()
+
+                viewModel.randomMeal.observe(viewLifecycleOwner) { recipeResponce ->
+                    if(recipeResponce.meals.isNotEmpty()){
+                        favoriteMeal = FavoriteMeal(
+                            idMeal =recipeResponce.meals[0].idMeal.toInt(),
+                            strCategory =recipeResponce.meals[0].strCategory,
+                            strMeal=  recipeResponce.meals[0].strMeal,
+                            strMealThumb= recipeResponce.meals[0].strMealThumb,
+                            strTags =recipeResponce.meals[0].strTags,
+                            strYoutube =recipeResponce.meals[0].strYoutube,
+                            userId= userId,
+                            strArea =recipeResponce.meals[0].strArea,
+                            strInstructions =recipeResponce.meals[0].strInstructions
+                        )
 
 
-        viewModel.getRandomMeal()
+                        val FavImg = view?.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
 
-        viewModel.randomMeal.observe(viewLifecycleOwner) { recipeResponce ->
-            if(recipeResponce.meals.isNotEmpty()){
-                favoriteMeal = FavoriteMeal(
-                    idMeal =recipeResponce.meals[0].idMeal.toInt(),
-                    strCategory =recipeResponce.meals[0].strCategory,
-                    strMeal=  recipeResponce.meals[0].strMeal,
-                    strMealThumb= recipeResponce.meals[0].strMealThumb,
-                    strTags =recipeResponce.meals[0].strTags,
-                    strYoutube =recipeResponce.meals[0].strYoutube,
-                    userId= userId,
-                    strArea =recipeResponce.meals[0].strArea,
-                    strInstructions =recipeResponce.meals[0].strInstructions
-                )
+                        CoroutineScope(Dispatchers.IO).launch {
 
+                            isFavorite = favViewModel.isMealFavorite(recipeResponce.meals[0].strMeal, userId)
+                            withContext(Dispatchers.Main) {
+                                FavImg?.setImageResource(R.drawable.avorite)
+                                if (isFavorite) {
+                                    FavImg?.setImageResource(R.drawable.baseline_favorite_24)
+                                }
+                            }
 
-                val FavImg = view?.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
+                        }
 
-                CoroutineScope(Dispatchers.IO).launch {
-
-                    isFavorite = favViewModel.isMealFavorite(recipeResponce.meals[0].strMeal, userId)
-                    withContext(Dispatchers.Main) {
-                        FavImg?.setImageResource(R.drawable.avorite)
-                        if (isFavorite) {
-                            FavImg?.setImageResource(R.drawable.baseline_favorite_24)
+                        val image = view?.findViewById<ImageView>(R.id.random_image)
+                        val title = view?.findViewById<TextView>(R.id.titletext)
+                        title?.text = recipeResponce.meals[0].strMeal
+                        strMealRandom = recipeResponce.meals[0].strMeal
+                        if (image != null) {
+                            Glide.with(this).load(recipeResponce.meals[0].strMealThumb).apply(
+                                RequestOptions().placeholder(R.drawable.baseline_access_time_24)
+                                    .error(R.drawable.baseline_assignment_late_24)
+                            ).into(image)
+                        }
+                        image?.setOnClickListener {
+                            lifecycleScope.launch {
+                                val action =
+                                    HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(
+                                        viewModel.getMealById(recipeResponce.meals[0].idMeal)
+                                    )
+                                findNavController().navigate(action)
+                            }
                         }
                     }
 
                 }
 
-                val image = view?.findViewById<ImageView>(R.id.random_image)
-                val title = view?.findViewById<TextView>(R.id.titletext)
-                title?.text = recipeResponce.meals[0].strMeal
-                strMealRandom = recipeResponce.meals[0].strMeal
-                if (image != null) {
-                    Glide.with(this).load(recipeResponce.meals[0].strMealThumb).apply(
-                        RequestOptions().placeholder(R.drawable.baseline_access_time_24)
-                            .error(R.drawable.baseline_assignment_late_24)
-                    ).into(image)
-                }
-                image?.setOnClickListener {
-                    lifecycleScope.launch {
-                        val action =
-                            HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(
-                                viewModel.getMealById(recipeResponce.meals[0].idMeal)
-                            )
-                        findNavController().navigate(action)
-                    }
-                }
-            }
 
+            } else {
+                Toast.makeText(requireContext(), "Internet is lost", Toast.LENGTH_SHORT).show()
+            }
         }
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 (requireActivity() as RecipeActivity).showExitDialog()
@@ -131,25 +148,36 @@ class HomeFragment : Fragment() {
         toolbar = activity?.findViewById(R.id.toolbar) ?: return
         toolbar.visibility = View.VISIBLE
         super.onViewCreated(view, savedInstanceState)
-        val FavImg = view.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
-        FavImg.setOnClickListener {
 
-            if(favoriteMeal != null){
-                if (!isFavorite) {
-                   favViewModel.insertFavoriteMeal(favoriteMeal)
-                    FavImg.setImageResource(R.drawable.baseline_favorite_24)
-                    Log.d("SAD", " is added random to fav")
-                    isFavorite = true
-                }else{
-                    (requireActivity() as RecipeActivity).showRemoveFavDialog(favoriteMeal) {
-                        favViewModel.deleteFromFavList(favoriteMeal)
-                        FavImg.setImageResource(R.drawable.avorite)
-                        Log.d("SAD", " is already   random  fav")
-                        isFavorite = false
+        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        networkLiveData = NetworkLiveData(connectivityManager)
+
+        networkLiveData.observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
+                val FavImg = view.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
+                FavImg.setOnClickListener {
+
+                    if(favoriteMeal != null){
+                        if (!isFavorite) {
+                            favViewModel.insertFavoriteMeal(favoriteMeal)
+                            FavImg.setImageResource(R.drawable.baseline_favorite_24)
+                            Log.d("SAD", " is added random to fav")
+                            isFavorite = true
+                        }else{
+                            (requireActivity() as RecipeActivity).showRemoveFavDialog(favoriteMeal) {
+                                favViewModel.deleteFromFavList(favoriteMeal)
+                                FavImg.setImageResource(R.drawable.avorite)
+                                Log.d("SAD", " is already   random  fav")
+                                isFavorite = false
+                            }
+                        }
                     }
                 }
+            } else {
+                Toast.makeText(requireContext(), "Internet is lost", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
 
