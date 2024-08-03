@@ -6,19 +6,26 @@ import com.example.recipeapp.Aucthentication.Login.Repository.LoginRepo
 import com.example.recipeapp.Aucthentication.Register.Repository.RegisterRepo
 
 class ViewModelFactory<T : ViewModel>(
+
     private val viewModelClass: Class<T>,
-    private val constructorLogin: ((LoginRepo) -> T)? = null, // Login constructor is optional
+
+    //  Login is optional
+    private val constructorLogin: ((LoginRepo) -> T)? = null,
     private val loginRepo: LoginRepo? = null,
-    private val constructorRegister: ((RegisterRepo) -> T)? = null, // Register constructor is optional
+
+    //  Register is optional
+    private val constructorRegister: ((RegisterRepo) -> T)? = null,
     private val registerRepo: RegisterRepo? = null
+
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(viewModelClass) -> {
                 when {
-                    loginRepo != null && constructorLogin != null -> constructorLogin.invoke(loginRepo) as T
-                    registerRepo != null && constructorRegister != null -> constructorRegister.invoke(registerRepo) as T
+                    loginRepo != null && constructorLogin != null -> constructorLogin?.let { it(loginRepo) } as T
+                    registerRepo != null && constructorRegister != null -> constructorRegister?.let { it(registerRepo) } as T
+
                     else -> throw IllegalArgumentException("No appropriate constructor or repository provided for ${viewModelClass.simpleName}")
                 }
             }

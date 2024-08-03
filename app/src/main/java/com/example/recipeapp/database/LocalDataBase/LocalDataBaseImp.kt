@@ -19,25 +19,14 @@ class LocalDataBaseImp (context: Context) : LocalDataBase {
         usersDao = db.productDao()
         favoriteMealDao = db.favoriteMealDao()
     }
+
     override suspend fun insertUser(user: Users) {
        usersDao.insertUser(user)
-    }
-
-    override suspend fun gellAllUsers(): List<Users> {
-        TODO("Not yet implemented")
     }
 
     override suspend fun getUserByEmailAndPassword(email: String, password: String): Users {
        return usersDao.getUserByEmailAndPassword(email, password)
 
-    }
-
-    override suspend fun isUserExist(email: String, password: String): Boolean {
-        return usersDao.isUserExist(email , password)
-    }
-
-    suspend fun deleteUser(user: Users){
-        usersDao.deleteUser(user)
     }
 
     override suspend fun isEmailExist(email: String): Boolean {

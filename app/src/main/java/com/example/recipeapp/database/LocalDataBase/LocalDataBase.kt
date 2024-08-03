@@ -8,11 +8,7 @@ interface LocalDataBase {
 
     suspend fun insertUser(user: Users)
 
-    suspend fun gellAllUsers(): List<Users>
-
     suspend fun getUserByEmailAndPassword(email: String, password: String): Users
-
-    suspend fun isUserExist(email: String, password: String ): Boolean
 
     suspend fun  isEmailExist(email: String): Boolean
 

@@ -36,6 +36,7 @@ class RegisterViewModel(private val registerRepo: RegisterRepo) : ViewModel() {
             }
         }
     }
+
     fun checkIfUserExists(email: String) {
 
         viewModelScope.launch {

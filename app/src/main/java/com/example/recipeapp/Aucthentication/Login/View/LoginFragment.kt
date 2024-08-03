@@ -41,6 +41,8 @@ class LoginFragment : Fragment() {
         sharedPreferences=requireActivity().getSharedPreferences("user_id",0)
         navController = findNavController()
 
+        // Check if user is already logged in
+
         val userId = sharedPreferences.getInt("user_id", -1)
         if (userId != -1) {
             navController.navigate(R.id.action_loginFragment_to_recipeActivity)
@@ -72,12 +74,14 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
+
+            // if Login Successful then save user id in shared preferences
             if (user != null) {
 
                 sharedPreferences.edit().putInt("user_id", user.userId).apply()
-
                 navController.navigate(R.id.action_loginFragment_to_recipeActivity)
                 requireActivity().finish()
+
             } else {
                 Toast.makeText(context, "Invalid Email or Password", Toast.LENGTH_SHORT).show()
             }

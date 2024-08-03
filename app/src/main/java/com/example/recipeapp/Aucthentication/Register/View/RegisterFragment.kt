@@ -34,10 +34,10 @@ class RegisterFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_register, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-
 
         val userViewModelFactory = ViewModelFactory(
             RegisterViewModel::class.java,
@@ -72,7 +72,11 @@ class RegisterFragment : Fragment() {
         viewModel.userExistStatus.observe(viewLifecycleOwner, Observer { exists ->
 
             if (exists) {
-                Toast.makeText(context, "User already exists", Toast.LENGTH_SHORT).show()
+
+                val emailhelper = view?.findViewById<TextInputLayout>(R.id.register_email_InputLayout)
+                if (emailhelper != null)
+                    emailhelper.helperText = "*User already exists"
+
             } else {
                 viewModel.registerUser(
                     firstName.text.toString().trim(),
@@ -108,25 +112,21 @@ class RegisterFragment : Fragment() {
 
 
         if (passwordEdittext != null) {
+            val helper= view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
+
             if (passwordEdittext.length() < 8) {
-                // make helper text visible
-                val helper= view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
                 if (helper != null) {
                     helper.helperText = "*Password must be at least 8 characters"
                 }
             }
 
             else if (passwordEdittext.length() > 16) {
-                // make helper text visible
-                val helper= view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
                 if (helper != null) {
                     helper.helperText = "*Password must be at most 16 characters"
                 }
             }
 
             else{
-                // make helper text invisible
-                val helper= view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
                 if (helper != null) {
                     helper.helperText = ""
                 }
@@ -154,7 +154,7 @@ class RegisterFragment : Fragment() {
                 !isPasswordValid -> {
                     val passwordhelper = view?.findViewById<TextInputLayout>(R.id.register_password_InputLayout)
                     if (passwordhelper != null)
-                        passwordhelper.helperText = "*Wrong Password"
+                        passwordhelper.helperText = "*invalid Password Format"
                 }
 
                 !isFirstNameValid -> {
