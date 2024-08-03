@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -21,6 +22,7 @@ class SearchFragment : Fragment() {
     private val searchViewModel: SearchViewModel by viewModels()
     private lateinit var searchView: SearchView
     private lateinit var recipeRecyclerView: RecyclerView
+    private lateinit var placeholderTextView: TextView
     private lateinit var notFoundImageView: ImageView
     private lateinit var adapter: RecipeAdapter
 
@@ -39,7 +41,12 @@ class SearchFragment : Fragment() {
         // Initialize views
         searchView = view.findViewById(R.id.search_view)
         recipeRecyclerView = view.findViewById(R.id.recipeRecyclerView)
+        placeholderTextView = view.findViewById(R.id.placeholder_text_view)
         notFoundImageView = view.findViewById(R.id.not_found_image)
+
+        searchView.queryHint = "Search for a recipe"
+        searchView.onActionViewExpanded()
+        searchView.clearFocus()
 
         // Set up RecyclerView
         recipeRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -56,11 +63,27 @@ class SearchFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
                     Log.d(TAG, "Query text changed: $it")
-                    searchViewModel.searchMealByName(it)
+                    if (it.isEmpty()) {
+                        // Show placeholder if search query is empty
+                        placeholderTextView.visibility = View.VISIBLE
+                        recipeRecyclerView.visibility = View.GONE
+                        notFoundImageView.visibility = View.GONE
+                    } else {
+                        // Hide placeholder and search for meals
+                        placeholderTextView.visibility = View.GONE
+                        searchViewModel.searchMealByName(it)
+                    }
                 }
                 return true
             }
         })
+
+        // Initial state: Display placeholderTextView if the search view is empty
+        if (searchView.query.isEmpty()) {
+            placeholderTextView.visibility = View.VISIBLE
+            recipeRecyclerView.visibility = View.GONE
+            notFoundImageView.visibility = View.GONE
+        }
 
         return view
     }
@@ -72,13 +95,20 @@ class SearchFragment : Fragment() {
         // Observe LiveData from ViewModel
         searchViewModel.meals.observe(viewLifecycleOwner, Observer { meals ->
             Log.d(TAG, "Updating UI with meals: $meals")
-            if (meals.isEmpty()) {
+            if (meals.isEmpty() && searchView.query.isNotEmpty()) {
+                // Show "not found" image if no meals found for the query
                 notFoundImageView.visibility = View.VISIBLE
                 recipeRecyclerView.visibility = View.GONE
-            } else {
+            } else if (meals.isNotEmpty()) {
+                // Show list of meals if found
                 notFoundImageView.visibility = View.GONE
                 recipeRecyclerView.visibility = View.VISIBLE
                 adapter.updateData(meals)
+            } else if (searchView.query.isEmpty()) {
+                // Show placeholder if search query is empty
+                placeholderTextView.visibility = View.VISIBLE
+                recipeRecyclerView.visibility = View.GONE
+                notFoundImageView.visibility = View.GONE
             }
         })
 
