@@ -18,7 +18,7 @@ interface FavoriteMealDao {
 
     @Transaction
     @Query("Select * from Users where userId=:userId")
-    suspend fun getUsersWithPlaylists(userId:Int): List<UserWithFavorite>
+    suspend fun getUserWithFavorite(userId:Int): List<UserWithFavorite>
 
     @Query("SELECT * FROM FavoriteMeal WHERE userId = :userId and idMeal = :idMeal")
     suspend fun getFavoriteMealsByUserIdAndIdMeal(userId: Int, idMeal: Int): FavoriteMeal
