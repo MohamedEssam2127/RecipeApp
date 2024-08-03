@@ -19,11 +19,16 @@ import com.example.recipeapp.models.Meal
 
 class SearchFragment : Fragment() {
 
+    // ViewModel for managing search logic
     private val searchViewModel: SearchViewModel by viewModels()
+
+    // UI components
     private lateinit var searchView: SearchView
     private lateinit var recipeRecyclerView: RecyclerView
     private lateinit var placeholderTextView: TextView
     private lateinit var notFoundImageView: ImageView
+
+    // Adapter for displaying search results
     private lateinit var adapter: RecipeAdapter
 
     companion object {
@@ -35,6 +40,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Log.d(TAG, "onCreateView")
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_search, container, false)
 
@@ -112,6 +118,7 @@ class SearchFragment : Fragment() {
             }
         })
 
+        // Observe error messages from ViewModel
         searchViewModel.errorMessage.observe(viewLifecycleOwner, Observer { error ->
             Log.d(TAG, "Error message received: $error")
             notFoundImageView.visibility = View.VISIBLE
@@ -119,6 +126,7 @@ class SearchFragment : Fragment() {
         })
     }
 
+    // Navigate to the detail screen for the selected meal
     private fun navigateToDetail(meal: Meal) {
         Log.d("SearchFragment", "Navigating to details with meal: $meal")
         val action = SearchFragmentDirections.actionSearchFragmentToRecipeDetailFragment(meal)
