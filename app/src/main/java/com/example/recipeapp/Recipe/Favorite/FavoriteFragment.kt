@@ -48,11 +48,12 @@ class FavoriteFragment : Fragment() {
         viewModel.FavoriteMeal.observe(viewLifecycleOwner) { favoriteMeals ->
 
             val fav = favoriteMeals
-            Log.d("FavoriteFragment", "Favorite meals size : ${fav.size}")
-            if (fav.size==0){
-                Log.d("FavoriteFragment", "Favorite meals: ${fav}")
-
+            if(fav[0].favoriteMeals.size == 0){
+                view.findViewById<View>(R.id.ImEmptyList).visibility = View.VISIBLE
             }else{
+                view.findViewById<View>(R.id.ImEmptyList).visibility = View.GONE
+            }
+            if (fav.size!=0){
                 val list = fav[0].favoriteMeals as MutableList<FavoriteMeal>
                 val adapter = FavoriteAdapter(list,viewModel, viewLifecycleOwner,
                     requireActivity() as RecipeActivity
