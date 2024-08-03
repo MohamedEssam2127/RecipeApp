@@ -113,6 +113,7 @@
             android:id="@+id/aboutAppTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Popular recipe"
             android:textColor="@color/dark_blue"
             android:textSize="23dp"
@@ -126,14 +127,13 @@
             android:id="@+id/rv_popular_recipe"
             android:layout_width="match_parent"
             android:layout_height="234dp"
-            android:layout_marginTop="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
 
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/aboutAppTitle"
 
+            app:layout_constraintTop_toBottomOf="@+id/aboutAppTitle"
             app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/popular_rv_item" />
 
