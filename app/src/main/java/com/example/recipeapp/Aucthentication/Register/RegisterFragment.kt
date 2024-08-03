@@ -57,10 +57,11 @@ class RegisterFragment : Fragment() {
         val lastName = view.findViewById<TextInputEditText>(R.id.register_SecName_TextInput)
         val email_editText = view.findViewById<TextInputEditText>(R.id.register_email_TextInput)
         val password_editText = view.findViewById<TextInputEditText>(R.id.register_password_TextInput)
+        val confirmPassword_editText = view.findViewById<TextInputEditText>(R.id.register_confirmPassword_TextInput)
 
 
         register_btn.setOnClickListener {
-            handleRegistration(firstName,lastName,email_editText, password_editText)
+            handleRegistration(firstName,lastName,email_editText, password_editText,confirmPassword_editText)
         }
 
         login_btn.setOnClickListener {
@@ -90,17 +91,19 @@ class RegisterFragment : Fragment() {
         })
     }
 
-    private fun handleRegistration(firstName: TextInputEditText, lastName: TextInputEditText,emailEdittext: TextInputEditText?, passwordEdittext: TextInputEditText?,) {
+    private fun handleRegistration(firstName: TextInputEditText, lastName: TextInputEditText,emailEdittext: TextInputEditText?, passwordEdittext: TextInputEditText?,confirmPasswordEditText: TextInputEditText?) {
 
         val email = emailEdittext?.text.toString().trim()
         val password = passwordEdittext?.text.toString().trim()
         val firstName = firstName.text.toString().trim()
         val lastName = lastName.text.toString().trim()
+        val confirmPassword = confirmPasswordEditText?.text.toString().trim()
 
         validations.validateEmail(email)
         validations.validatePassword(password)
         validations.validateFirstName(firstName)
         validations.validateLastName(lastName)
+        validations.confirmPassword(password,confirmPassword)
 
 
         if (passwordEdittext != null) {
@@ -134,9 +137,10 @@ class RegisterFragment : Fragment() {
         val isPasswordValid = validations.isPasswordValid.value ?: false
         val isFirstNameValid = validations.isFirstNameValid.value ?: false
         val isLastNameValid = validations.isLastNameValid.value ?: false
+        val isConfirmPasswordValid = validations.isConfirmPasswordValid.value ?: false
 
 
-        if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid) {
+        if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid) {
             viewModel.checkIfUserExists(email)
         } else {
             when {
@@ -161,6 +165,11 @@ class RegisterFragment : Fragment() {
                     val lastNameHelper = view?.findViewById<TextInputLayout>(R.id.register_secName_InputLayout)
                     if (lastNameHelper != null)
                         lastNameHelper.helperText = "*Last Name is Required"
+                }
+                !isConfirmPasswordValid -> {
+                    val confirmPasswordHelper = view?.findViewById<TextInputLayout>(R.id.register_confirmPassword_InputLayout)
+                    if (confirmPasswordHelper != null)
+                        confirmPasswordHelper.helperText = "*Password does not match"
                 }
             }
 

@@ -28,4 +28,5 @@
     <string name="clear_category">Clear Category</string>
     <string name="ImEmpty">I\'m Empty!</string>
     <string name="addItem">Click  Add to Favourites</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>

@@ -17,6 +17,9 @@ class validations {
      val _isLastNameValid = MutableLiveData<Boolean>()
     val isLastNameValid: LiveData<Boolean> get() = _isLastNameValid
 
+    val _isConfirmPasswordValid = MutableLiveData<Boolean>()
+    val isConfirmPasswordValid: LiveData<Boolean> get() = _isConfirmPasswordValid
+
 
     fun validateEmail(email: String) {
         val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
@@ -34,6 +37,11 @@ class validations {
 
     fun validateLastName(lastName: String) {
         _isLastNameValid.value = lastName.isNotEmpty()
+    }
+
+    fun confirmPassword(password: String, confirmPassword: String) {
+        _isConfirmPasswordValid.value = password == confirmPassword
+
     }
 
 
