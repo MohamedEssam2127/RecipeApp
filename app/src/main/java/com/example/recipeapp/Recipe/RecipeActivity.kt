@@ -32,9 +32,7 @@ class RecipeActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
 
 
-    companion object {
-        var splachFlag = false
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -57,12 +55,12 @@ class RecipeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_bar_fav -> {
-                    toolbar.visibility= View.INVISIBLE
+                    toolbar.visibility= View.GONE
                     navController.navigate(R.id.action_global_favoriteFragment)
                     true
                 }
                 R.id.bottom_barchr_sea -> {
-                    toolbar.visibility= View.INVISIBLE
+                    toolbar.visibility= View.GONE
                     navController.navigate(R.id.action_global_searchFragment)
                     true
                 }
@@ -84,7 +82,8 @@ class RecipeActivity : AppCompatActivity() {
                 return true
             }
             R.id.menu_about -> {
-                toolbar.visibility= View.INVISIBLE
+                toolbar.visibility= View.GONE
+
 //                navController.navigate(R.id.action_homeFragment_to_aboutFragment)
 //                return true
 
