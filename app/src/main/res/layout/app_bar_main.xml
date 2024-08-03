@@ -17,6 +17,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+            app:title="Welcome to Sofra"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@color/light_blue"
@@ -26,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleTextAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
             app:titleTextColor="@color/dark_blue" />
 
         <include
