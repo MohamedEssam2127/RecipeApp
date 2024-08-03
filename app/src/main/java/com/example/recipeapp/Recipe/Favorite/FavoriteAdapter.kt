@@ -40,6 +40,11 @@ class FavoriteAdapter(
                 values.removeAt(position)
                 notifyItemRemoved(position)
                 notifyItemRangeChanged(position, values.size)
+                if (values.size == 0) {
+                    activity.findViewById<View>(R.id.ImEmptyList).visibility = View.VISIBLE
+                }else{
+                    activity.findViewById<View>(R.id.ImEmptyList).visibility = View.GONE
+                }
             }
         }
         holder.itemView.setOnClickListener{

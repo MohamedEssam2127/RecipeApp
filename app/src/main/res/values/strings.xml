@@ -26,4 +26,6 @@
     <string name="cancel">cancel</string>
     <string name="remove">remove</string>
     <string name="clear_category">Clear Category</string>
+    <string name="ImEmpty">I\'m Empty!</string>
+    <string name="addItem">Click  Add to Favourites</string>
 </resources>
