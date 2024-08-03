@@ -6,12 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipeapp.models.Meal
 import com.example.recipeapp.network.RecipeRepository
+import com.example.recipeapp.network.RecipeRepositoryImpl
 import kotlinx.coroutines.launch
 
 class SearchViewModel : ViewModel() {
 
     // Repository for accessing the network layer
-    private val repository = RecipeRepository()
+    private val repository = RecipeRepositoryImpl()
 
     // LiveData to hold the list of meals
     val meals = MutableLiveData<List<Meal>>()

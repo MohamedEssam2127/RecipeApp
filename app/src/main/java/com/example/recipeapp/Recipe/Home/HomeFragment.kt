@@ -30,6 +30,7 @@ import com.example.recipeapp.Recipe.RecipeActivity
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.network.RecipeRepository
+import com.example.recipeapp.network.RecipeRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -154,7 +155,7 @@ class HomeFragment : Fragment() {
 
     private fun gettingHomeViewModelReady() {
         val HomeViewModelFactory = FactoryViewModelHome(
-                RecipeRepository()
+                RecipeRepositoryImpl()
                 )
                 viewModel =
                 ViewModelProvider(this, HomeViewModelFactory).get(HomeViewModel::class.java)

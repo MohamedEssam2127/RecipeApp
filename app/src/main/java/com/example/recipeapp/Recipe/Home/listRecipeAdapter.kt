@@ -21,6 +21,7 @@ import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Meal
 import com.example.recipeapp.models.RecipeResponse
 import com.example.recipeapp.network.RecipeRepository
+import com.example.recipeapp.network.RecipeRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +30,7 @@ import kotlinx.coroutines.withContext
 class listRecipeAdapter(private val activity: RecipeActivity,private val recipes: RecipeResponse ,val viewModel: FavoriteViewModel) :
     RecyclerView.Adapter<listRecipeAdapter.RecipesViewHolder>() {
     var onItemClick: ((Meal) -> Unit)? = null
-    val homeViewModel = HomeViewModel(RecipeRepository())
+    val homeViewModel = HomeViewModel(RecipeRepositoryImpl())
 
     class RecipesViewHolder(private val row: View) : RecyclerView.ViewHolder(row) {
         private var img: ImageView? = null
