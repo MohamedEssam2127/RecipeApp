@@ -26,4 +26,17 @@
     <string name="cancel">cancel</string>
     <string name="remove">remove</string>
     <string name="clear_category">Clear Category</string>
+    <string name="our_recipe_app_allows_you_to_discover_save_and_organize_a_variety_of_recipes_effortlessly_enhance_your_cooking_experience_with_easy_to_follow_instructions_and_personalized_recipe_collections">Our Recipe app allows you to discover, save, and organize a variety of recipes effortlessly. Enhance your cooking experience with easy-to-follow instructions and personalized recipe collections.</string>
+    <string name="about_the_app">About The App</string>
+    <string name="about_us">About Us</string>
+    <string name="youssef_mostafa_abdelaty">Youssef Mostafa Abdelaty</string>
+    <string name="youssef2_mostafa_1_gmail_com">youssef2.mostafa.1@gmail.com</string>
+    <string name="mohammed_essam_el_din">Mohammed Essam El-Din</string>
+    <string name="msam01619_gmail_com">msam01619@gmail.com</string>
+    <string name="omar_adel_badawy">Omar Adel Badawy</string>
+    <string name="omarwahsh555_gmail_com">omarwahsh555@gmail.com</string>
+    <string name="shahd_osama_hamed">Shahd Osama Hamed</string>
+    <string name="shahdosama734_gmail_com">shahdosama734@gmail.com</string>
+    <string name="asmaa_saleh_farghaly">Asmaa Saleh Farghaly</string>
+    <string name="asmaa111saleh111_gmail_com">asmaa111saleh111@gmail.com</string>
 </resources>

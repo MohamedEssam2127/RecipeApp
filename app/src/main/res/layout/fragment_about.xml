@@ -5,196 +5,248 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FBE6E6"
-    android:orientation="vertical"
     tools:context=".Recipe.Home.AboutFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
+    <!-- About the App Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/aboutAppCard"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="373dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9541985" />
-
-    <ImageView
-        android:id="@+id/logoImage"
-        android:layout_width="130dp"
-        android:layout_height="152dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/app_logo"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/aboutApp"
-        android:layout_width="306dp"
-        android:layout_height="98dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="Our Recipe app allows you to discover, save, and organize a variety of recipes effortlessly. Enhance your cooking experience with easy-to-follow instructions and personalized recipe collections."
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.448"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/aboutAppTitle" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-    <TextView
-        android:id="@+id/aboutAppTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="About The App"
-        android:textColor="@color/orange"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/logoImage"
-        app:layout_constraintHorizontal_bias="0.351"
-        app:layout_constraintStart_toStartOf="@+id/logoImage"
-        app:layout_constraintTop_toBottomOf="@+id/logoImage" />
+            <ImageView
+                android:id="@+id/logoImage"
+                android:layout_width="130dp"
+                android:layout_height="152dp"
+                android:src="@drawable/app_logo"
+                tools:ignore="ContentDescription" />
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingLeft="16dp">
+
+                <TextView
+                    android:id="@+id/aboutAppTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_the_app"
+                    android:textColor="@color/orange"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/aboutApp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/our_recipe_app_allows_you_to_discover_save_and_organize_a_variety_of_recipes_effortlessly_enhance_your_cooking_experience_with_easy_to_follow_instructions_and_personalized_recipe_collections"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- About Us Section Title -->
     <TextView
         android:id="@+id/AboutUsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="About Us"
+        android:layout_marginTop="16dp"
+        android:text="@string/about_us"
         android:textColor="@color/orange"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/aboutApp"
-        tools:textSize="22sp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutAppCard" />
 
-    <TextView
-        android:id="@+id/youssefAboutID"
-        android:layout_width="wrap_content"
+    <!-- Youssef Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/youssefCard"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Youssef Mostafa Abdelaty"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/aboutApp"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="@+id/aboutApp"
-        app:layout_constraintTop_toBottomOf="@+id/AboutUsTitle" />
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AboutUsTitle">
 
-    <TextView
-        android:id="@+id/youssefEmailID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="youssef2.mostafa.1@gmail.com"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/youssefAboutID"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toStartOf="@+id/youssefAboutID"
-        app:layout_constraintTop_toBottomOf="@+id/youssefAboutID" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
 
-    <TextView
-        android:id="@+id/mohammedEmailID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="msam01619@gmail.com"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/mohammedAboutID"
-        app:layout_constraintHorizontal_bias="0.62"
-        app:layout_constraintStart_toStartOf="@+id/mohammedAboutID"
-        app:layout_constraintTop_toBottomOf="@+id/mohammedAboutID" />
+            <TextView
+                android:id="@+id/youssefAboutID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/youssef_mostafa_abdelaty"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/OmarAboutID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Omar Adel Badawy"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/aboutApp"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="@+id/aboutApp"
-        app:layout_constraintTop_toBottomOf="@+id/mohammedEmailID" />
+            <TextView
+                android:id="@+id/youssefEmailID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/youssef2_mostafa_1_gmail_com"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/mohammedAboutID"
-        android:layout_width="wrap_content"
+    <!-- Mohammed Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mohammedCard"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Mohammed Essam El-Din"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/aboutApp"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="@+id/aboutApp"
-        app:layout_constraintTop_toBottomOf="@+id/youssefEmailID" />
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/youssefCard">
 
-    <TextView
-        android:id="@+id/omarEmailID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="omarwahsh555@gmail.com"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/OmarAboutID"
-        app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toStartOf="@+id/OmarAboutID"
-        app:layout_constraintTop_toBottomOf="@+id/OmarAboutID" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
 
-    <TextView
-        android:id="@+id/ShahdAboutID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Shahd Osama Hamed"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/aboutApp"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="@+id/aboutApp"
-        app:layout_constraintTop_toBottomOf="@+id/omarEmailID" />
+            <TextView
+                android:id="@+id/mohammedAboutID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mohammed_essam_el_din"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/shahdEmailID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="shahdosama734@gmail.com"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/ShahdAboutID"
-        app:layout_constraintHorizontal_bias="0.566"
-        app:layout_constraintStart_toStartOf="@+id/ShahdAboutID"
-        app:layout_constraintTop_toBottomOf="@+id/ShahdAboutID" />
+            <TextView
+                android:id="@+id/mohammedEmailID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/msam01619_gmail_com"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/AsmaaAboutID"
-        android:layout_width="wrap_content"
+    <!-- Omar Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/omarCard"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Asmaa Saleh Farghaly"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/aboutApp"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="@+id/aboutApp"
-        app:layout_constraintTop_toBottomOf="@+id/shahdEmailID" />
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mohammedCard">
 
-    <TextView
-        android:id="@+id/AsmaaEmailID"
-        android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/OmarAboutID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/omar_adel_badawy"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/omarEmailID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/omarwahsh555_gmail_com"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Shahd Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/shahdCard"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="asmaa111saleh111@gmail.com"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/AsmaaAboutID"
-        app:layout_constraintHorizontal_bias="0.44"
-        app:layout_constraintStart_toStartOf="@+id/AsmaaAboutID"
-        app:layout_constraintTop_toBottomOf="@+id/AsmaaAboutID" />
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/omarCard">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/ShahdAboutID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shahd_osama_hamed"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/shahdEmailID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shahdosama734_gmail_com"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Asmaa Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/asmaaCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shahdCard">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/AsmaaAboutID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/asmaa_saleh_farghaly"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/AsmaaEmailID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/asmaa111saleh111_gmail_com"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
