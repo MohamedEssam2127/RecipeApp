@@ -8,24 +8,9 @@
     android:background="@color/light_blue"
     tools:context=".Recipe.Home.HomeFragment">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
-        <!--        <androidx.cardview.widget.CardView-->
-<!--            android:id="@+id/cardView"-->
-<!--            android:layout_width="306dp"-->
-<!--            android:layout_height="195dp"-->
-<!--            app:cardCornerRadius="20dp"-->
-<!--            app:cardElevation="10dp"-->
-<!--            android:layout_marginTop="12dp"-->
-
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.495"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" >-->
 
         <TextView
             android:id="@+id/welcomeTextView"
@@ -68,8 +53,10 @@
                     android:src="@drawable/food"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <ImageView
                     android:id="@+id/Home_RandamImg_addfav"
@@ -96,7 +83,7 @@
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:paddingBottom="20dp"
-                    android:text="this is the title "
+                    android:text="this is the title"
                     android:textColor="@color/black"
                     android:textSize="24dp"
                     android:textStyle="bold"
@@ -106,8 +93,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
-
-<!--        </androidx.cardview.widget.CardView>-->
 
         <TextView
             android:id="@+id/aboutAppTitle"
@@ -127,12 +112,10 @@
             android:id="@+id/rv_popular_recipe"
             android:layout_width="match_parent"
             android:layout_height="234dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toBottomOf="@+id/aboutAppTitle"
             app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/popular_rv_item" />
@@ -159,9 +142,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textcategory">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            app:layout_constraintTop_toBottomOf="@+id/textcategory" />
 
         <Button
             android:id="@+id/clearCategoryBtn"
@@ -176,9 +157,19 @@
             app:layout_constraintStart_toEndOf="@+id/textcategory"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
+        <ImageView
+            android:id="@+id/home_no_internet_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="no_internet"
+            android:src="@drawable/network_connection_failed"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.41000003" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
-
-
-
