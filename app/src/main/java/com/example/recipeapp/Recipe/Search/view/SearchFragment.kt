@@ -1,5 +1,8 @@
 package com.example.recipeapp.Recipe.Search.view
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -33,6 +36,7 @@ class SearchFragment : Fragment() {
     private lateinit var recipeRecyclerView: RecyclerView
     private lateinit var placeholderTextView: TextView
     private lateinit var notFoundImageView: ImageView
+    private lateinit var noConnectionImageView: ImageView
 
     // Adapter for displaying search results in RecyclerView
     private lateinit var adapter: RecipeAdapter
@@ -64,6 +68,7 @@ class SearchFragment : Fragment() {
         recipeRecyclerView = view.findViewById(R.id.recipeRecyclerView)
         placeholderTextView = view.findViewById(R.id.placeholder_text_view)
         notFoundImageView = view.findViewById(R.id.not_found_image)
+        noConnectionImageView = view.findViewById(R.id.no_connection_image) // Add this line
 
         // Configure SearchView
         searchView.queryHint = "Search for a recipe"
@@ -79,6 +84,23 @@ class SearchFragment : Fragment() {
         val repository = SearchRepositoryImpl()
         val factory = SearchViewModelFactory(repository)
         searchViewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
+
+        // Check for internet connection and update UI accordingly
+        if (!isInternetAvailable()) {
+            noConnectionImageView.visibility = View.VISIBLE
+            searchView.visibility = View.GONE
+            placeholderTextView.visibility = View.GONE
+            recipeRecyclerView.visibility = View.GONE
+            notFoundImageView.visibility = View.GONE
+        } else {
+            // Set initial visibility of UI components based on query
+            if (searchView.query.isEmpty()) {
+                placeholderTextView.visibility = View.VISIBLE
+                recipeRecyclerView.visibility = View.GONE
+                notFoundImageView.visibility = View.GONE
+                noConnectionImageView.visibility = View.GONE
+            }
+        }
 
         // Set up SearchView listener to handle text changes
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -105,13 +127,6 @@ class SearchFragment : Fragment() {
                 return true
             }
         })
-
-        // Set initial visibility of UI components based on query
-        if (searchView.query.isEmpty()) {
-            placeholderTextView.visibility = View.VISIBLE
-            recipeRecyclerView.visibility = View.GONE
-            notFoundImageView.visibility = View.GONE
-        }
 
         return view
     }
@@ -166,5 +181,17 @@ class SearchFragment : Fragment() {
         Log.d("SearchFragment", "Navigating to details with meal: $meal")
         val action = SearchFragmentDirections.actionSearchFragmentToRecipeDetailFragment(meal)
         findNavController().navigate(action)
+    }
+
+    /**
+     * Checks if the device has an active internet connection.
+     *
+     * @return True if there is an internet connection, false otherwise.
+     */
+    private fun isInternetAvailable(): Boolean {
+        val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 }

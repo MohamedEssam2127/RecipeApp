@@ -60,5 +60,12 @@
         android:textColor="@android:color/darker_gray"
         android:visibility="gone" />
 
-
+    <ImageView
+        android:id="@+id/no_connection_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/no_internet_connetction"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        />
 </FrameLayout>
