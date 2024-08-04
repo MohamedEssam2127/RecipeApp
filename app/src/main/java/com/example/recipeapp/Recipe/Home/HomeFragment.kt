@@ -65,23 +65,8 @@ class HomeFragment : Fragment() {
         networkLiveData = NetworkLiveData(connectivityManager)
         sharedPreferences = requireActivity().getSharedPreferences("user_id", 0)
         userId = sharedPreferences.getInt("user_id", -1)
-
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-
         networkLiveData.observe(viewLifecycleOwner) { isConnected ->
             if (isConnected) {
-
-                Toast.makeText(requireContext(), "Internet is back", Toast.LENGTH_SHORT).show()
-
-                view.findViewById<ImageView>(R.id.home_no_internet_image).visibility = View.GONE
-                view.findViewById<RecyclerView>(R.id.rv_popular_recipe).visibility = View.VISIBLE
-                view.findViewById<TextView>(R.id.textcategory).visibility = View.VISIBLE
-                view.findViewById<Button>(R.id.clearCategoryBtn).visibility = View.VISIBLE
-                view.findViewById<RecyclerView>(R.id.categoriesRV).visibility = View.VISIBLE
-                view.findViewById<TextView>(R.id.aboutAppTitle).visibility = View.VISIBLE
-                view.findViewById<ImageView>(R.id.random_image).visibility = View.VISIBLE
-                view.findViewById<ImageView>(R.id.Home_RandamImg_addfav).visibility = View.VISIBLE
-                view.findViewById<TextView>(R.id.titletext).visibility = View.VISIBLE
 
 
                 gettingFavoriteViewModelReady()
@@ -143,8 +128,8 @@ class HomeFragment : Fragment() {
 
                 }
 
+
             } else {
-                updateOfflineUI()
                 Toast.makeText(requireContext(), "Internet is lost", Toast.LENGTH_SHORT).show()
             }
         }
@@ -189,7 +174,6 @@ class HomeFragment : Fragment() {
                     }
                 }
             } else {
-                updateOfflineUI()
                 Toast.makeText(requireContext(), "Internet is lost", Toast.LENGTH_SHORT).show()
             }
         }
@@ -254,31 +238,5 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun updateOfflineUI(){
-        val PopularRecyclerView = view?.findViewById<RecyclerView>(R.id.rv_popular_recipe)
-        val noInternetImage = view?.findViewById<ImageView>(R.id.home_no_internet_image)
-        val categoryText=view?.findViewById<TextView>(R.id.textcategory)
-        val clearCategory=view?.findViewById<Button>(R.id.clearCategoryBtn)
-        val categoryRecyclerView=view?.findViewById<RecyclerView>(R.id.categoriesRV)
-        val popularText=view?.findViewById<TextView>(R.id.aboutAppTitle)
-        val randomImage = view?.findViewById<ImageView>(R.id.random_image)
-        val favButton = view?.findViewById<ImageView>(R.id.Home_RandamImg_addfav)
-        val titleText=view?.findViewById<TextView>(R.id.titletext)
-        PopularRecyclerView?.visibility = View.GONE
-        noInternetImage?.visibility = View.VISIBLE
-        categoryText?.visibility=View.GONE
-        clearCategory?.visibility=View.GONE
-        categoryRecyclerView?.visibility=View.GONE
-        popularText?.visibility=View.GONE
-        randomImage?.visibility=View.GONE
-        favButton?.visibility=View.GONE
-        titleText?.visibility=View.GONE
-    }
-
 
 }
-
-
-
-
-
