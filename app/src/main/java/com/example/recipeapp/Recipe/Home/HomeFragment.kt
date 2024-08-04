@@ -63,15 +63,15 @@ class HomeFragment : Fragment() {
 
         val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         networkLiveData = NetworkLiveData(connectivityManager)
-
+        sharedPreferences = requireActivity().getSharedPreferences("user_id", 0)
+        userId = sharedPreferences.getInt("user_id", -1)
         networkLiveData.observe(viewLifecycleOwner) { isConnected ->
             if (isConnected) {
 
 
                 gettingFavoriteViewModelReady()
                 gettingHomeViewModelReady()
-                sharedPreferences = requireActivity().getSharedPreferences("user_id", 0)
-                userId = sharedPreferences.getInt("user_id", -1)
+
                 initializeRecipesList()     //prepare the Recipes RV
                 initializeCategories()      //prepare the Categories and it's actions
                 viewModel.getRandomMeal()
