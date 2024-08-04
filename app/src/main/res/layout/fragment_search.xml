@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragmentsearch"
-    tools:context=".Recipe.Search.SearchFragment">
+    tools:context=".Recipe.Search.view.SearchFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
