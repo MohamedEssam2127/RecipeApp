@@ -11,7 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/fragmenthomeConstrain">
 
 
         <!--        <androidx.cardview.widget.CardView-->
@@ -178,6 +179,36 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/noInternetViewHome"
+        android:visibility="gone"
+        android:background="@color/light_blue">
+
+
+        <ImageView
+            android:id="@+id/no_internet_image"
+            android:layout_width="112dp"
+            android:layout_height="176dp"
+            android:layout_gravity="center"
+            android:cropToPadding="true"
+            android:paddingTop="40dp"
+            android:src="@drawable/no_wifi" />
+
+        <TextView
+            android:id="@+id/no_internet_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_internet_connection"
+            android:paddingTop="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+    </LinearLayout>
 </FrameLayout>
 
 
