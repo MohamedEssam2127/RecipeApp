@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
         networkLiveData.observe(viewLifecycleOwner) { isConnected ->
             if (isConnected) {
 
-                switchToNoInternetView(true)
+                switchToNoInternetView(false)
                 gettingFavoriteViewModelReady()
                 gettingHomeViewModelReady()
                 sharedPreferences = requireActivity().getSharedPreferences("user_id", 0)
@@ -131,7 +131,7 @@ class HomeFragment : Fragment() {
 
             } else {
                 Toast.makeText(requireContext(), "Internet is lost", Toast.LENGTH_SHORT).show()
-                switchToNoInternetView(false)
+                switchToNoInternetView(true)
             }
         }
 
@@ -241,10 +241,10 @@ class HomeFragment : Fragment() {
 
     fun switchToNoInternetView(isConnected: Boolean) {
         if (!isConnected) {
-            view?.findViewById<View>(R.id.noInternetViewHome)?.visibility = View.VISIBLE
-        } else {
             view?.findViewById<View>(R.id.noInternetViewHome)?.visibility = View.GONE
             view?.findViewById<View>(R.id.fragmenthome)?.visibility = View.VISIBLE
+        } else {
+            view?.findViewById<View>(R.id.noInternetViewHome)?.visibility = View.VISIBLE
         }
     }
 
