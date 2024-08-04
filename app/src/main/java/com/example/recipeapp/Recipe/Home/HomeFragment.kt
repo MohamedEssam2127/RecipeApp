@@ -68,7 +68,7 @@ class HomeFragment : Fragment() {
         networkLiveData.observe(viewLifecycleOwner) { isConnected ->
             if (isConnected) {
 
-
+                switchToNoInternetView(false)
                 gettingFavoriteViewModelReady()
                 gettingHomeViewModelReady()
 
@@ -131,6 +131,7 @@ class HomeFragment : Fragment() {
 
             } else {
                 Toast.makeText(requireContext(), "Internet is lost", Toast.LENGTH_SHORT).show()
+                switchToNoInternetView(true)
             }
         }
 
@@ -235,6 +236,15 @@ class HomeFragment : Fragment() {
                 viewModel.getRecipesByLetter()  // Restart the Recipes unselected categories
                 adapter.clearSelectedCategory(resources)
             }
+        }
+    }
+
+    fun switchToNoInternetView(isConnected: Boolean) {
+        if (!isConnected) {
+            view?.findViewById<View>(R.id.noInternetViewHome)?.visibility = View.GONE
+            view?.findViewById<View>(R.id.fragmenthome)?.visibility = View.VISIBLE
+        } else {
+            view?.findViewById<View>(R.id.noInternetViewHome)?.visibility = View.VISIBLE
         }
     }
 
