@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FBE6E6"
     android:orientation="vertical"
-    tools:context=".Recipe.Home.AboutFragment">
+    tools:context=".Recipe.Home.view.AboutFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

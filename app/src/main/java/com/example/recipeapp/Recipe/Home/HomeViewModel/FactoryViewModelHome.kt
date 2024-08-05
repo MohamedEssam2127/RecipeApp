@@ -2,7 +2,7 @@ package com.example.recipeapp.Recipe.Home.HomeViewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.recipeapp.network.RecipeRepository
+import com.example.recipeapp.Recipe.Home.Repo.RecipeRepository
 
 class FactoryViewModelHome  (private val repo : RecipeRepository) :  ViewModelProvider.Factory {
 

@@ -1,9 +1,10 @@
-package com.example.recipeapp.network
+package com.example.recipeapp.Recipe.Home.Repo
 
 import android.util.Log
 import com.example.recipeapp.models.CategoriesResponse
 import com.example.recipeapp.models.Meal
 import com.example.recipeapp.models.RecipeResponse
+import com.example.recipeapp.network.RetrofitInstance
 
 /**
  * Implementation of the [RecipeRepository] interface.
