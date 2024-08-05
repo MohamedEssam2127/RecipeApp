@@ -1,4 +1,4 @@
-package com.example.recipeapp.network
+package com.example.recipeapp.Recipe.Home.Repo
 
 import com.example.recipeapp.models.CategoriesResponse
 import com.example.recipeapp.models.Meal

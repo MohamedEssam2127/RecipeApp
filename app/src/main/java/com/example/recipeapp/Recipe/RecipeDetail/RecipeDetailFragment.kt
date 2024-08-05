@@ -1,7 +1,6 @@
 package com.example.recipeapp.Recipe.RecipeDetail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,14 +15,13 @@ import com.example.recipeapp.R
 import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModel
 import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModelFactory
 import com.example.recipeapp.Recipe.Favorite.Repo.FavoriteRepoImp
-import com.example.recipeapp.Recipe.Home.HomeFragment.Companion.userId
+import com.example.recipeapp.Recipe.Home.view.HomeFragment.Companion.userId
 import com.example.recipeapp.Recipe.RecipeActivity
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Meal
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

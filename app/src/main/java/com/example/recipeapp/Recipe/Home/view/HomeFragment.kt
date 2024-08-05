@@ -1,4 +1,4 @@
-package com.example.recipeapp.Recipe.Home
+package com.example.recipeapp.Recipe.Home.view
 
 import NetworkLiveData
 import android.content.Context
@@ -16,8 +16,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -34,11 +32,9 @@ import com.example.recipeapp.Recipe.Home.HomeViewModel.HomeViewModel
 import com.example.recipeapp.Recipe.RecipeActivity
 import com.example.recipeapp.database.LocalDataBase.LocalDataBaseImp
 import com.example.recipeapp.models.FavoriteMeal
-import com.example.recipeapp.network.RecipeRepository
-import com.example.recipeapp.network.RecipeRepositoryImpl
+import com.example.recipeapp.Recipe.Home.Repo.RecipeRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -117,8 +113,7 @@ class HomeFragment : Fragment() {
                         }
                         image?.setOnClickListener {
                             lifecycleScope.launch {
-                                val action =
-                                    HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(
+                                val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(
                                         viewModel.getMealById(recipeResponce.meals[0].idMeal)
                                     )
                                 findNavController().navigate(action)
@@ -211,7 +206,9 @@ class HomeFragment : Fragment() {
 
             adapter.onItemClick = {     // get the item was clicked on
                 lifecycleScope.launch { // get the complete meal object from the Api
-                    val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(viewModel.getMealById(it.idMeal))
+                    val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(
+                            viewModel.getMealById(it.idMeal)
+                        )
                     findNavController().navigate(action)
                 }
             }

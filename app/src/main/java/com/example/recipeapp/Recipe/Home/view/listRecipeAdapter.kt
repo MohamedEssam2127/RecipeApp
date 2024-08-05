@@ -1,7 +1,5 @@
-package com.example.recipeapp.Recipe.Home
+package com.example.recipeapp.Recipe.Home.view
 
-import android.app.Activity
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,14 +12,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.recipeapp.R
 import com.example.recipeapp.Recipe.Favorite.FavViewModel.FavoriteViewModel
-import com.example.recipeapp.Recipe.Home.HomeFragment.Companion.userId
+import com.example.recipeapp.Recipe.Home.view.HomeFragment.Companion.userId
 import com.example.recipeapp.Recipe.Home.HomeViewModel.HomeViewModel
 import com.example.recipeapp.Recipe.RecipeActivity
 import com.example.recipeapp.models.FavoriteMeal
 import com.example.recipeapp.models.Meal
 import com.example.recipeapp.models.RecipeResponse
-import com.example.recipeapp.network.RecipeRepository
-import com.example.recipeapp.network.RecipeRepositoryImpl
+import com.example.recipeapp.Recipe.Home.Repo.RecipeRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

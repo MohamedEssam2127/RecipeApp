@@ -1,16 +1,11 @@
-package com.example.recipeapp.Recipe.Home
+package com.example.recipeapp.Recipe.Home.view
 
-import android.content.res.ColorStateList
 import android.content.res.Resources
-import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions

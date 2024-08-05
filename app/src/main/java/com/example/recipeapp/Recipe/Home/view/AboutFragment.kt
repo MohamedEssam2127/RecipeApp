@@ -1,4 +1,4 @@
-package com.example.recipeapp.Recipe.Home
+package com.example.recipeapp.Recipe.Home.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

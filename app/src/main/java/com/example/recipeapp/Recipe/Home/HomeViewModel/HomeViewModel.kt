@@ -1,17 +1,13 @@
 package com.example.recipeapp.Recipe.Home.HomeViewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.recipeapp.Recipe.Favorite.Repo.FavoriteRepo
 import com.example.recipeapp.models.CategoriesResponse
 import com.example.recipeapp.models.Meal
 import com.example.recipeapp.models.RecipeResponse
-import com.example.recipeapp.network.RecipeRepository
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
+import com.example.recipeapp.Recipe.Home.Repo.RecipeRepository
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repo: RecipeRepository) : ViewModel() {

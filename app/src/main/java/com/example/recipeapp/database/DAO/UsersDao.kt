@@ -22,9 +22,9 @@ interface UsersDao {
     suspend fun isEmailExist(email: String): Boolean
 
 
-    @Transaction
-    @Query("SELECT * FROM Users WHERE userId = :userId")
-    fun getUserWithTasks(userId: Int): LiveData<UserWithFavorite>
+//    @Transaction
+//    @Query("SELECT * FROM Users WHERE userId = :userId")
+//    fun getUserWithTasks(userId: Int): LiveData<UserWithFavorite>
 
 
 }
