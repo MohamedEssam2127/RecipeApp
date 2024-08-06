@@ -26,7 +26,8 @@ Welcome to the Recipe App, a comprehensive application designed to provide a del
 
 ## Video
 
-![Watch the demo](path_to_your_video.mp4)
+Uploading sofra-2.mp4…
+
 *Watch the demo*
 
 ## Getting Started
